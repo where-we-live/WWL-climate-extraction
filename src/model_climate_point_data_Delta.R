@@ -9,7 +9,8 @@ set.seed(123)
 
 #load survey data (simulated)
 
-SS1 <- read.csv("./data/survey/SS1.csv")
+SS1 <- read.csv("/mnt/ceph/erichs/owncloud/W2L/DroughtHeatWildfire_survey123Data/20251117_DroughtHeatWildfire.csv")
+
 SS1$Location <- as.factor(SS1$Location)
 levels(SS1$Location)[levels(SS1$Location) == "Elk River"] <- "Kendrick"
 F4<-SS1%>%dplyr::select(Education,Occupation,Duration,age)
