@@ -1,0 +1,461 @@
+---
+title: "Idaho Climate Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+geometry:
+  - margin=1in
+header-includes:
+  - \usepackage{pdflscape}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6.5,
+  fig.height = 4.2,
+  dpi = 300,
+  fig.align = 'center',
+  out.width = '100%'
+)
+```
+
+# Overview
+
+This report produces a **question-framed** summary of **heat, drought, and fire** metrics for the five Idaho towns:
+
+- Deary
+- Bovill
+- Kendrick
+- Juliaetta
+- Elk River
+
+The structure follows the original **fire-only report** as closely as possible, while extending the analysis to the climate-comparable survey questions for **heat, drought, and fire**. The emphasis here is on **question-by-question plots**, with each metric shown **by town and buffer**, rather than large summary tables at the start of each section.
+
+This RMarkdown is designed so that knitting the PDF runs the working Idaho script once, then reads the saved outputs and embeds the saved figures.
+
+# Data sources and conventions
+
+## Data source
+
+- **GridMET** daily climate time series for each town and its 10-mile buffer.
+- Expected input files follow the existing project naming convention:
+  - `Town_gridmet.csv`
+  - `Town_10mibuffer_gridmet.csv`
+
+## Calendar and water-year conventions
+
+- **Water year**: Oct 1 - Sep 30, labeled by the ending year.
+- **wyday**: water-year day where Oct 1 = 1.
+- **season4**: DJF / MAM / JJA / SON.
+- **baseline climatology period**: 1996-2025.
+
+```{r source-pipeline, include=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+library(knitr)
+library(tibble)
+
+project_root <- getwd()
+
+script_candidates <- c(
+  file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics.R"),
+  file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics_v2.R"),
+  file.path(project_root, "src", "extract_fire_metrics2_heat_drought_idaho.R")
+)
+
+script_path <- script_candidates[file.exists(script_candidates)][1]
+stopifnot(!is.na(script_path), file.exists(script_path))
+
+plot_dir <- file.path(project_root, "plots")
+out_dir  <- file.path(project_root, "outputs")
+
+source(script_path)
+
+question_outputs_path <- file.path(out_dir, "idaho_question_outputs.csv")
+pdi_summary_path      <- file.path(out_dir, "idaho_pdi_summary.csv")
+pdi_person_path       <- file.path(out_dir, "idaho_pdi_person.csv")
+
+stopifnot(file.exists(question_outputs_path))
+stopifnot(file.exists(pdi_summary_path))
+stopifnot(file.exists(pdi_person_path))
+
+question_outputs <- readr::read_csv(question_outputs_path, show_col_types = FALSE)
+pdi_summary      <- readr::read_csv(pdi_summary_path, show_col_types = FALSE)
+pdi_person       <- readr::read_csv(pdi_person_path, show_col_types = FALSE)
+```
+
+# Metric construction and question mapping
+
+## Heat questions
+
+- **H1**: Overall heat magnitude
+- **H2**: Summer heat magnitude
+- **H3**: Heat frequency
+- **H4**: Spring heat onset timing
+- **H5**: Fall cooling timing
+- **H6**: Heat duration / persistence
+
+## Drought questions
+
+- **D1**: Overall wetter/drier magnitude
+- **D2**: Winter wetter/drier magnitude
+- **D3**: Winter dryness frequency
+- **D4**: Precipitation timing
+- **D5**: Dry-duration persistence
+
+## Fire questions
+
+- **F1**: Overall frequency of high fire-weather days
+- **F2**: Summer frequency of high fire-weather days
+- **F3**: Fire-weather magnitude / intensity proxy
+- **F4**: Fire-season start timing
+- **F5**: Fire-season duration / persistence
+
+*(Question-to-metric mapping table suppressed to keep the report concise.)*
+
+# Results: Question-framed plots
+
+The script saves question-specific plots to `plots/`. Below, each question is shown in the same spirit as the original fire report: short interpretation text followed by the saved **by-town** time-series figures.
+
+```{r helpers, include=FALSE}
+question_meta <- tribble(
+  ~question, ~title, ~survey_question, ~interpretation, ~metrics,
+  "H1", "Overall heat magnitude", "Overall, has it gotten hotter or cooler?", "Higher values indicate stronger overall warming relative to baseline conditions.", list(c("meananntemp", "meananomanntemp", "meanmaxanntemp", "meanmaxanomanntemp", "meanminanntemp", "meanminanomanntemp")),
+  "H2", "Summer heat magnitude", "During the summer months, has it gotten hotter or cooler?", "Higher values indicate hotter summer conditions, especially during JJA.", list(c("maxmaxanomjjatemp", "maxmaxjjatemp", "maxminanomjjatemp", "maxminjjatemp", "meananomjjatemp", "meanjjatemp")),
+  "H3", "Heat frequency", "If summer has changed, how frequently is it hotter?", "Higher values indicate more frequent hot-day conditions.", list(c("frostdays", "summerdays", "tmaxgt90thdays", "tmingt90thdays")),
+  "H4", "Spring heat onset timing", "When does it start getting hotter in the spring?", "Smaller day-of-year values indicate earlier spring onset.", list(c("gsstartdoy")),
+  "H5", "Fall cooling timing", "When does it start getting cooler in the fall?", "Larger end-day values indicate later persistence of warm-season conditions.", list(c("gsenddoy")),
+  "H6", "Heat duration / persistence", "Do heat conditions last shorter or longer than you remember?", "Higher values indicate longer hot periods or longer warm-season persistence.", list(c("durtmaxgt90th", "gslength")),
+  "D1", "Overall wetter/drier magnitude", "Overall, has it gotten wetter or drier?", "Lower precipitation and larger moisture deficits indicate stronger drought stress.", list(c("annualanometo", "annualanomprecip", "annualanompwd", "annualeto", "annualprecip", "annualpwd")),
+  "D2", "Winter wetter/drier magnitude", "During the winter months, has it become wetter or drier?", "Focuses on cool-season precipitation conditions.", list(c("coolseasonanomprecip", "coolseasonprecip")),
+  "D3", "Winter dryness frequency", "If winter has changed, how frequently is it drier?", "Higher values indicate more frequent winter dry-day conditions.", list(c("coolseasondrydays1mm")),
+  "D4", "Precipitation timing", "Has there been a change in when rainfall/snowfall starts during the year?", "Timing metrics describe when precipitation tends to begin or concentrate within the water year.", list(c("preciponsetwydoy", "precipCOMwydoy")),
+  "D5", "Dry-duration persistence", "Do drier conditions last shorter or longer than you remember?", "Higher values indicate longer dry spells or more persistent drought conditions.", list(c("maxdrydur", "maxcoolseasondrydur")),
+  "F1", "Overall frequency of high fire-weather days", "Overall, has fire become less common or more common?", "Higher values indicate more days in the year with unusually elevated fire-weather conditions.", list(c("firehighdays_erc90", "firehighdays_bi90", "firehighdays_erc95", "firehighdays_bi95")),
+  "F2", "Summer frequency of high fire-weather days", "During the summer months, has fire occurred more often or less often?", "Focuses on the summer portion of the year when fire-weather conditions are often most consequential.", list(c("firesummerhighdays_erc90", "firesummerhighdays_bi90")),
+  "F3", "Fire-weather magnitude / intensity proxy", "Have the areas affected by wildfires gotten smaller or larger?", "These metrics summarize how extreme fire-weather conditions become within a year.", list(c("firepeak_erc", "firepeak_bi", "firep95_erc", "fireseverity_erc90", "fireseverity_bi90")),
+  "F4", "Fire-season start timing", "Has there been a change in when the fire season starts during the year?", "Smaller water-year day values indicate earlier seasonal onset.", list(c("firestart_wyday_erc", "firestart_wyday_bi", "firestart_any_erc90", "firestart_any_bi90", "firestart_k2_erc90", "firestart_k3_erc90", "firestart_k3_bi90")),
+  "F5", "Fire-season duration / persistence", "Do the fire conditions last shorter or longer than you remember?", "Higher values indicate longer or more persistent periods of elevated fire-weather conditions.", list(c("fireseasonlength_erc", "fireseasonlength_bi", "firemaxrun_erc", "firemaxrun_bi"))
+)
+
+include_plot <- function(fname) {
+  f <- file.path(plot_dir, fname)
+  if (!file.exists(f)) {
+    cat("(Plot not found:", fname, ")\n")
+    return(invisible(NULL))
+  }
+  knitr::include_graphics(f)
+}
+
+show_question_plots <- function(qcode) {
+  row <- question_meta %>% filter(question == qcode)
+  mets <- row$metrics[[1]]
+  for (m in mets) {
+    include_plot(paste0(qcode, "_timeseries_", m, ".png"))
+  }
+}
+```
+
+## H1: Overall heat magnitude
+
+**Survey question:** “Overall, has it gotten hotter or cooler?”
+
+**Interpretation:** Higher values indicate stronger overall warming relative to baseline conditions.
+
+**Metrics used:** `meananntemp`, `meananomanntemp`, `meanmaxanntemp`, `meanmaxanomanntemp`, `meanminanntemp`, `meanminanomanntemp`
+
+```{r h1-plots}
+show_question_plots("H1")
+```
+
+## H2: Summer heat magnitude
+
+**Survey question:** “During the summer months, has it gotten hotter or cooler?”
+
+**Interpretation:** Higher values indicate hotter summer conditions, especially during JJA.
+
+**Metrics used:** `maxmaxanomjjatemp`, `maxmaxjjatemp`, `maxminanomjjatemp`, `maxminjjatemp`, `meananomjjatemp`, `meanjjatemp`
+
+```{r h2-plots}
+show_question_plots("H2")
+```
+
+## H3: Heat frequency
+
+**Survey question:** “If summer has changed, how frequently is it hotter?”
+
+**Interpretation:** Higher values indicate more frequent hot-day conditions.
+
+**Metrics used:** `frostdays`, `summerdays`, `tmaxgt90thdays`, `tmingt90thdays`
+
+```{r h3-plots}
+show_question_plots("H3")
+```
+
+## H4: Spring heat onset timing
+
+**Survey question:** “When does it start getting hotter in the spring?”
+
+**Interpretation:** Smaller day-of-year values indicate earlier spring onset.
+
+**Metrics used:** `gsstartdoy`
+
+```{r h4-plots}
+show_question_plots("H4")
+```
+
+## H5: Fall cooling timing
+
+**Survey question:** “When does it start getting cooler in the fall?”
+
+**Interpretation:** Larger day-of-year values indicate later seasonal cooling.
+
+**Metrics used:** `gsenddoy`
+
+```{r h5-plots}
+show_question_plots("H5")
+```
+
+## H6: Heat duration / persistence
+
+**Survey question:** “Do heat conditions last shorter or longer than you remember?”
+
+**Interpretation:** Higher values indicate longer hot periods or longer warm-season persistence.
+
+**Metrics used:** `durtmaxgt90th`, `gslength`
+
+```{r h6-plots}
+show_question_plots("H6")
+```
+
+## D1: Overall wetter/drier magnitude
+
+**Survey question:** “Overall, has it gotten wetter or drier?”
+
+**Interpretation:** Lower precipitation and larger moisture deficits indicate stronger drought stress.
+
+**Metrics used:** `annualanometo`, `annualanomprecip`, `annualanompwd`, `annualeto`, `annualprecip`, `annualpwd`
+
+```{r d1-plots}
+show_question_plots("D1")
+```
+
+## D2: Winter wetter/drier magnitude
+
+**Survey question:** “During the winter months, has it become wetter or drier?”
+
+**Interpretation:** Focuses on cool-season precipitation conditions.
+
+**Metrics used:** `coolseasonanomprecip`, `coolseasonprecip`
+
+```{r d2-plots}
+show_question_plots("D2")
+```
+
+## D3: Winter dryness frequency
+
+**Survey question:** “If winter has changed, how frequently is it drier?”
+
+**Interpretation:** Higher values indicate more frequent winter dry-day conditions.
+
+**Metrics used:** `coolseasondrydays1mm`
+
+```{r d3-plots}
+show_question_plots("D3")
+```
+
+## D4: Precipitation timing
+
+**Survey question:** “Has there been a change in when rainfall/snowfall starts during the year?”
+
+**Interpretation:** Timing metrics describe when precipitation tends to begin or concentrate within the water year.
+
+**Metrics used:** `preciponsetwydoy`, `precipCOMwydoy`
+
+```{r d4-plots}
+show_question_plots("D4")
+```
+
+## D5: Dry-duration persistence
+
+**Survey question:** “Do drier conditions last shorter or longer than you remember?”
+
+**Interpretation:** Higher values indicate longer dry spells or more persistent drought conditions.
+
+**Metrics used:** `maxdrydur`, `maxcoolseasondrydur`
+
+```{r d5-plots}
+show_question_plots("D5")
+```
+
+## F1: Overall frequency of high fire-weather days
+
+**Survey question:** “Overall, has fire become less common or more common?”
+
+**Interpretation:** Higher values indicate more days in the year with unusually elevated fire-weather conditions.
+
+**Metrics used:** `firehighdays_erc90`, `firehighdays_bi90`, `firehighdays_erc95`, `firehighdays_bi95`
+
+```{r f1-plots}
+show_question_plots("F1")
+```
+
+## F2: Summer frequency of high fire-weather days
+
+**Survey question:** “During the summer months, has fire occurred more often or less often?”
+
+**Interpretation:** Focuses on the summer portion of the year when fire-weather conditions are often most consequential.
+
+**Metrics used:** `firesummerhighdays_erc90`, `firesummerhighdays_bi90`
+
+```{r f2-plots}
+show_question_plots("F2")
+```
+
+## F3: Fire-weather magnitude / intensity proxy
+
+**Survey question:** “Have the areas affected by wildfires gotten smaller or larger?”
+
+**Interpretation:** These metrics summarize how extreme fire-weather conditions become within a year.
+
+**Metrics used:** `firepeak_erc`, `firepeak_bi`, `firep95_erc`, `fireseverity_erc90`, `fireseverity_bi90`
+
+```{r f3-plots}
+show_question_plots("F3")
+```
+
+## F4: Fire-season start timing
+
+**Survey question:** “Has there been a change in when the fire season starts during the year?”
+
+**Interpretation:** Smaller water-year day values indicate earlier seasonal onset.
+
+**Metrics used:** `firestart_wyday_erc`, `firestart_wyday_bi`, `firestart_any_erc90`, `firestart_any_bi90`, `firestart_k2_erc90`, `firestart_k3_erc90`, `firestart_k3_bi90`
+
+```{r f4-plots}
+show_question_plots("F4")
+```
+
+## F5: Fire-season duration / persistence
+
+**Survey question:** “Do the fire conditions last shorter or longer than you remember?”
+
+**Interpretation:** Higher values indicate longer or more persistent periods of elevated fire-weather conditions.
+
+**Metrics used:** `fireseasonlength_erc`, `fireseasonlength_bi`, `firemaxrun_erc`, `firemaxrun_bi`
+
+```{r f5-plots}
+show_question_plots("F5")
+```
+
+# Results: Delta / ARIMA outputs
+
+## What the Delta / ARIMA block is doing
+
+For each metric (town × buffer):
+
+1. Compute baseline anomalies relative to the mean over 1996-2025.
+2. Compute Sen’s slope (per decade) for the observed series.
+3. Fit an ARIMA model with no drift.
+4. Simulate many synthetic series from the fitted ARIMA model.
+5. Place the observed slope into Q1-Q7 bins based on the simulated distribution.
+
+The resulting `qcat` summarizes how unusual the observed trend is relative to the fitted stationary ARIMA process.
+
+## ARIMA results: visual summaries
+
+```{r arima-prep, include=FALSE}
+q_order <- c(paste0("H", 1:6), paste0("D", 1:5), paste0("F", 1:5))
+question_outputs <- question_outputs %>%
+  mutate(
+    question = factor(question, levels = q_order),
+    qcat = factor(qcat, levels = paste0("Q", 1:7), ordered = TRUE),
+    qcat_num = as.integer(qcat),
+    unit = paste(town, buffer, sep = " | ")
+  )
+```
+
+```{r arima-qcat-heatmap}
+ggplot(question_outputs, aes(x = question, y = unit, fill = qcat_num)) +
+  geom_tile(color = "white", linewidth = 0.2) +
+  scale_fill_continuous(breaks = 1:7, limits = c(1, 7)) +
+  labs(
+    title = "ARIMA Delta diagnostics: Q1-Q7 category by question and location",
+    x = "Question",
+    y = "Town | Buffer",
+    fill = "Qcat (1-7)"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.y = element_text(size = 7),
+    panel.grid = element_blank()
+  )
+```
+
+```{r arima-qcat-counts}
+question_outputs %>%
+  count(question, qcat) %>%
+  ggplot(aes(x = question, y = n, fill = qcat)) +
+  geom_col(position = "stack") +
+  labs(
+    title = "Counts of ARIMA Qcat categories by question",
+    x = "Question",
+    y = "Count",
+    fill = "Qcat"
+  ) +
+  theme_minimal(base_size = 11) +
+  scale_fill_discrete(drop = FALSE)
+```
+
+# PDI (Perception Δ Instrumentation)
+
+This section summarizes the tenure-based PDI outputs from the working Idaho script.
+
+```{r pdi-summary-table}
+pdi_summary %>%
+  select(question, .town, n, mean_resp, mean_instr_delta_raw, mean_climate_delta_z, mean_pdi, sd_pdi) %>%
+  arrange(question, .town) %>%
+  knitr::kable(
+    caption = "Town-level PDI summary by question.",
+    digits = 3,
+    align = c("l", "l", "r", "r", "r", "r", "r", "r")
+  )
+```
+
+```{r pdi-plot}
+pdi_summary %>%
+  mutate(question = factor(question, levels = q_order)) %>%
+  ggplot(aes(x = .town, y = mean_pdi)) +
+  geom_col() +
+  facet_wrap(~ question, scales = "free_y") +
+  labs(
+    title = "Mean PDI by town and question",
+    x = "Town",
+    y = "Mean PDI"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+# Notes / interpretation guidance
+
+- Frequency metrics generally increase when hot, dry, or high fire-weather days become more common.
+- Timing metrics require directional interpretation: earlier onset often corresponds to smaller day values.
+- Magnitude metrics summarize intensity or severity, not direct impacts such as burned area.
+- Qcat values summarize how unusual an observed trend is relative to simulated ARIMA variability.
+- PDI values indicate the degree of mismatch between reported perceptions and climate-derived instrumentation.

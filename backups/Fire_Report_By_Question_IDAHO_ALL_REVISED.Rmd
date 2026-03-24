@@ -1,0 +1,375 @@
+---
+title: "Idaho Climate Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+geometry:
+  - margin=1in
+header-includes:
+  - \usepackage{pdflscape}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6.5,
+  fig.height = 4.2,
+  dpi = 300,
+  fig.align = 'center',
+  out.width = '100%'
+)
+```
+
+# Overview
+
+This report produces a **question-framed** summary of **heat, drought, and fire** metrics for the five Idaho towns:
+
+- Deary
+- Bovill
+- Kendrick
+- Juliaetta
+- Elk River
+
+The workflow mirrors the original fire report structure as closely as possible, while extending the analysis to the **climate-comparable survey questions** for heat, drought, and fire.
+
+The pipeline:
+
+1. Reads daily **GridMET** time series by town and buffer.
+2. Builds **daily climatologies** (1996-2025) and seasonal or threshold-based daily flags.
+3. Aggregates daily values into **annual water-year metrics**.
+4. Maps annual metrics into **survey-question buckets**.
+5. Computes **Delta / ARIMA** diagnostics for each metric.
+6. Computes **tenure-based PDI** summaries from the linked survey responses.
+
+This RMarkdown is designed so that **knitting the PDF runs the full pipeline once** by sourcing the working Idaho script, then renders plots and summary tables from the generated objects and saved outputs.
+
+# Data sources and conventions
+
+## Data source
+
+- **GridMET** daily climate time series for each town and its 10-mile buffer.
+- Expected input files follow the existing project naming convention:
+  - `Town_gridmet.csv`
+  - `Town_10mibuffer_gridmet.csv`
+
+## Calendar and water-year conventions
+
+- **Water year**: Oct 1 - Sep 30, labeled by the ending year.
+- **wyday**: water-year day where Oct 1 = 1.
+- **season4**: DJF / MAM / JJA / SON.
+- **baseline climatology period**: 1996-2025.
+
+```{r source-pipeline, include=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+library(knitr)
+
+project_root <- getwd()
+
+script_candidates <- file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics_v2.R")
+
+script_path <- script_candidates[file.exists(script_candidates)][1]
+stopifnot(!is.na(script_path), file.exists(script_path))
+
+plot_dir <- file.path(project_root, "plots")
+out_dir  <- file.path(project_root, "outputs")
+
+source(script_path)
+```
+
+# Metric construction and question mapping
+
+## Heat questions
+
+- **H1**: Overall heat magnitude
+- **H2**: Summer heat magnitude
+- **H3**: Heat frequency
+- **H4**: Spring heat onset timing
+- **H5**: Fall cooling timing
+- **H6**: Heat duration / persistence
+
+## Drought questions
+
+- **D1**: Overall wetter/drier magnitude
+- **D2**: Winter wetter/drier magnitude
+- **D3**: Winter dryness frequency
+- **D4**: Precipitation timing
+- **D5**: Dry-duration persistence
+
+## Fire questions
+
+- **F1**: Overall frequency of high fire-weather days
+- **F2**: Summer frequency of high fire-weather days
+- **F3**: Fire-weather magnitude / intensity proxy
+- **F4**: Fire-season start timing
+- **F5**: Fire-season duration / persistence
+
+```{r read-generated-csvs, include=FALSE}
+question_outputs_path <- file.path(out_dir, "idaho_question_outputs.csv")
+pdi_summary_path      <- file.path(out_dir, "idaho_pdi_summary.csv")
+annual_long_path      <- file.path(out_dir, "idaho_annual_metrics_long.csv")
+
+stopifnot(file.exists(question_outputs_path))
+stopifnot(file.exists(pdi_summary_path))
+stopifnot(file.exists(annual_long_path))
+
+question_outputs <- readr::read_csv(question_outputs_path, show_col_types = FALSE)
+pdi_summary      <- readr::read_csv(pdi_summary_path, show_col_types = FALSE)
+annual_long_csv  <- readr::read_csv(annual_long_path, show_col_types = FALSE)
+
+question_meta <- tibble::tribble(
+  ~question, ~stressor, ~title, ~survey_question, ~interpretation,
+  "H1", "Heat", "Overall heat magnitude", "Overall, has it gotten hotter or cooler?", "Higher values indicate stronger overall warming relative to baseline conditions.",
+  "H2", "Heat", "Summer heat magnitude", "During the summer months, has it gotten hotter or cooler?", "Higher values indicate hotter summer conditions, especially in JJA.",
+  "H3", "Heat", "Heat frequency", "If summer has changed, how frequently is it hotter?", "Higher values indicate more frequent hot-day conditions.",
+  "H4", "Heat", "Spring heat onset timing", "When does it start getting hotter in the spring?", "Smaller day-of-year values indicate earlier spring onset.",
+  "H5", "Heat", "Fall cooling timing", "When does it start getting cooler in the fall?", "Larger end-day values indicate later persistence of warm-season conditions.",
+  "H6", "Heat", "Heat duration / persistence", "Do heat conditions last shorter or longer than you remember?", "Higher values indicate longer hot periods or growing-season persistence.",
+  "D1", "Drought", "Overall wetter/drier magnitude", "Overall, has it gotten wetter or drier?", "Lower precipitation / larger moisture deficits indicate stronger drought stress.",
+  "D2", "Drought", "Winter wetter/drier magnitude", "During the winter months, has it become wetter or drier?", "Focuses on cool-season precipitation conditions.",
+  "D3", "Drought", "Winter dryness frequency", "If winter has changed, how frequently is it drier?", "Higher values indicate more frequent winter dry conditions.",
+  "D4", "Drought", "Precipitation timing", "Has there been a change in when rainfall/snowfall starts during the year?", "Timing metrics summarize onset and center-of-mass shifts in precipitation.",
+  "D5", "Drought", "Dry-duration persistence", "Do drier conditions last shorter or longer than you remember?", "Higher values indicate longer dry spells.",
+  "F1", "Fire", "Overall frequency of high fire-weather days", "Overall, has fire become less common or more common?", "Higher values indicate more days with unusually elevated fire-weather conditions.",
+  "F2", "Fire", "Summer frequency of high fire-weather days", "During the summer months, has fire occurred more often or less often?", "Higher values indicate more frequent summer fire-weather exceedances.",
+  "F3", "Fire", "Fire-weather magnitude / intensity proxy", "Have the areas affected by wildfires gotten smaller or larger?", "Higher values indicate more extreme or intense fire-weather conditions.",
+  "F4", "Fire", "Fire-season start timing", "Has there been a change in when the fire season starts during the year?", "Smaller water-year-day values indicate earlier fire-season onset.",
+  "F5", "Fire", "Fire-season duration / persistence", "Do the fire conditions last shorter or longer than you remember?", "Higher values indicate longer or more persistent fire-weather periods."
+)
+```
+
+# Results: Question-framed plots
+
+```{r helper-include-plot, include=FALSE}
+include_plot <- function(fname) {
+  f <- file.path(plot_dir, fname)
+  if (!file.exists(f)) {
+    cat("(Plot not found:", fname, ")\n")
+    return(invisible(NULL))
+  }
+  knitr::include_graphics(f)
+}
+
+show_question_section <- function(qcode) {
+  meta <- question_meta %>% filter(question == qcode)
+  qdat <- question_outputs %>% filter(question == qcode) %>% arrange(metric, town, buffer)
+  metrics <- unique(qdat$metric)
+
+  cat("**Survey question:** ", meta$survey_question, "\n\n", sep = "")
+  cat("**Interpretation:** ", meta$interpretation, "\n\n", sep = "")
+  cat("**Metrics used:**\n")
+  for (m in metrics) cat("- `", m, "`\n", sep = "")
+  cat("\n")
+
+  for (m in metrics) {
+    include_plot(paste0(qcode, "_timeseries_", m, ".png"))
+  }
+  for (m in metrics) {
+    include_plot(paste0(qcode, "_distribution_", m, ".png"))
+  }
+
+  tbl <- qdat %>%
+    select(town, buffer, metric, sen_slope_per_decade, qcat, delta_late_minus_early) %>%
+    mutate(across(c(sen_slope_per_decade, delta_late_minus_early), ~ round(.x, 3)))
+
+  if (nrow(tbl) > 0) {
+    print(knitr::kable(tbl, caption = paste(qcode, meta$title), align = c("l", "l", "l", "r", "l", "r")))
+  }
+}
+```
+
+# Heat
+
+## H1: Overall heat magnitude
+
+```{r H1}
+show_question_section("H1")
+```
+
+## H2: Summer heat magnitude
+
+```{r H2}
+show_question_section("H2")
+```
+
+## H3: Heat frequency
+
+```{r H3}
+show_question_section("H3")
+```
+
+## H4: Spring heat onset timing
+
+```{r H4}
+show_question_section("H4")
+```
+
+## H5: Fall cooling timing
+
+```{r H5}
+show_question_section("H5")
+```
+
+## H6: Heat duration / persistence
+
+```{r H6}
+show_question_section("H6")
+```
+
+# Drought
+
+## D1: Overall wetter/drier magnitude
+
+```{r D1}
+show_question_section("D1")
+```
+
+## D2: Winter wetter/drier magnitude
+
+```{r D2}
+show_question_section("D2")
+```
+
+## D3: Winter dryness frequency
+
+```{r D3}
+show_question_section("D3")
+```
+
+## D4: Precipitation timing
+
+```{r D4}
+show_question_section("D4")
+```
+
+## D5: Dry-duration persistence
+
+```{r D5}
+show_question_section("D5")
+```
+
+# Fire
+
+## F1: Overall frequency of high fire-weather days
+
+```{r F1}
+show_question_section("F1")
+```
+
+## F2: Summer frequency of high fire-weather days
+
+```{r F2}
+show_question_section("F2")
+```
+
+## F3: Fire-weather magnitude / intensity proxy
+
+```{r F3}
+show_question_section("F3")
+```
+
+## F4: Fire-season start timing
+
+```{r F4}
+show_question_section("F4")
+```
+
+## F5: Fire-season duration / persistence
+
+```{r F5}
+show_question_section("F5")
+```
+
+# Delta / ARIMA outputs
+
+## What the Delta / ARIMA block is doing
+
+For each metric and town-buffer combination:
+
+1. Compute baseline anomalies relative to 1996-2025.
+2. Compute **Sen's slope** for the observed series.
+3. Fit a no-drift **ARIMA** model.
+4. Simulate many synthetic series.
+5. Compare the observed slope to the simulated distribution.
+6. Assign a **Q1-Q7** category summarizing trend extremeness.
+
+```{r arima-heatmap}
+q_levels <- unique(question_outputs$question)
+question_outputs$question <- factor(question_outputs$question, levels = q_levels)
+question_outputs$qcat_num <- as.integer(factor(question_outputs$qcat, levels = paste0("Q", 1:7), ordered = TRUE))
+question_outputs$unit <- paste(question_outputs$town, question_outputs$buffer, sep = " | ")
+
+ggplot(question_outputs, aes(x = question, y = unit, fill = qcat_num)) +
+  geom_tile(color = "white", linewidth = 0.2) +
+  scale_fill_continuous(breaks = 1:7, limits = c(1, 7)) +
+  labs(
+    title = "ARIMA diagnostic category by question and location",
+    x = "Question",
+    y = "Town | Buffer",
+    fill = "Qcat"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(axis.text.y = element_text(size = 7), panel.grid = element_blank())
+```
+
+```{r arima-qcat-counts}
+question_outputs %>%
+  count(question, qcat) %>%
+  ggplot(aes(x = question, y = n, fill = qcat)) +
+  geom_col() +
+  labs(
+    title = "Counts of ARIMA Qcat categories by question",
+    x = "Question",
+    y = "Count",
+    fill = "Qcat"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+# PDI (Perception Δ Instrumentation)
+
+This section summarizes the mismatch between survey perceptions and tenure-linked climate instrumentation.
+
+```{r pdi-summary-table}
+pdi_summary %>%
+  arrange(question, .town) %>%
+  mutate(across(where(is.numeric), ~ round(.x, 3))) %>%
+  knitr::kable(
+    caption = "Town-level PDI summary by question",
+    align = c("l", "l", rep("r", ncol(.) - 2))
+  )
+```
+
+```{r pdi-mean-pdi-plot}
+ggplot(pdi_summary, aes(x = .town, y = mean_pdi)) +
+  geom_col() +
+  facet_wrap(~ question, scales = "free_y") +
+  labs(
+    title = "Mean PDI by town and question",
+    x = "Town",
+    y = "Mean PDI"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+# Notes / interpretation guidance
+
+- **Frequency metrics** generally increase when hot, dry, or high fire-weather days become more common.
+- **Timing metrics** require directional interpretation: earlier onset often corresponds to smaller day values.
+- **Magnitude metrics** summarize intensity or severity, not direct impacts such as burned area.
+- **Qcat values** summarize how unusual an observed trend is relative to simulated ARIMA variability.
+- **PDI values** indicate the degree of mismatch between reported perceptions and climate-derived instrumentation.

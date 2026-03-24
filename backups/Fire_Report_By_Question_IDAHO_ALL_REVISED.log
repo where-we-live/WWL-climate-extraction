@@ -1,0 +1,4015 @@
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2026.2.27)  13 MAR 2026 19:56
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Fire_Report_By_Question_IDAHO_ALL_REVISED.tex
+(./Fire_Report_By_Question_IDAHO_ALL_REVISED.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count184
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\c@subparagraph=\count189
+\c@figure=\count190
+\c@table=\count191
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+For additional information on amsmath, use the `?' option.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen141
+)) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count192
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count193
+\leftroot@=\count194
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count195
+\DOTSCASE@=\count196
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count197
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count198
+\dotsspace@=\muskip16
+\c@parentequation=\count199
+\dspbrk@lvl=\count266
+\tag@help=\toks18
+\row@=\count267
+\column@=\count268
+\maxfields@=\count269
+\andhelp@=\toks19
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks20
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2024-02-20 L3 programming layer (loader) 
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2024-02-20 L3 backend support: XeTeX
+\g__graphics_track_int=\count270
+\l__pdf_internal_box=\box53
+\g__pdf_backend_object_int=\count271
+\g__pdf_backend_annotation_int=\count272
+\g__pdf_backend_link_int=\count273
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2024-02-18 L3 Experimental document command parser
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2024-02-18 LaTeX2e option processing using LaTeX3 keys
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+Package: fontspec 2024/02/13 v2.9a Font selection for XeLaTeX and LuaLaTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2024/02/13 v2.9a Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count274
+\l__fontspec_language_int=\count275
+\l__fontspec_strnum_int=\count276
+\l__fontspec_tmp_int=\count277
+\l__fontspec_tmpa_int=\count278
+\l__fontspec_tmpb_int=\count279
+\l__fontspec_tmpc_int=\count280
+\l__fontspec_em_int=\count281
+\l__fontspec_emdef_int=\count282
+\l__fontspec_strong_int=\count283
+\l__fontspec_strongdef_int=\count284
+\l__fontspec_tmpa_dim=\dimen150
+\l__fontspec_tmpb_dim=\dimen151
+\l__fontspec_tmpc_dim=\dimen152
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+\g__um_fam_int=\count285
+\g__um_fonts_used_int=\count286
+\l__um_primecount_int=\count287
+\g__um_primekern_muskip=\muskip17
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count288
+\Gm@cntv=\count289
+\c@Gm@tempcnt=\count290
+\Gm@bindingoffset=\dimen153
+\Gm@wd@mp=\dimen154
+\Gm@odd@mp=\dimen155
+\Gm@even@mp=\dimen156
+\Gm@layoutwidth=\dimen157
+\Gm@layoutheight=\dimen158
+\Gm@layouthoffset=\dimen159
+\Gm@layoutvoffset=\dimen160
+\Gm@dimlist=\toks23
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip53
+\LTright=\skip54
+\LTpre=\skip55
+\LTpost=\skip56
+\LTchunksize=\count291
+\LTcapwidth=\dimen161
+\LT@head=\box54
+\LT@firsthead=\box55
+\LT@foot=\box56
+\LT@lastfoot=\box57
+\LT@gbox=\box58
+\LT@cols=\count292
+\LT@rows=\count293
+\c@LT@tables=\count294
+\c@LT@chunks=\count295
+\LT@p@ftn=\toks24
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen162
+\lightrulewidth=\dimen163
+\cmidrulewidth=\dimen164
+\belowrulesep=\dimen165
+\belowbottomsep=\dimen166
+\aboverulesep=\dimen167
+\abovetopsep=\dimen168
+\cmidrulesep=\dimen169
+\cmidrulekern=\dimen170
+\defaultaddspace=\dimen171
+\@cmidla=\count296
+\@cmidlb=\count297
+\@aboverulesep=\dimen172
+\@belowrulesep=\dimen173
+\@thisruleclass=\count298
+\@lastruleclass=\count299
+\@thisrulewidth=\dimen174
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen175
+\ar@mcellbox=\box59
+\extrarowheight=\dimen176
+\NC@list=\toks25
+\extratabsurround=\skip57
+\backup@length=\skip58
+\ar@cellbox=\box60
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count300
+\calc@Bcount=\count301
+\calc@Adimen=\dimen177
+\calc@Bdimen=\dimen178
+\calc@Askip=\skip59
+\calc@Bskip=\skip60
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count302
+\calc@Cskip=\skip61
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count303
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box61
+\fn@width=\dimen179
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+)
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
+)
+\pandoc@box=\box62
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
+)) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count304
+\float@exts=\toks26
+\float@box=\box63
+\@float@everytoks=\toks27
+\@floatcapt=\box64
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count305
+)
+\@linkdim=\dimen182
+\Hy@linkcounter=\count306
+\Hy@pagecounter=\count307
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count308
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4062.
+Package hyperref Info: Hyper figures OFF on input line 4179.
+Package hyperref Info: Link nesting OFF on input line 4184.
+Package hyperref Info: Hyper index ON on input line 4187.
+Package hyperref Info: Plain pages OFF on input line 4194.
+Package hyperref Info: Backreferencing OFF on input line 4199.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4446.
+\c@Hy@tempcnt=\count309
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4784.
+\XeTeXLinkMargin=\dimen183
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count310
+\Field@Width=\dimen184
+\Fld@charsize=\dimen185
+Package hyperref Info: Hyper figures OFF on input line 6063.
+Package hyperref Info: Link nesting OFF on input line 6068.
+Package hyperref Info: Hyper index ON on input line 6071.
+Package hyperref Info: backreferencing OFF on input line 6078.
+Package hyperref Info: Link coloring OFF on input line 6083.
+Package hyperref Info: Link coloring with OCG OFF on input line 6088.
+Package hyperref Info: PDF/A mode OFF on input line 6093.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count311
+\c@Item=\count312
+\c@Hfootnote=\count313
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2024-01-20 v7.01h Hyperref driver for XeTeX
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\pdfm@box=\box65
+\c@Hy@AnnotLevel=\count314
+\HyField@AnnotCount=\count315
+\Fld@listcount=\count316
+\c@bookmark@seq@number=\count317
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip62
+) (/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
+File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
+\BKM@id=\count318
+)) (./Fire_Report_By_Question_IDAHO_ALL_REVISED.aux)
+\openout1 = `Fire_Report_By_Question_IDAHO_ALL_REVISED.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 84.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 84.
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 84.
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6-8.5,Font=latinmodern-math.otf,Style=MathScript},{Size=-6,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6-8.5>s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6>s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999964596882403]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 84.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 84.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 84.
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096459334209.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096459334209.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096459334209.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096459334209.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096459334209.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6-8.5,Font=latinmodern-math.otf,Style=MathScript},{Size=-6,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAdjustment={\fontdimen
+(fontspec)             8\font =6.77pt\relax \fontdimen 9\font =3.94pt\relax
+(fontspec)             \fontdimen 10\font =4.44pt\relax \fontdimen 11\font
+(fontspec)             =6.86pt\relax \fontdimen 12\font =3.45pt\relax
+(fontspec)             \fontdimen 13\font =3.63pt\relax \fontdimen 14\font
+(fontspec)             =3.63pt\relax \fontdimen 15\font =2.89pt\relax
+(fontspec)             \fontdimen 16\font =2.47pt\relax \fontdimen 17\font
+(fontspec)             =2.47pt\relax \fontdimen 18\font =2.5pt\relax
+(fontspec)             \fontdimen 19\font =2.0pt\relax \fontdimen 22\font
+(fontspec)             =2.5pt\relax \fontdimen 20\font =0pt\relax \fontdimen
+(fontspec)             21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[1.000096459334209]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6-8.5>s*[1.000096459334209]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6>s*[1.000096459334209]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =6.77pt\relax \fontdimen 9\font
+(fontspec)             =3.94pt\relax \fontdimen 10\font =4.44pt\relax
+(fontspec)             \fontdimen 11\font =6.86pt\relax \fontdimen 12\font
+(fontspec)             =3.45pt\relax \fontdimen 13\font =3.63pt\relax
+(fontspec)             \fontdimen 14\font =3.63pt\relax \fontdimen 15\font
+(fontspec)             =2.89pt\relax \fontdimen 16\font =2.47pt\relax
+(fontspec)             \fontdimen 17\font =2.47pt\relax \fontdimen 18\font
+(fontspec)             =2.5pt\relax \fontdimen 19\font =2.0pt\relax \fontdimen
+(fontspec)             22\font =2.5pt\relax \fontdimen 20\font =0pt\relax
+(fontspec)             \fontdimen 21\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.000096459334209]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =6.77pt\relax \fontdimen 9\font
+(fontspec)             =3.94pt\relax \fontdimen 10\font =4.44pt\relax
+(fontspec)             \fontdimen 11\font =6.86pt\relax \fontdimen 12\font
+(fontspec)             =3.45pt\relax \fontdimen 13\font =3.63pt\relax
+(fontspec)             \fontdimen 14\font =3.63pt\relax \fontdimen 15\font
+(fontspec)             =2.89pt\relax \fontdimen 16\font =2.47pt\relax
+(fontspec)             \fontdimen 17\font =2.47pt\relax \fontdimen 18\font
+(fontspec)             =2.5pt\relax \fontdimen 19\font =2.0pt\relax \fontdimen
+(fontspec)             22\font =2.5pt\relax \fontdimen 20\font =0pt\relax
+(fontspec)             \fontdimen 21\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 84.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 84.
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998964600422715.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998964600422715.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998964600422715.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998964600422715.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998964600422715.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=8.5-},{Size=6-8.5,Font=latinmodern-math.otf,Style=MathScript},{Size=-6,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAdjustment={\fontdimen
+(fontspec)             8\font =0.4pt\relax \fontdimen 9\font =2.0pt\relax
+(fontspec)             \fontdimen 10\font =1.67pt\relax \fontdimen 11\font
+(fontspec)             =1.11pt\relax \fontdimen 12\font =6.0pt\relax
+(fontspec)             \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <8.5->s*[0.9998964600422715]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<6-8.5>s*[0.9998964600422715]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-6>s*[0.9998964600422715]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.4pt\relax \fontdimen 9\font
+(fontspec)             =2.0pt\relax \fontdimen 10\font =1.67pt\relax
+(fontspec)             \fontdimen 11\font =1.11pt\relax \fontdimen 12\font
+(fontspec)             =6.0pt\relax \fontdimen 13\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9998964600422715]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.4pt\relax \fontdimen 9\font
+(fontspec)             =2.0pt\relax \fontdimen 10\font =1.67pt\relax
+(fontspec)             \fontdimen 11\font =1.11pt\relax \fontdimen 12\font
+(fontspec)             =6.0pt\relax \fontdimen 13\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 84.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 84.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 84.
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring OFF on input line 84.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 86.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 86.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.0011pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.00073pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 11.99872pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.99915pt on input line 86.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 86.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 86.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
+(/mnt/ceph/erichs/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (./Fire_Report_By_Question_IDAHO_ALL_REVISED.toc
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00092pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00064pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 3.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 3.
+[1
+
+])
+\tf@toc=\write3
+\openout3 = `Fire_Report_By_Question_IDAHO_ALL_REVISED.toc'.
+
+[2]
+Overfull \hbox (70.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate stronger overall warming relative to baseline conditions.[] 
+ []
+
+[3]
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric             | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meananntemp        |                0.346|Q7   |                  0.977|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meananntemp        |                0.350|Q7   |                  0.965|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meananntemp        |                0.309|Q7   |                  0.898|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meananntemp        |                0.320|Q7   |                  0.999|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meananntemp        |                0.277|Q7   |                  0.796|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meananntemp        |                0.229|Q7   |                  0.745|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meananntemp        |                0.219|Q7   |                  0.465|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meananntemp        |                0.199|Q7   |                  0.391|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meananntemp        |                0.234|Q7   |                  0.545|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meananntemp        |                0.196|Q7   |                  0.459|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meananomanntemp    |                0.345|Q7   |                  0.977|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meananomanntemp    |                0.352|Q7   |                  0.965|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meananomanntemp    |                0.314|Q7   |                  0.898|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meananomanntemp    |                0.320|Q7   |                  0.999|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meananomanntemp    |                0.277|Q7   |                  0.796|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meananomanntemp    |                0.225|Q7   |                  0.745|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meananomanntemp    |                0.215|Q7   |                  0.465|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meananomanntemp    |                0.202|Q7   |                  0.391|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meananomanntemp    |                0.230|Q7   |                  0.545|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meananomanntemp    |                0.193|Q7   |                  0.459|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meanmaxanntemp     |                0.423|Q7   |                  1.427|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meanmaxanntemp     |                0.491|Q7   |                  1.713|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meanmaxanntemp     |                0.287|Q7   |                  0.878|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meanmaxanntemp     |                0.283|Q7   |                  0.878|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meanmaxanntemp     |                0.211|Q7   |                  0.709|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meanmaxanntemp     |                0.173|Q7   |                  0.686|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meanmaxanntemp     |                0.219|Q7   |                  0.440|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meanmaxanntemp     |                0.196|Q7   |                  0.366|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meanmaxanntemp     |                0.243|Q7   |                  0.481|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meanmaxanntemp     |                0.207|Q7   |                  0.444|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meanmaxanomanntemp |                0.422|Q7   |                  1.427|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meanmaxanomanntemp |                0.494|Q7   |                  1.713|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meanmaxanomanntemp |                0.289|Q7   |                  0.878|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meanmaxanomanntemp |                0.283|Q7   |                  0.878|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meanmaxanomanntemp |                0.204|Q7   |                  0.709|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meanmaxanomanntemp |                0.176|Q7   |                  0.686|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meanmaxanomanntemp |                0.222|Q7   |                  0.440|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meanmaxanomanntemp |                0.196|Q7   |                  0.366|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meanmaxanomanntemp |                0.243|Q7   |                  0.481|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meanmaxanomanntemp |                0.207|Q7   |                  0.444|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meanminanntemp     |                0.245|Q7   |                  0.526|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meanminanntemp     |                0.168|Q7   |                  0.217|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meanminanntemp     |                0.343|Q6   |                  0.917|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meanminanntemp     |                0.379|Q6   |                  1.120|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meanminanntemp     |                0.369|Q6   |                  0.883|[] 
+ []
+
+[4]
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meanminanntemp     |                0.326|Q6   |                  0.805|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meanminanntemp     |                0.225|Q7   |                  0.490|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meanminanntemp     |                0.202|Q7   |                  0.416|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meanminanntemp     |                0.265|Q7   |                  0.608|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meanminanntemp     |                0.200|Q7   |                  0.473|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meanminanomanntemp |                0.249|Q7   |                  0.526|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meanminanomanntemp |                0.170|Q7   |                  0.217|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meanminanomanntemp |                0.339|Q6   |                  0.917|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meanminanomanntemp |                0.379|Q6   |                  1.120|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meanminanomanntemp |                0.370|Q6   |                  0.883|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meanminanomanntemp |                0.326|Q6   |                  0.805|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meanminanomanntemp |                0.225|Q7   |                  0.490|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meanminanomanntemp |                0.203|Q7   |                  0.416|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meanminanomanntemp |                0.265|Q7   |                  0.608|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 315--315
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meanminanomanntemp |                0.200|Q7   |                  0.473|[] 
+ []
+
+
+Overfull \hbox (2.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate hotter summer conditions, especially in JJA.[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric            | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:-----------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxmaxanomjjatemp |                0.920|Q6   |                  3.981|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxmaxanomjjatemp |                1.025|Q6   |                  4.389|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxmaxanomjjatemp |                0.758|Q6   |                  3.155|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxmaxanomjjatemp |                0.760|Q6   |                  3.161|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxmaxanomjjatemp |                0.662|Q6   |                  2.987|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxmaxanomjjatemp |                0.606|Q6   |                  2.979|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxmaxanomjjatemp |                0.688|Q6   |                  2.593|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxmaxanomjjatemp |                0.668|Q6   |                  2.562|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxmaxanomjjatemp |                0.677|Q6   |                  2.677|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxmaxanomjjatemp |                0.692|Q6   |                  2.628|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxmaxjjatemp     |                0.804|Q6   |                  2.603|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxmaxjjatemp     |                0.856|Q6   |                  2.933|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxmaxjjatemp     |                0.629|Q6   |                  1.815|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxmaxjjatemp     |                0.643|Q6   |                  1.854|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxmaxjjatemp     |                0.577|Q6   |                  2.057|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxmaxjjatemp     |                0.555|Q6   |                  2.188|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxmaxjjatemp     |                0.497|Q6   |                  1.022|[] 
+ []
+
+[5]
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxmaxjjatemp     |                0.488|Q6   |                  1.005|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxmaxjjatemp     |                0.535|Q6   |                  1.171|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxmaxjjatemp     |                0.510|Q6   |                  1.080|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxminanomjjatemp |                0.208|Q7   |                  0.491|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxminanomjjatemp |                0.102|Q6   |                  0.386|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxminanomjjatemp |                0.236|Q7   |                  0.792|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxminanomjjatemp |                0.288|Q7   |                  1.149|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxminanomjjatemp |                0.306|Q7   |                  1.041|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxminanomjjatemp |                0.257|Q7   |                  0.811|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxminanomjjatemp |                0.031|Q5   |                  0.499|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxminanomjjatemp |                0.082|Q5   |                  0.730|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxminanomjjatemp |                0.063|Q5   |                  0.597|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxminanomjjatemp |               -0.056|Q3   |                  0.311|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxminjjatemp     |                0.459|Q7   |                 -0.418|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxminjjatemp     |                0.379|Q7   |                 -0.734|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxminjjatemp     |                0.580|Q7   |                 -0.060|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxminjjatemp     |                0.634|Q6   |                  0.280|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxminjjatemp     |                0.528|Q6   |                  0.246|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxminjjatemp     |                0.491|Q7   |                  0.036|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxminjjatemp     |                0.296|Q7   |                 -0.743|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxminjjatemp     |                0.328|Q6   |                 -0.533|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxminjjatemp     |                0.291|Q7   |                 -0.677|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxminjjatemp     |                0.232|Q7   |                 -0.933|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meananomjjatemp   |                0.480|Q7   |                  1.168|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meananomjjatemp   |                0.462|Q7   |                  1.134|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meananomjjatemp   |                0.469|Q7   |                  1.129|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meananomjjatemp   |                0.468|Q7   |                  1.118|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meananomjjatemp   |                0.423|Q7   |                  1.096|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meananomjjatemp   |                0.363|Q7   |                  0.883|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meananomjjatemp   |                0.390|Q7   |                  0.912|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meananomjjatemp   |                0.401|Q7   |                  0.922|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meananomjjatemp   |                0.414|Q7   |                  0.944|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meananomjjatemp   |                0.375|Q7   |                  0.847|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |meanjjatemp       |                0.480|Q7   |                  1.168|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |meanjjatemp       |                0.462|Q7   |                  1.134|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |meanjjatemp       |                0.469|Q7   |                  1.129|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |meanjjatemp       |                0.468|Q7   |                  1.118|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |meanjjatemp       |                0.423|Q7   |                  1.096|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |meanjjatemp       |                0.363|Q7   |                  0.883|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |meanjjatemp       |                0.390|Q7   |                  0.912|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |meanjjatemp       |                0.401|Q7   |                  0.922|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |meanjjatemp       |                0.414|Q7   |                  0.944|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 398--398
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |meanjjatemp       |                0.375|Q7   |                  0.847|[] 
+ []
+
+[6]
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric         | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:--------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |frostdays      |               -4.286|Q2   |                  -20.6|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |frostdays      |               -3.514|Q2   |                  -17.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |frostdays      |               -4.286|Q2   |                  -26.2|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |frostdays      |               -5.484|Q2   |                  -31.1|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |frostdays      |               -4.706|Q3   |                  -20.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |frostdays      |               -4.333|Q3   |                  -21.2|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |frostdays      |               -0.500|Q3   |                   -6.5|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |frostdays      |                0.000|Q4   |                   -0.6|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |frostdays      |               -1.613|Q2   |                  -12.5|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |frostdays      |               -0.556|Q3   |                   -7.8|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |summerdays     |                6.923|Q6   |                   23.6|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |summerdays     |                7.619|Q7   |                   27.9|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |summerdays     |                5.714|Q6   |                   18.1|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |summerdays     |                5.625|Q7   |                   17.7|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |summerdays     |                4.286|Q7   |                   15.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |summerdays     |                4.118|Q7   |                   15.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |summerdays     |                4.545|Q7   |                   12.7|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |summerdays     |                4.000|Q6   |                   11.9|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |summerdays     |                5.000|Q7   |                   14.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |summerdays     |                4.286|Q6   |                   12.7|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |tmaxgt90thdays |                5.000|Q6   |                   30.7|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |tmaxgt90thdays |                5.455|Q6   |                   35.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |tmaxgt90thdays |                2.500|Q7   |                   20.3|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |tmaxgt90thdays |                2.632|Q7   |                   22.9|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |tmaxgt90thdays |                1.875|Q7   |                   19.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |tmaxgt90thdays |                1.538|Q6   |                   19.5|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |tmaxgt90thdays |                0.417|Q5   |                   14.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |tmaxgt90thdays |                0.455|Q5   |                   14.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |tmaxgt90thdays |                0.000|Q4   |                   14.3|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |tmaxgt90thdays |                0.000|Q4   |                   13.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |tmingt90thdays |                0.000|Q4   |                    3.5|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |tmingt90thdays |                0.000|Q4   |                    3.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |tmingt90thdays |                1.765|Q6   |                   12.8|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |tmingt90thdays |                2.258|Q4   |                   20.4|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |tmingt90thdays |                1.923|Q4   |                   15.1|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |tmingt90thdays |                1.304|Q5   |                   10.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |tmingt90thdays |                0.385|Q5   |                    9.9|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |tmingt90thdays |                0.000|Q4   |                   10.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |tmingt90thdays |                1.053|Q6   |                   12.0|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 459--459
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |tmingt90thdays |               -0.250|Q4   |                    8.4|[] 
+ []
+
+[7]
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric     | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:----------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |gsstartdoy |                0.000|Q4   |                   38.2|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |gsstartdoy |                0.000|Q4   |                   57.3|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |gsstartdoy |                0.000|Q4   |                   56.2|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |gsstartdoy |                0.227|Q4   |                   55.2|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |gsstartdoy |                0.400|Q4   |                   57.0|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |gsstartdoy |                0.000|Q4   |                   55.4|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |gsstartdoy |                0.000|Q4   |                   19.0|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |gsstartdoy |                0.000|Q4   |                    4.9|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |gsstartdoy |                0.000|Q4   |                   50.9|[] 
+ []
+
+
+Overfull \hbox (7.99498pt too wide) in paragraph at lines 488--488
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |gsstartdoy |                0.000|Q4   |                   19.1|[] 
+ []
+
+
+Overfull \hbox (44.74498pt too wide) in paragraph at lines 516--516
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Larger end-day values indicate later persistence of warm-season conditions.[] 
+ []
+
+[8]
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate longer hot periods or growing-season persistence.[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric        | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:-------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |durtmaxgt90th |                0.000|Q4   |                    5.4|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |durtmaxgt90th |                0.000|Q4   |                    6.1|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |durtmaxgt90th |                0.000|Q4   |                    0.6|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |durtmaxgt90th |                0.000|Q4   |                    2.6|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |durtmaxgt90th |                0.000|Q4   |                    2.4|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |durtmaxgt90th |                0.000|Q4   |                    1.4|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |durtmaxgt90th |                0.000|Q4   |                    2.2|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |durtmaxgt90th |                0.000|Q4   |                    1.5|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |durtmaxgt90th |                0.000|Q4   |                    2.3|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |durtmaxgt90th |                0.000|Q4   |                    1.5|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |gslength      |                1.538|Q5   |                  -34.6|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |gslength      |                0.000|Q4   |                  -55.2|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |gslength      |                0.000|Q4   |                  -54.2|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |gslength      |               -0.238|Q4   |                  -52.0|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |gslength      |               -0.882|Q4   |                  -56.6|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |gslength      |                0.000|Q4   |                  -55.0|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |gslength      |                0.000|Q4   |                  -19.0|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |gslength      |                0.000|Q4   |                   -5.0|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |gslength      |                0.000|Q4   |                  -50.8|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 556--556
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |gslength      |                0.000|Q4   |                  -18.9|[] 
+ []
+
+
+Overfull \hbox (70.99498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Lower precipitation / larger moisture deficits indicate stronger drought stress.[] 
+ []
+
+[9]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric           | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:----------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualanometo    |               37.415|Q7   |                129.916|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualanometo    |               40.385|Q7   |                139.332|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualanometo    |               31.727|Q7   |                105.269|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualanometo    |               31.706|Q7   |                108.763|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualanometo    |               22.902|Q7   |                 92.761|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualanometo    |               21.000|Q7   |                 89.937|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualanometo    |               21.685|Q6   |                 79.070|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualanometo    |               20.759|Q6   |                 74.980|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualanometo    |               23.270|Q7   |                 82.554|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualanometo    |               21.913|Q6   |                 82.471|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualanomprecip |              -37.134|Q1   |               -125.018|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualanomprecip |              -36.846|Q1   |               -119.781|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualanomprecip |              -32.032|Q1   |                -96.382|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualanomprecip |              -32.199|Q1   |               -109.677|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualanomprecip |              -35.994|Q1   |               -143.541|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualanomprecip |              -35.906|Q1   |               -136.673|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualanomprecip |              -13.068|Q1   |                -45.918|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualanomprecip |              -11.025|Q1   |                -32.246|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualanomprecip |              -14.332|Q1   |                -55.433|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualanomprecip |              -14.698|Q1   |                -55.125|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualanompwd    |              -73.425|Q1   |               -254.934|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualanompwd    |              -75.333|Q1   |               -259.114|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualanompwd    |              -60.692|Q1   |               -201.651|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualanompwd    |              -62.555|Q2   |               -218.440|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualanompwd    |              -57.400|Q2   |               -236.302|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualanompwd    |              -52.003|Q2   |               -226.610|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualanompwd    |              -38.989|Q1   |               -124.987|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualanompwd    |              -34.677|Q1   |               -107.226|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualanompwd    |              -41.660|Q1   |               -137.987|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualanompwd    |              -40.665|Q1   |               -137.596|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualeto        |               37.451|Q7   |                129.916|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualeto        |               40.258|Q7   |                139.332|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualeto        |               31.754|Q7   |                105.269|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualeto        |               31.500|Q7   |                108.763|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualeto        |               22.902|Q7   |                 92.761|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualeto        |               21.046|Q7   |                 89.937|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualeto        |               21.705|Q6   |                 79.070|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualeto        |               20.759|Q6   |                 74.980|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualeto        |               22.990|Q7   |                 82.554|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualeto        |               22.033|Q6   |                 82.471|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualprecip     |              -37.092|Q1   |               -125.018|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualprecip     |              -36.776|Q1   |               -119.781|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualprecip     |              -32.085|Q1   |                -96.382|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualprecip     |              -32.555|Q1   |               -109.677|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualprecip     |              -35.994|Q1   |               -143.541|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualprecip     |              -35.324|Q1   |               -136.673|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualprecip     |              -13.408|Q1   |                -45.918|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualprecip     |              -11.468|Q1   |                -32.246|[] 
+ []
+
+[10]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualprecip     |              -14.332|Q1   |                -55.433|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualprecip     |              -14.698|Q1   |                -55.125|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |annualpwd        |              -73.345|Q1   |               -254.934|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |annualpwd        |              -75.311|Q1   |               -259.114|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |annualpwd        |              -60.692|Q1   |               -201.651|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |annualpwd        |              -62.739|Q2   |               -218.440|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |annualpwd        |              -57.400|Q2   |               -236.302|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |annualpwd        |              -53.573|Q2   |               -226.610|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |annualpwd        |              -38.640|Q1   |               -124.987|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |annualpwd        |              -34.652|Q1   |               -107.226|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |annualpwd        |              -41.430|Q1   |               -137.987|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 642--642
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |annualpwd        |              -40.397|Q1   |               -137.596|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric               | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:--------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |coolseasonanomprecip |               -8.451|Q3   |                -62.642|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |coolseasonanomprecip |               -5.790|Q3   |                -58.733|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |coolseasonanomprecip |               -2.796|Q3   |                -42.138|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |coolseasonanomprecip |               -5.784|Q3   |                -50.720|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |coolseasonanomprecip |               -8.108|Q3   |                -79.039|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |coolseasonanomprecip |               -6.786|Q3   |                -73.670|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |coolseasonanomprecip |                5.307|Q5   |                 -2.589|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |coolseasonanomprecip |                7.782|Q6   |                  9.123|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |coolseasonanomprecip |                4.392|Q5   |                -11.530|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |coolseasonanomprecip |                1.697|Q5   |                 -9.590|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |coolseasonprecip     |               -9.254|Q2   |                -62.642|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |coolseasonprecip     |               -6.254|Q3   |                -58.733|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |coolseasonprecip     |               -2.982|Q3   |                -42.138|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |coolseasonprecip     |               -5.176|Q3   |                -50.720|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |coolseasonprecip     |               -7.843|Q3   |                -79.039|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |coolseasonprecip     |               -7.397|Q3   |                -73.670|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |coolseasonprecip     |                5.307|Q5   |                 -2.589|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |coolseasonprecip     |                7.675|Q6   |                  9.123|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |coolseasonprecip     |                3.987|Q5   |                -11.530|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 682--682
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |coolseasonprecip     |                1.656|Q5   |                 -9.590|[] 
+ []
+
+[11]
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric               | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:--------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |coolseasondrydays1mm |                1.562|Q6   |                    6.4|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |coolseasondrydays1mm |                2.273|Q7   |                    9.1|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |coolseasondrydays1mm |                0.833|Q6   |                    5.5|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |coolseasondrydays1mm |                0.000|Q4   |                    4.5|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |coolseasondrydays1mm |                1.250|Q6   |                    1.9|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |coolseasondrydays1mm |                1.111|Q6   |                    0.7|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |coolseasondrydays1mm |                1.250|Q6   |                    6.1|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |coolseasondrydays1mm |                1.176|Q6   |                    5.7|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |coolseasondrydays1mm |                0.556|Q5   |                    6.6|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 711--711
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |coolseasondrydays1mm |                1.667|Q7   |                    4.8|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## **Survey question:** Has there been a change in when rainfall/snowfall starts during the year?[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Timing metrics summarize onset and center-of-mass shifts in precipitation.[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric           | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:----------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |precipCOMwydoy   |               -4.511|Q1   |                 -7.429|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |precipCOMwydoy   |               -4.917|Q1   |                 -7.658|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |precipCOMwydoy   |               -4.742|Q1   |                 -8.342|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |precipCOMwydoy   |               -4.628|Q1   |                 -8.476|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |precipCOMwydoy   |               -3.884|Q1   |                 -5.711|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |precipCOMwydoy   |               -4.094|Q1   |                 -5.637|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |precipCOMwydoy   |               -5.511|Q1   |                -10.562|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |precipCOMwydoy   |               -5.902|Q1   |                -11.678|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |precipCOMwydoy   |               -5.345|Q1   |                 -9.530|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |precipCOMwydoy   |               -5.639|Q1   |                -10.438|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |preciponsetwydoy |                0.714|Q6   |                  8.500|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |preciponsetwydoy |                0.625|Q6   |                  8.300|[] 
+ []
+
+[12]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |preciponsetwydoy |                0.714|Q6   |                  5.300|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |preciponsetwydoy |                0.435|Q5   |                  5.300|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |preciponsetwydoy |                0.556|Q5   |                  8.000|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |preciponsetwydoy |                0.625|Q6   |                  8.200|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |preciponsetwydoy |                0.455|Q5   |                  1.100|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |preciponsetwydoy |                0.000|Q4   |                  1.200|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |preciponsetwydoy |                1.143|Q6   |                  4.700|[] 
+ []
+
+
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 750--750
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |preciponsetwydoy |                0.500|Q5   |                  1.400|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric              | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:-------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxcoolseasondrydur |               -0.833|Q2   |                   -2.0|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxcoolseasondrydur |               -1.111|Q2   |                   -1.7|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxcoolseasondrydur |               -0.741|Q3   |                    0.0|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxcoolseasondrydur |               -0.952|Q2   |                   -0.1|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxcoolseasondrydur |               -0.455|Q3   |                    1.5|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxcoolseasondrydur |               -0.556|Q3   |                    0.4|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxcoolseasondrydur |                0.000|Q4   |                    3.8|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxcoolseasondrydur |               -0.500|Q3   |                    1.5|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxcoolseasondrydur |               -0.690|Q3   |                    2.1|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxcoolseasondrydur |                0.000|Q4   |                    2.6|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |maxdrydur           |                4.286|Q6   |                   11.9|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |maxdrydur           |                3.571|Q6   |                   11.2|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |maxdrydur           |                4.286|Q6   |                   13.0|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |maxdrydur           |                4.167|Q6   |                   13.0|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |maxdrydur           |                2.593|Q7   |                    3.7|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |maxdrydur           |                2.353|Q7   |                    6.0|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |maxdrydur           |                3.000|Q5   |                   10.5|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |maxdrydur           |                1.923|Q7   |                    7.5|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |maxdrydur           |                2.667|Q5   |                    9.6|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 790--790
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |maxdrydur           |                2.439|Q5   |                    8.2|[] 
+ []
+
+[13]
+Overfull \hbox (76.24498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate more days with unusually elevated fire-weather conditions.[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric             | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firehighdays_bi90  |                2.857|Q5   |                   21.4|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firehighdays_bi90  |                2.500|Q5   |                   15.5|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firehighdays_bi90  |                3.000|Q5   |                   25.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firehighdays_bi90  |                3.810|Q5   |                   30.2|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firehighdays_bi90  |                3.333|Q5   |                   26.7|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firehighdays_bi90  |                2.308|Q5   |                   22.4|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firehighdays_bi90  |                1.667|Q6   |                   19.1|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firehighdays_bi90  |                0.811|Q5   |                   16.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firehighdays_bi90  |                2.105|Q6   |                   20.5|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firehighdays_bi90  |                1.463|Q6   |                   20.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firehighdays_bi95  |                1.000|Q6   |                   10.5|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firehighdays_bi95  |                0.909|Q6   |                    7.2|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firehighdays_bi95  |                1.111|Q5   |                   12.5|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firehighdays_bi95  |                1.515|Q5   |                   14.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firehighdays_bi95  |                1.250|Q5   |                   12.4|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firehighdays_bi95  |                1.111|Q6   |                   12.1|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firehighdays_bi95  |                0.588|Q5   |                   10.7|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firehighdays_bi95  |                0.000|Q4   |                    8.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firehighdays_bi95  |                0.526|Q5   |                   11.0|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firehighdays_bi95  |                0.286|Q5   |                    9.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firehighdays_erc90 |                5.484|Q6   |                   36.1|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firehighdays_erc90 |                4.762|Q6   |                   28.8|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firehighdays_erc90 |                7.500|Q6   |                   43.1|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firehighdays_erc90 |                8.529|Q6   |                   49.0|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firehighdays_erc90 |                5.926|Q6   |                   43.5|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firehighdays_erc90 |                5.833|Q6   |                   43.2|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firehighdays_erc90 |                3.636|Q6   |                   32.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firehighdays_erc90 |                3.333|Q6   |                   29.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firehighdays_erc90 |                5.385|Q7   |                   36.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firehighdays_erc90 |                3.636|Q6   |                   37.3|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firehighdays_erc95 |                2.500|Q5   |                   21.2|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firehighdays_erc95 |                2.381|Q7   |                   16.1|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firehighdays_erc95 |                3.571|Q5   |                   25.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firehighdays_erc95 |                3.913|Q5   |                   28.2|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firehighdays_erc95 |                3.333|Q5   |                   27.4|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firehighdays_erc95 |                2.727|Q5   |                   27.8|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firehighdays_erc95 |                1.034|Q5   |                   19.8|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firehighdays_erc95 |                0.714|Q5   |                   16.9|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firehighdays_erc95 |                1.875|Q6   |                   20.6|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 854--854
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firehighdays_erc95 |                0.714|Q5   |                   20.3|[] 
+ []
+
+[14]
+Overfull \hbox (18.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## **Survey question:** During the summer months, has fire occurred more often or less often?[] 
+ []
+
+
+Overfull \hbox (13.24498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate more frequent summer fire-weather exceedances.[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric                   | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:------------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firesummerhighdays_bi90  |                0.323|Q4   |                    8.3|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firesummerhighdays_bi90  |                0.294|Q4   |                    6.2|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firesummerhighdays_bi90  |                0.333|Q4   |                    9.3|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firesummerhighdays_bi90  |                0.435|Q4   |                   10.1|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firesummerhighdays_bi90  |                0.645|Q5   |                    9.9|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firesummerhighdays_bi90  |                0.417|Q4   |                    8.6|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firesummerhighdays_bi90  |                0.714|Q5   |                    8.0|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firesummerhighdays_bi90  |                0.606|Q5   |                    7.8|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firesummerhighdays_bi90  |                0.588|Q5   |                    7.7|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firesummerhighdays_bi90  |                0.500|Q5   |                    8.5|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firesummerhighdays_erc90 |                0.000|Q4   |                   13.2|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firesummerhighdays_erc90 |                0.000|Q4   |                   11.5|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firesummerhighdays_erc90 |                0.000|Q4   |                   14.1|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firesummerhighdays_erc90 |                0.000|Q4   |                   14.3|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firesummerhighdays_erc90 |                0.000|Q4   |                   15.6|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firesummerhighdays_erc90 |                0.333|Q4   |                   13.9|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firesummerhighdays_erc90 |                0.000|Q4   |                   13.9|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firesummerhighdays_erc90 |                0.000|Q4   |                   14.7|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firesummerhighdays_erc90 |                0.000|Q4   |                   13.9|[] 
+ []
+
+
+Overfull \hbox (81.49498pt too wide) in paragraph at lines 894--894
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firesummerhighdays_erc90 |                0.000|Q4   |                   14.8|[] 
+ []
+
+
+Overfull \hbox (23.74498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate more extreme or intense fire-weather conditions.[] 
+ []
+
+[15]
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric             | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firep95_erc        |                4.147|Q7   |                  9.052|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firep95_erc        |                3.901|Q7   |                  6.679|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firep95_erc        |                4.826|Q7   |                 11.560|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firep95_erc        |                4.857|Q7   |                 12.473|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firep95_erc        |                3.623|Q7   |                 10.480|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firep95_erc        |                3.645|Q7   |                 10.349|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firep95_erc        |                4.256|Q7   |                 11.302|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firep95_erc        |                4.196|Q7   |                 11.606|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firep95_erc        |                4.348|Q7   |                 11.311|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firep95_erc        |                4.029|Q7   |                 11.385|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firepeak_bi        |                3.477|Q7   |                  6.913|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firepeak_bi        |                3.393|Q6   |                  5.216|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firepeak_bi        |                4.082|Q7   |                  8.641|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firepeak_bi        |                4.224|Q7   |                  9.610|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firepeak_bi        |                3.056|Q7   |                  7.270|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firepeak_bi        |                3.211|Q7   |                  7.695|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firepeak_bi        |                3.523|Q7   |                  8.045|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firepeak_bi        |                3.288|Q7   |                  8.173|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firepeak_bi        |                3.749|Q7   |                  8.174|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firepeak_bi        |                3.216|Q7   |                  8.282|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firepeak_erc       |                4.700|Q7   |                  7.354|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firepeak_erc       |                4.629|Q6   |                  4.943|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firepeak_erc       |                5.298|Q7   |                  9.719|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firepeak_erc       |                5.303|Q7   |                 10.676|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firepeak_erc       |                3.572|Q6   |                  9.343|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firepeak_erc       |                3.581|Q7   |                  8.758|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firepeak_erc       |                4.257|Q7   |                  9.689|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firepeak_erc       |                4.136|Q7   |                 10.128|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firepeak_erc       |                4.517|Q7   |                  9.814|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firepeak_erc       |                4.284|Q7   |                 10.128|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |fireseverity_bi90  |                7.650|Q6   |                 73.382|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |fireseverity_bi90  |                6.538|Q5   |                 52.774|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |fireseverity_bi90  |                9.840|Q5   |                108.333|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |fireseverity_bi90  |               11.667|Q5   |                124.350|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |fireseverity_bi90  |               10.889|Q6   |                102.603|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |fireseverity_bi90  |                7.876|Q6   |                 91.966|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |fireseverity_bi90  |                5.073|Q5   |                 84.358|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |fireseverity_bi90  |                2.678|Q5   |                 78.424|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |fireseverity_bi90  |                6.408|Q5   |                 91.223|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |fireseverity_bi90  |                4.384|Q5   |                 90.373|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |fireseverity_erc90 |               19.406|Q5   |                156.833|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |fireseverity_erc90 |               13.625|Q6   |                115.870|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |fireseverity_erc90 |               30.850|Q5   |                218.086|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |fireseverity_erc90 |               33.453|Q5   |                259.983|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |fireseverity_erc90 |               26.516|Q5   |                230.596|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |fireseverity_erc90 |               23.577|Q5   |                236.527|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |fireseverity_erc90 |               12.448|Q5   |                162.159|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |fireseverity_erc90 |                8.515|Q5   |                139.029|[] 
+ []
+
+
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |fireseverity_erc90 |               18.204|Q6   |                180.760|[] 
+ []
+
+[16]
+Overfull \hbox (49.99498pt too wide) in paragraph at lines 967--967
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |fireseverity_erc90 |               11.864|Q5   |                185.131|[] 
+ []
+
+
+Overfull \hbox (28.99498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## **Survey question:** Has there been a change in when the fire season starts during the year?[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric              | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:-------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_any_bi90  |               -2.053|Q3   |                -38.744|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_any_bi90  |               -0.635|Q4   |                -17.344|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_any_bi90  |               -0.606|Q4   |                -46.500|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_any_bi90  |               -3.670|Q3   |                -70.175|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_any_bi90  |               -2.129|Q3   |                -59.433|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_any_bi90  |               -4.129|Q3   |                -51.678|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_any_bi90  |                0.000|Q4   |                -90.575|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_any_bi90  |                2.209|Q5   |                -63.825|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_any_bi90  |               -1.250|Q4   |                -92.125|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_any_bi90  |                0.000|Q4   |                -67.014|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_any_erc90 |               -2.330|Q3   |                -68.511|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_any_erc90 |               -1.588|Q3   |                -44.522|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_any_erc90 |               -4.146|Q3   |                -72.443|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_any_erc90 |               -5.000|Q3   |                -87.200|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_any_erc90 |               -1.071|Q4   |                -38.957|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_any_erc90 |               -1.667|Q3   |                -31.625|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_any_erc90 |               -2.963|Q3   |                -43.214|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_any_erc90 |               -2.353|Q3   |                -40.371|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_any_erc90 |               -0.909|Q4   |                -65.757|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_any_erc90 |               -3.889|Q3   |                -50.671|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_k2_erc90  |               -1.724|Q4   |                -52.133|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_k2_erc90  |               -0.769|Q4   |                -24.857|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_k2_erc90  |               -6.533|Q3   |                -60.567|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_k2_erc90  |               -5.607|Q3   |                -62.000|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_k2_erc90  |               -1.667|Q4   |                -78.167|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_k2_erc90  |                0.000|Q4   |                -78.833|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_k2_erc90  |               -5.500|Q3   |                -49.200|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_k2_erc90  |               -3.218|Q3   |                 12.900|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_k2_erc90  |               -6.667|Q2   |                -47.967|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_k2_erc90  |               -4.167|Q3   |                -31.950|[] 
+ []
+
+[17]
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_k3_bi90   |                4.000|Q5   |                -29.389|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_k3_bi90   |               12.857|Q7   |                 17.567|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_k3_bi90   |                4.545|Q5   |                -25.125|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_k3_bi90   |                0.000|Q4   |                -73.875|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_k3_bi90   |                2.273|Q4   |                -60.400|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_k3_bi90   |               -0.455|Q4   |                -82.200|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_k3_bi90   |               16.364|Q6   |                 -2.083|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_k3_bi90   |               22.632|Q6   |                 70.542|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_k3_bi90   |               13.889|Q6   |                -28.639|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_k3_bi90   |               12.426|Q5   |                 77.833|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_k3_erc90  |               -0.167|Q4   |                -42.300|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_k3_erc90  |               -0.143|Q4   |                 -9.333|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_k3_erc90  |               -7.639|Q2   |                -55.533|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_k3_erc90  |               -5.000|Q3   |                -62.300|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_k3_erc90  |                1.517|Q4   |                -72.233|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_k3_erc90  |                1.312|Q4   |                -78.633|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_k3_erc90  |                0.000|Q4   |                 25.667|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_k3_erc90  |                0.385|Q4   |                 31.700|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_k3_erc90  |               -3.478|Q3   |                 21.967|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_k3_erc90  |               -1.603|Q4   |                -27.400|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_wyday_bi  |                4.000|Q5   |                -29.389|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_wyday_bi  |               12.857|Q7   |                 17.567|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_wyday_bi  |                4.545|Q5   |                -25.125|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_wyday_bi  |                0.000|Q4   |                -73.875|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_wyday_bi  |                2.273|Q4   |                -60.400|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_wyday_bi  |               -0.455|Q4   |                -82.200|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_wyday_bi  |               16.364|Q6   |                 -2.083|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_wyday_bi  |               22.632|Q6   |                 70.542|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_wyday_bi  |               13.889|Q6   |                -28.639|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_wyday_bi  |               12.426|Q5   |                 77.833|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firestart_wyday_erc |               -0.167|Q4   |                -42.300|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firestart_wyday_erc |               -0.143|Q4   |                 -9.333|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firestart_wyday_erc |               -7.639|Q2   |                -55.533|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firestart_wyday_erc |               -5.000|Q3   |                -62.300|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firestart_wyday_erc |                1.517|Q4   |                -72.233|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firestart_wyday_erc |                1.312|Q4   |                -78.633|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firestart_wyday_erc |                0.000|Q4   |                 25.667|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firestart_wyday_erc |                0.385|Q4   |                 31.700|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firestart_wyday_erc |               -3.478|Q3   |                 21.967|[] 
+ []
+
+
+Overfull \hbox (55.24498pt too wide) in paragraph at lines 1062--1062
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firestart_wyday_erc |               -1.603|Q4   |                -27.400|[] 
+ []
+
+
+Overfull \hbox (18.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## **Interpretation:** Higher values indicate longer or more persistent fire-weather periods.[] 
+ []
+
+[18]
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |town      |buffer     |metric               | sen_slope_per_decade|qcat | delta_late_minus_early|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |:---------|:----------|:--------------------|--------------------:|:----|----------------------:|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firemaxrun_bi        |                0.526|Q6   |                  6.200|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firemaxrun_bi        |                0.000|Q4   |                  4.400|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firemaxrun_bi        |                0.588|Q6   |                  6.500|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firemaxrun_bi        |                0.769|Q5   |                  6.400|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firemaxrun_bi        |                0.571|Q6   |                  4.500|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firemaxrun_bi        |                0.476|Q6   |                  5.000|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firemaxrun_bi        |                0.500|Q6   |                  5.100|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firemaxrun_bi        |                0.000|Q4   |                  4.700|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firemaxrun_bi        |                0.476|Q6   |                  4.000|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firemaxrun_bi        |                0.000|Q4   |                  5.000|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |firemaxrun_erc       |                1.786|Q6   |                 11.600|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |firemaxrun_erc       |                0.938|Q6   |                  8.100|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |firemaxrun_erc       |                2.500|Q6   |                 13.400|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |firemaxrun_erc       |                2.857|Q6   |                 13.300|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |firemaxrun_erc       |                2.000|Q6   |                 12.600|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |firemaxrun_erc       |                1.875|Q7   |                 12.300|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |firemaxrun_erc       |                1.765|Q7   |                 12.500|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |firemaxrun_erc       |                1.667|Q7   |                  9.700|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |firemaxrun_erc       |                2.308|Q7   |                 12.500|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |firemaxrun_erc       |                1.667|Q7   |                 13.700|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |fireseasonlength_bi  |               31.622|Q6   |                 89.850|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |fireseasonlength_bi  |               25.556|Q5   |                 44.450|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |fireseasonlength_bi  |               33.000|Q6   |                 84.557|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |fireseasonlength_bi  |               38.750|Q6   |                188.733|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |fireseasonlength_bi  |               31.818|Q6   |                185.157|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |fireseasonlength_bi  |               36.923|Q7   |                161.886|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |fireseasonlength_bi  |               21.724|Q6   |                 49.867|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |fireseasonlength_bi  |               20.000|Q6   |                 34.600|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |fireseasonlength_bi  |               25.000|Q6   |                 63.133|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |fireseasonlength_bi  |               21.333|Q6   |                 63.933|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |10mibuffer |fireseasonlength_erc |               24.868|Q7   |                 95.025|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Bovill    |none       |fireseasonlength_erc |               16.833|Q7   |                 26.575|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |10mibuffer |fireseasonlength_erc |               29.500|Q7   |                101.500|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Deary     |none       |fireseasonlength_erc |               34.444|Q6   |                182.971|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |10mibuffer |fireseasonlength_erc |               26.400|Q7   |                174.533|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |ElkRiver  |none       |fireseasonlength_erc |               25.769|Q7   |                120.000|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |10mibuffer |fireseasonlength_erc |               18.125|Q7   |                 76.700|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Juliaetta |none       |fireseasonlength_erc |               22.222|Q7   |                109.600|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |10mibuffer |fireseasonlength_erc |               21.250|Q7   |                150.633|[] 
+ []
+
+
+Overfull \hbox (60.49498pt too wide) in paragraph at lines 1124--1124
+[]\TU/lmtt/m/n/10 ## |Kendrick  |none       |fireseasonlength_erc |               12.500|Q6   |                118.800|[] 
+ []
+
+[19]
+File: Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/arima-heatmap-1.pdf Graphic file (type pdf)
+<use Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/arima-heatmap-1.pdf>
+File: Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/arima-qcat-counts-1.pdf Graphic file (type pdf)
+<use Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/arima-qcat-counts-1.pdf>
+[20]
+Overfull \hbox (3.78294pt too wide) in paragraph at lines 1173--1174
+[]\TU/lmr/m/n/10 question  
+ []
+
+
+Overfull \hbox (12.39581pt too wide) in paragraph at lines 1179--1180
+ []\TU/lmr/m/n/10 mean_resp
+ []
+
+
+Overfull \hbox (17.08723pt too wide) in paragraph at lines 1181--1182
+ []\TU/lmr/m/n/10 mean_resp_z
+ []
+
+
+Overfull \hbox (27.24016pt too wide) in paragraph at lines 1183--1184
+ []\TU/lmr/m/n/10 mean_instr_delta_raw
+ []
+
+
+Overfull \hbox (27.39017pt too wide) in paragraph at lines 1185--1186
+ []\TU/lmr/m/n/10 mean_climate_delta_z
+ []
+
+
+Overfull \hbox (12.34294pt too wide) in paragraph at lines 1187--1188
+ []\TU/lmr/m/n/10 mean_pdi
+ []
+
+
+Overfull \hbox (5.76723pt too wide) in paragraph at lines 1189--1190
+ []\TU/lmr/m/n/10 sd_pdi
+ []
+
+
+Overfull \hbox (3.78294pt too wide) in paragraph at lines 1195--1196
+[]\TU/lmr/m/n/10 question  
+ []
+
+
+Overfull \hbox (12.39581pt too wide) in paragraph at lines 1201--1202
+ []\TU/lmr/m/n/10 mean_resp
+ []
+
+
+Overfull \hbox (17.08723pt too wide) in paragraph at lines 1203--1204
+ []\TU/lmr/m/n/10 mean_resp_z
+ []
+
+
+Overfull \hbox (27.24016pt too wide) in paragraph at lines 1205--1206
+ []\TU/lmr/m/n/10 mean_instr_delta_raw
+ []
+
+
+Overfull \hbox (27.39017pt too wide) in paragraph at lines 1207--1208
+ []\TU/lmr/m/n/10 mean_climate_delta_z
+ []
+
+
+Overfull \hbox (12.34294pt too wide) in paragraph at lines 1209--1210
+ []\TU/lmr/m/n/10 mean_pdi
+ []
+
+
+Overfull \hbox (5.76723pt too wide) in paragraph at lines 1211--1212
+ []\TU/lmr/m/n/10 sd_pdi
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1219--1219
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1221--1221
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1223--1223
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1226--1226
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1228--1228
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1230--1230
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1233--1233
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1235--1235
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1236--1236
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1239--1239
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1240--1240
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1242--1242
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1246--1246
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1247--1247
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1249--1249
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1252--1252
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1253--1253
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1255--1255
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1258--1258
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1259--1259
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1260--1260
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1263--1263
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1264--1264
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1266--1266
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1269--1269
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1271--1271
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1273--1273
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1276--1276
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1277--1277
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1279--1279
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1282--1282
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1283--1283
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1284--1284
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1287--1287
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1288--1288
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1289--1289
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1292--1292
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1293--1293
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1294--1294
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1297--1297
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1298--1298
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1300--1300
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1303--1303
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1304--1304
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1306--1306
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+
+Overfull \hbox (2.0758pt too wide) in paragraph at lines 1309--1309
+[]|\TU/lmr/m/n/10 ElkRiver|  
+ []
+
+
+Overfull \hbox (2.1858pt too wide) in paragraph at lines 1311--1311
+[]|\TU/lmr/m/n/10 Juliaetta|  
+ []
+
+
+Overfull \hbox (3.1858pt too wide) in paragraph at lines 1313--1313
+[]|\TU/lmr/m/n/10 Kendrick|  
+ []
+
+[21] [22]
+File: Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/pdi-mean-pdi-plot-1.pdf Graphic file (type pdf)
+<use Fire_Report_By_Question_IDAHO_ALL_REVISED_files/figure-latex/pdi-mean-pdi-plot-1.pdf>
+[23] (./Fire_Report_By_Question_IDAHO_ALL_REVISED.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-02-20>
+ ***********
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 17327 strings out of 476778
+ 319733 string characters out of 5802401
+ 2044839 words of memory out of 5000000
+ 39121 multiletter control sequences out of 15000+600000
+ 564480 words of font info for 84 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 90i,7n,121p,404b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on Fire_Report_By_Question_IDAHO_ALL_REVISED.pdf (23 pages).

@@ -1,0 +1,1488 @@
+---
+title: "Fire Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+geometry:
+  - margin=1in
+header-includes:
+  - \usepackage{pdflscape}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6.5,
+  fig.height = 4.2,
+  dpi = 300,
+  fig.align = 'center',
+  out.width = '100%'
+)
+```
+
+# Overview
+
+This report produces a **question-framed** summary of *fire-weather* metrics derived from **GridMET** daily time series (per town and buffer). The workflow mirrors Christine’s approach used for heat/drought metrics:
+
+1. **Parse daily dates** from `system.index` and create water-year variables.
+2. Build a **daily climatology** (1996-2025) and use it to define *relative* “high fire-weather days” (e.g., above the daily 90th percentile).
+3. Aggregate daily flags into **annual (water-year) metrics**.
+4. Organize the metrics into **survey-question buckets** (Q1-Q5) with plots and summary tables.
+5. At the end, run the **Christine-style Delta/ARIMA diagnostic** to produce Q1-Q7 quantile categories for trend strength.
+
+This RMarkdown is designed so that **knitting the PDF runs the full pipeline once** by sourcing the up-to-date script (`src/extract_fire_metrics2.R`), and then **renders plots/tables in the report** from the generated objects and saved outputs.
+
+# Data sources and fire-weather variables
+
+## Data source
+
+- **GridMET**: gridded daily meteorology (used here for fire-weather indices and supporting variables).
+- Input files are expected under `data/ID_data/ID/` and follow the naming convention:
+  - `Town_gridmet.csv`
+  - `Town_10mibuffer_gridmet.csv`
+  - (Other sources can exist, but fire metrics in this report are computed from **gridmet** only.)
+
+## Fire-weather indices used
+
+These are **fire danger / fire-weather** indicators, not direct measurements of burned area:
+
+- **BI (Burning Index)**: composite index related to potential fire behavior (higher BI - more intense potential fire behavior).
+- **ERC (Energy Release Component)**: proxy for available energy in the flaming front; responds strongly to fuel dryness (higher ERC - more potential energy release).
+- **FM100 / FM1000**: 100-hr and 1000-hr dead fuel moisture proxies (lower - drier fuels).
+
+In this project, BI and ERC are the primary drivers for defining “high fire-weather days” using **relative exceedance** above the daily climatology percentiles.
+
+## Calendar and water-year conventions
+
+- **Water year**: Oct 1 - Sep 30, labeled by the ending year (e.g., Oct 2019-Sep 2020 is **WY2020**).
+- **wyday**: “water-year day” where Oct 1 = 1, and Sep 30 = 365/366.
+- **season4**: DJF / MAM / JJA / SON.
+
+```{r fire-pipeline, include=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+library(knitr)
+
+# Project root: this Rmd lives at repo root; script is in /src
+project_root  <- getwd()
+script_path   <- file.path(project_root, "src", "extract_fire_metrics2.R")
+
+# Where the script writes outputs
+fire_plot_dir <- file.path(project_root, "plots", "fire")
+out_dir       <- file.path(project_root, "outputs", "fire_questions")
+
+stopifnot(file.exists(script_path))
+
+# Run full fire-metrics workflow (silent in report output)
+source(script_path)
+```
+
+# Metric construction and question mapping
+
+## How “high fire-weather days” are defined
+
+For each calendar day (month/day), a **daily climatology threshold** is computed from **1996-2025** using the chosen quantile (typically **q90**, optionally **q95**). A day is a “high day” if:
+
+- `BI > dailyclimo9625_bi_q0.9`  (BI high day)
+- `ERC > dailyclimo9625_erc_q0.9` (ERC high day)
+
+This makes the threshold **seasonally varying**, so “high” in spring is defined relative to typical spring conditions.
+
+## Annual metrics (water-year summaries)
+
+Daily flags are aggregated into water-year metrics. The main families are:
+
+- **Frequency**: number of high days per year
+- **Seasonal frequency**: number of high days in summer (JJA)
+- **Intensity / magnitude proxy**: annual maxima or high percentiles
+- **Timing**: first sustained run of high days (start of season)
+- **Duration**: maximum consecutive run length; optional season length
+
+## Question-to-metric mapping
+
+These are the **Christine-style “question buckets”** used to generate CSV outputs and summary tables.
+
+```{r show-fire-map, include=FALSE}
+# Mapping table suppressed in the PDF to keep the report clean.
+# If you want it back, set include=TRUE.
+stopifnot(exists("fire_map"))
+fire_map_df <- tibble(
+  Question = rep(names(fire_map), lengths(fire_map)),
+  Metric   = unlist(fire_map)
+)
+```
+
+*(Question-to-metric mapping table suppressed to keep the report concise.)*
+
+# Results: Question-framed plots
+
+The script saves a standard set of plots to `plots/fire/`. Below we embed those images in the same Q1-Q5 structure.
+
+```{r helper-include-plot}
+include_plot <- function(fname, cap = NULL) {
+  f <- file.path(fire_plot_dir, fname)
+  if (!file.exists(f)) {
+    cat("(Plot not found:", fname, ")\n")
+    return(invisible(NULL))
+  }
+  knitr::include_graphics(f)
+}
+```
+
+## Q1: Overall frequency of high fire-weather days
+
+**Survey question:** “Overall, has fire become less common or more common?” (frequency)
+
+**Fire metrics used (variable names):**
+- `firehighdays_erc90` — annual count of days above the daily 90th-percentile fire threshold (BI q90 or ERC q90). More days = more frequent high fire-weather.. **Source:** GridMET ERC.
+- `firehighdays_bi90` — annual count of days above the daily 90th-percentile fire threshold (BI q90 or ERC q90). More days = more frequent high fire-weather.. **Source:** GridMET BI.
+
+
+Interpretation: higher values indicate more days in the year where fire-weather conditions are unusually elevated relative to the daily 1996-2025 climatology.
+
+```{r q1-plots}
+include_plot("Q1_timeseries_firehighdays_erc90.png")
+include_plot("Q1_timeseries_firehighdays_bi90.png")
+include_plot("Q1_distribution_firehighdays_erc90.png")
+```
+
+## Q2: Summer frequency (JJA)
+
+**Survey question:** “During the summer months, has fire occurred more often or less often?” (summer frequency)
+
+**Fire metrics used (variable names):**
+- `firesummerhighdays_erc90` — same as above, but restricted to summer (JJA).. **Source:** GridMET ERC.
+- `firesummerhighdays_bi90` — same as above, but restricted to summer (JJA).. **Source:** GridMET BI.
+
+
+Interpretation: focuses on the part of the year when fire activity and impacts are often highest. This is a subset of Q1 restricted to JJA.
+
+```{r q2-plots}
+include_plot("Q2_timeseries_firesummerhighdays_erc90.png")
+include_plot("Q2_timeseries_firesummerhighdays_bi90.png")
+```
+
+## Q3: Magnitude / intensity proxies (not burned area)
+
+**Survey question:** “Have the fires been smaller or larger / less or more severe?” (magnitude/impact proxy)
+
+**Fire metrics used (variable names):**
+- `firepeak_erc` — annual peak (maximum daily) BI or ERC. Higher peaks ⇒ higher potential intensity on the worst day each year.. **Source:** GridMET ERC.
+- `firepeak_bi` — annual peak (maximum daily) BI or ERC. Higher peaks ⇒ higher potential intensity on the worst day each year.. **Source:** GridMET BI.
+- `firep95_erc` — annual 95th percentile of daily ERC values (tail intensity). Higher values ⇒ “typical extreme” days are more intense, not just the single worst day.. **Source:** GridMET ERC.
+
+
+Interpretation: these metrics capture **how extreme** fire-weather conditions become within a year.
+
+- `firepeak_*`: annual maximum
+- `firep95_erc`: upper-tail intensity (95th percentile)
+- `fireseverity_*`: exceedance above the daily q90 threshold summed across the year
+
+```{r q3-plots}
+include_plot("Q3proxy_timeseries_firepeak_erc.png")
+include_plot("Q3proxy_timeseries_firep95_erc.png")
+include_plot("Q3proxy_timeseries_firepeak_bi.png")
+```
+
+## Q4: Timing of the fire-weather season start
+
+**Survey question:** “Has there been a change in when the fire season starts?” (timing)
+
+**Fire metrics used (variable names):**
+- `firestart_wyday_erc` — water-year day (wyday) of the first sustained high-fire run (based on q90 threshold and your run-length rule). Smaller wyday ⇒ earlier seasonal onset.. **Source:** GridMET ERC.
+- `firestart_wyday_bi` — water-year day (wyday) of the first sustained high-fire run (based on q90 threshold and your run-length rule). Smaller wyday ⇒ earlier seasonal onset.. **Source:** GridMET BI.
+
+
+Interpretation: smaller `wyday` means the season starts earlier (because Oct 1 = 1). Start is defined using a **sustained run** of high days (e.g., 3 consecutive high days), which avoids treating isolated spikes as “season onset”.
+
+```{r q4-plots}
+include_plot("Q4_timeseries_firestart_wyday_erc.png")
+include_plot("Q4_timeseries_firestart_wyday_bi.png")
+include_plot("Q4_periodcompare_firestart_wyday_erc.png")
+```
+
+## Q5: Duration / persistence
+
+**Survey question:** “Do the fire conditions last shorter or longer than you remember?” (duration)
+
+**Fire metrics used (variable names):**
+- `fireseasonlength_erc` — season length (last − first high-fire day) in wyday units. Larger ⇒ longer season window with high-fire conditions.. **Source:** GridMET ERC.
+- `firemaxrun_erc` — maximum consecutive run length of high-fire days in a water year. Larger ⇒ longer uninterrupted high-fire “streaks”.. **Source:** GridMET ERC.
+- `firemaxrun_bi` — maximum consecutive run length of high-fire days in a water year. Larger ⇒ longer uninterrupted high-fire “streaks”.. **Source:** GridMET BI.
+
+
+Interpretation: these metrics describe how long high fire-weather conditions persist.
+
+- `firemaxrun_*`: longest consecutive run of high days in a year
+- `fireseasonlength_*`: (optional) span from first to last high day
+
+```{r q5-plots}
+include_plot("Q5_timeseries_firemaxrun_erc.png")
+include_plot("Q5_timeseries_firemaxrun_bi.png")
+include_plot("Q5_timeseries_fireseasonlength_erc.png")
+```
+
+# Results: Christine-style Delta/ARIMA outputs (CSV tables)
+
+## What the Delta/ARIMA block is doing
+
+For each metric (town × buffer):
+
+1. Compute **baseline anomalies** relative to the mean over 1996-2025.
+2. Compute **Sen’s slope** (per decade) for the observed series.
+3. Fit an **ARIMA** model (via `auto.arima`) with **no drift**.
+4. **Simulate** many synthetic series from the fitted ARIMA model.
+5. For each simulated series, compute Sen’s slope (per decade).
+6. Use the distribution of simulated slopes to define **Q1-Q7** quantile bins.
+7. Place the observed slope into one of the bins (**qcat**).
+
+The resulting `qcat` is a standardized way to summarize whether the observed trend is unusually strong relative to what would be expected under the fitted stationary ARIMA process.
+
+## Load the generated CSV outputs
+
+```{r read-arima-csv}
+all_path <- file.path(out_dir, "FIRE_ALL_questions_ARIMA_outputs.csv")
+summary_path <- file.path(out_dir, "FIRE_metric_summary_by_Qcat.csv")
+
+stopifnot(file.exists(all_path))
+
+df_all <- readr::read_csv(all_path, show_col_types = FALSE)
+
+# ------------------------------
+# ARIMA / Delta diagnostics: more visual summaries
+# ------------------------------
+# This block tries to create a few high-signal figures from the ARIMA outputs.
+# It is written defensively: if a needed column is missing, the figure is skipped.
+
+# Ensure question is a clean ordered factor if it exists (Q1..Q5 expected here)
+if ("question" %in% names(df_all)) {
+  q_levels <- sort(unique(df_all$question))
+  if (all(grepl("^Q[0-9]+$", q_levels))) {
+    q_levels <- paste0("Q", sort(as.integer(sub("Q", "", q_levels))))
+  }
+  df_all$question <- factor(df_all$question, levels = q_levels)
+}
+
+# Convert qcat to an ordered factor if present
+if ("qcat" %in% names(df_all)) {
+  qcat_levels <- paste0("Q", 1:7)
+  df_all$qcat <- factor(df_all$qcat, levels = qcat_levels, ordered = TRUE)
+  df_all$qcat_num <- as.integer(df_all$qcat)
+}
+
+# A compact unit id for plotting (town + buffer)
+if (all(c("town","buffer") %in% names(df_all))) {
+  df_all$unit <- paste(df_all$town, df_all$buffer, sep = " | ")
+}
+
+df_sum <- readr::read_csv(summary_path, show_col_types = FALSE)
+
+cat("(Initial rows table suppressed.)\n")
+```
+
+## ARIMA results: visual summaries
+
+```{r arima-qcat-heatmap}
+# Heatmap of Qcat by unit (town|buffer) and question
+if (all(c("qcat","unit","question") %in% names(df_all))) {
+  p_heat <- ggplot(df_all, aes(x = question, y = unit, fill = qcat_num)) +
+    geom_tile(color = "white", linewidth = 0.2) +
+    scale_fill_continuous(breaks = 1:7, limits = c(1,7)) +
+    labs(
+      title = "ARIMA Delta diagnostics: Q1-Q7 category by question and location",
+      x = "Question",
+      y = "Town | Buffer",
+      fill = "Qcat (1-7)"
+    ) +
+    theme_minimal(base_size = 10) +
+    theme(
+      axis.text.y = element_text(size = 7),
+      panel.grid = element_blank()
+    )
+  p_heat
+} else {
+  cat("(Heatmap skipped: need columns question, town, buffer, and qcat in FIRE_ALL_questions_ARIMA_outputs.csv.)\n")
+}
+```
+
+```{r arima-qcat-counts}
+# Distribution of Qcat by question
+if (all(c("qcat","question") %in% names(df_all))) {
+  p_bar <- df_all %>%
+    count(question, qcat) %>%
+    ggplot(aes(x = question, y = n, fill = qcat)) +
+    geom_col(position = "stack") +
+    labs(
+      title = "Counts of ARIMA Qcat categories by question",
+      x = "Question",
+      y = "Count",
+      fill = "Qcat"
+    ) +
+    theme_minimal(base_size = 11) +
+    scale_fill_discrete(drop = FALSE)
+  p_bar
+} else {
+  cat("(Bar chart skipped: need columns question and qcat.)\n")
+}
+```
+
+```{r arima-question-key}
+question_key <- tibble::tibble(
+  question = c("Q1","Q2","Q3","Q4","Q5"),
+  title = c(
+    "Overall frequency of high-fire conditions",
+    "Summer frequency of high-fire conditions (JJA)",
+    "Fire severity / intensity proxy (large or impactful fire-weather potential)",
+    "Fire season start timing",
+    "Fire season duration / persistence"
+  ),
+  survey_question = c(
+    "Overall, has fire become less common or more common?",
+    "During the summer months, has fire occurred more often or less often?",
+    "Have the fires been smaller or larger / less or more severe?",
+    "Has there been a change in when the fire season starts?",
+    "Do the fire conditions last shorter or longer than you remember?"
+  )
+)
+
+knitr::kable(
+  question_key,
+  caption = "Survey question key for the question buckets used in the ARIMA summary plots.",
+  align = c("l","l","l")
+)
+```
+
+
+```{r arima-delta-by-qcat}
+# If an observed delta/trend magnitude column exists, show it by Qcat
+# We'll look for a few common names and use the first one found.
+delta_col <- intersect(c("delta","observed_delta","sen_slope","sen_slope_C_per_decade","slope"), names(df_all))
+if (length(delta_col) > 0 && all(c("qcat","question") %in% names(df_all))) {
+  dc <- delta_col[1]
+  p_box <- ggplot(df_all, aes(x = qcat, y = .data[[dc]])) +
+    geom_boxplot(outlier.alpha = 0.4) +
+    facet_wrap(~ question, scales = "free_y") +
+    labs(
+      title = paste0("Observed trend magnitude vs ARIMA Qcat (using ", dc, ")"),
+      x = "Qcat",
+      y = dc
+    ) +
+    theme_minimal(base_size = 11)
+  p_box
+} else {
+  cat("(Boxplot skipped: need qcat + question and a numeric trend column such as observed_delta or sen_slope_C_per_decade.)\n")
+}
+```
+
+
+## Summary counts by question, metric, and qcat
+
+```{r arima-summary-table, include=FALSE}
+# Full summary table suppressed to avoid printing large tables in the PDF.
+# The CSV is saved to outputs/fire_questions/FIRE_metric_summary_by_Qcat.csv
+```
+
+*(ARIMA summary table suppressed; see saved CSV outputs.)*
+
+## Quick sanity checks
+
+```{r arima-sanity, include=FALSE}
+# Sanity-check tables suppressed to keep the report clean.
+```
+
+
+# Notes / interpretation guidance
+
+- **Frequency metrics** (Q1/Q2) increasing typically indicate more frequent high fire-weather conditions.
+- **Timing metrics** (Q4) decreasing (more negative Sen slope) indicates *earlier* onset over time because wyday gets smaller.
+- **Magnitude proxies** (Q3) are not burned area, but can align with years of high potential fire behavior.
+- **Qcat values** are **relative to simulated ARIMA variability**, not a direct p-value test of a trend model.
+
+
+# Estimating PDI (Perception Δ Instrumentation)
+
+This section links the **ARIMA-derived instrumentation signal** to the **survey responses** *without using respondent tenure*.
+Conceptually:
+
+- **Perception**: survey response for each question (Likert 1-5; higher = "more / earlier / longer / more severe" depending on wording)
+- **Instrumentation**: ARIMA-derived trend bucket (**Q1-Q7**) or continuous **Sen slope per decade** for the corresponding fire metrics
+- **PDI**: mismatch between perception and instrumentation after putting them on comparable scales.
+
+## Load ARIMA outputs + survey responses
+
+```{r pdi-load, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+
+# Prefer project-relative paths (as in your repo), but fall back to local files if needed.
+arima_file <- "outputs/fire_questions/FIRE_ALL_questions_ARIMA_outputs.csv"
+survey_file <- "data/survey/FW2L_DC.csv"
+
+if (!file.exists(arima_file)) arima_file <- "FIRE_ALL_questions_ARIMA_outputs.csv"
+if (!file.exists(survey_file)) survey_file <- "FW2L_DC.csv"
+
+arima <- readr::read_csv(arima_file, show_col_types = FALSE)
+survey <- readr::read_csv(survey_file, show_col_types = FALSE)
+
+# Harmonize town naming (ARIMA: ElkRiver; survey: Elk River)
+survey <- survey %>%
+  mutate(town = case_when(
+    Nearest_Town == "Elk River" ~ "ElkRiver",
+    TRUE ~ Nearest_Town
+  ))
+
+arima <- arima %>%
+  mutate(town = as.character(town))
+```
+
+
+```{r exclude-troy-everywhere, include=FALSE}
+drop_towns <- c("Troy")
+
+drop_norm <- function(x) {
+  stringr::str_to_lower(stringr::str_replace_all(stringr::str_trim(as.character(x)), "\\s+", ""))
+}
+
+# Helper to filter any data frame that has a 'town' column
+drop_from <- function(df) {
+  if (!("town" %in% names(df))) return(df)
+  df %>% dplyr::filter(!drop_norm(town) %in% drop_norm(drop_towns))
+}
+
+# Apply to any objects that already exist
+if (exists("survey"))          survey          <- drop_from(survey)
+if (exists("arima"))           arima           <- drop_from(arima)
+if (exists("perception"))      perception      <- drop_from(perception)
+if (exists("instrumentation")) instrumentation <- drop_from(instrumentation)
+if (exists("pdi"))             pdi             <- drop_from(pdi)
+if (exists("town_covars"))     town_covars     <- drop_from(town_covars)
+if (exists("pdi_demo"))        pdi_demo        <- drop_from(pdi_demo)
+```
+
+
+
+
+
+```{r pdi-tenure-setup, include=FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(tibble)
+
+# ---- Map survey items to questions (you provided this) ----
+survey_q_map <- tribble(
+  ~question, ~survey_col, ~direction,
+  "Q1",      "ID22",      "higher_more",
+  "Q2",      "ID23",      "higher_more",
+  "Q3",      "ID24",      "higher_more",
+  "Q4",      "ID25",      "higher_more",
+  "Q5",      "ID26",      "higher_more"
+)
+
+# ---- Map questions to the instrumentation metrics you use ----
+# IMPORTANT: metric names must match annual_long$metric exactly.
+q_metric_map <- tribble(
+  ~question, ~metric,
+  "Q1", "firehighdays_erc90",
+  "Q1", "firehighdays_bi90",
+
+  "Q2", "firesummerhighdays_erc90",
+  "Q2", "firesummerhighdays_bi90",
+
+  "Q3", "firepeak_erc",
+  "Q3", "firepeak_bi",
+  "Q3", "firep95_erc",
+
+  "Q4", "firestart_wyday_erc",
+  "Q4", "firestart_wyday_bi",
+
+  "Q5", "fireseasonlength_erc",
+  "Q5", "firemaxrun_erc",
+  "Q5", "firemaxrun_bi"
+)
+
+to_num <- function(x) suppressWarnings(as.numeric(x))
+
+compute_delta_one_series <- function(df_one, end_year, tenure_years,
+                                     min_years = 8,
+                                     delta_method = c("slope","diff"),
+                                     k_years = 5) {
+  delta_method <- match.arg(delta_method)
+  if (is.na(tenure_years)) return(NA_real_)
+
+  df_one <- df_one %>% filter(!is.na(value))
+  if (nrow(df_one) == 0) return(NA_real_)
+
+  max_year <- min(end_year, max(df_one$year, na.rm = TRUE))
+  start_year <- max_year - floor(tenure_years) + 1
+
+  df_w <- df_one %>%
+    filter(year >= start_year, year <= max_year) %>%
+    arrange(year)
+
+  if (nrow(df_w) < min_years) return(NA_real_)
+
+  if (delta_method == "slope") {
+    fit <- try(lm(value ~ year, data = df_w), silent = TRUE)
+    if (inherits(fit, "try-error")) return(NA_real_)
+    slope_per_year <- unname(coef(fit)[["year"]])
+    return(10 * slope_per_year)  # per decade
+  }
+
+  # delta_method == "diff"
+  k <- min(k_years, floor(nrow(df_w) / 2))
+  if (k < 2) return(NA_real_)
+  first_mean <- mean(df_w$value[1:k], na.rm = TRUE)
+  last_mean  <- mean(df_w$value[(nrow(df_w)-k+1):nrow(df_w)], na.rm = TRUE)
+  last_mean - first_mean
+}
+
+compute_pdi_tenure <- function(survey,
+                               annual_long,
+                               survey_q_map,
+                               q_metric_map,
+                               town_col = "town",
+                               id_col   = "record_id",
+                               tenure_col = "tenure_years",
+                               end_year = 2025,
+                               delta_method = c("slope","diff"),
+                               k_years = 5,
+                               min_years = 8) {
+  delta_method <- match.arg(delta_method)
+
+  perception_long <- survey %>%
+    mutate(
+      .town = .data[[town_col]],
+      .id   = .data[[id_col]],
+      tenure_years = to_num(.data[[tenure_col]])
+    ) %>%
+    select(.id, .town, tenure_years, all_of(survey_q_map$survey_col)) %>%
+    pivot_longer(
+      cols = all_of(survey_q_map$survey_col),
+      names_to = "survey_item",
+      values_to = "resp"
+    ) %>%
+    left_join(survey_q_map, by = c("survey_item" = "survey_col")) %>%
+    mutate(
+      resp = to_num(resp),
+      resp = if_else(direction == "reverse" & !is.na(resp), 8 - resp, resp)  # 1–7 Likert
+    ) %>%
+    select(.id, .town, tenure_years, question, resp)
+
+  person_q_metric <- perception_long %>%
+    left_join(q_metric_map, by = "question") %>%
+    filter(!is.na(metric))
+
+  stopifnot(all(c("town","year","metric","value") %in% names(annual_long)))
+
+  deltas <- person_q_metric %>%
+    left_join(annual_long, by = c(".town" = "town", "metric" = "metric")) %>%
+    group_by(.id, .town, tenure_years, question, resp, metric) %>%
+    summarise(
+      delta = compute_delta_one_series(
+        df_one = tibble(year = year, value = value),
+        end_year = end_year,
+        tenure_years = unique(tenure_years),
+        min_years = min_years,
+        delta_method = delta_method,
+        k_years = k_years
+      ),
+      .groups = "drop"
+    )
+
+  instr_person_q <- deltas %>%
+    group_by(.id, .town, tenure_years, question, resp) %>%
+    summarise(
+      instr_delta = mean(delta, na.rm = TRUE),
+      n_metrics_used = sum(!is.na(delta)),
+      .groups = "drop"
+    )
+
+  instr_person_q %>%
+    group_by(question) %>%
+    mutate(
+      z_resp  = as.numeric(scale(resp)),
+      z_delta = as.numeric(scale(instr_delta)),
+      PDI = z_resp - z_delta
+    ) %>%
+    ungroup()
+}
+```
+
+
+## Map survey items to questions (edit this once)
+
+You need to tell the pipeline which survey columns correspond to each fire-perception question **Q1-Q5**.
+Set this mapping once, then everything below will run.
+
+```{r pdi-map, include=FALSE}
+library(tibble)
+library(dplyr)
+
+# Mapping of the 5 fire-perception survey items (provided by you)
+# NOTE: ID22–ID26 are 1–7 Likert items in FW2L_DC.csv
+survey_q_map <- tribble(
+  ~question, ~survey_col, ~direction,
+  "Q1",      "ID22",      "higher_more",
+  "Q2",      "ID23",      "higher_more",
+  "Q3",      "ID24",      "higher_more",
+  "Q4",      "ID25",      "higher_more",
+  "Q5",      "ID26",      "higher_more"
+)
+
+# If any item is reverse-coded (higher means "less / later / shorter"),
+# change direction for that row to "reverse" and it will be flipped automatically (1<->7).
+flip_likert_1_7 <- function(x) {
+  # works for numeric or integer; preserves NA
+  ifelse(is.na(x), NA, 8 - as.numeric(x))
+}
+```
+
+## Compute PDI (town-level, without tenure)
+
+We compute:
+
+1. **Perception score** per town × question: mean Likert response (after optional reverse-coding)  
+2. **Instrumentation score** per town × question: mean ARIMA bucket (Q1-Q7 -> 1..7) across that question's metrics  
+3. **PDI** per town × question: z(perception) − z(instrumentation), standardized within question
+
+```{r pdi-compute, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyr)
+
+# ---- Perception: town × question mean response ----
+perception <- survey %>%
+  # keep just what we need
+  select(town, all_of(survey_q_map$survey_col)) %>%
+  pivot_longer(
+    cols = all_of(survey_q_map$survey_col),
+    names_to = "survey_item",
+    values_to = "resp"
+  ) %>%
+  # attach question + direction
+  left_join(
+    survey_q_map %>% mutate(survey_col = as.character(survey_col)),
+    by = c("survey_item" = "survey_col")
+  ) %>%
+  mutate(
+    resp = suppressWarnings(as.numeric(resp)),
+    # reverse-code for 1–7 Likert if needed
+    resp = if_else(direction == "reverse" & !is.na(resp), 8 - resp, resp)
+  ) %>%
+  group_by(town, question) %>%
+  summarise(
+    perception_mean = mean(resp, na.rm = TRUE),
+    perception_n = sum(!is.na(resp)),
+    .groups = "drop"
+  )
+
+# ---- Instrumentation: town × question mean ARIMA bucket across metrics ----
+instrumentation <- arima %>%
+  mutate(
+    qcat_num = as.integer(gsub("^Q","", qcat)),
+    qcat_num = if_else(is.na(qcat_num), NA_integer_, qcat_num)
+  ) %>%
+  group_by(town, question, buffer) %>%
+  summarise(
+    instr_qcat_mean = mean(qcat_num, na.rm = TRUE),
+    instr_sen_slope_mean = mean(sen_slope_per_decade, na.rm = TRUE),
+    n_metrics = n(),
+    .groups = "drop"
+  )
+
+# Choose which buffer to use for PDI (default: none)
+buffer_choice <- "none"
+
+instrumentation_use <- instrumentation %>%
+  filter(buffer == buffer_choice) %>%
+  select(town, question, instr_qcat_mean, instr_sen_slope_mean, n_metrics)
+
+# ---- Join and compute PDI ----
+pdi <- perception %>%
+  left_join(instrumentation_use, by = c("town","question")) %>%
+  group_by(question) %>%
+  mutate(
+    z_perception = as.numeric(scale(perception_mean)),
+    z_instr = as.numeric(scale(instr_qcat_mean)),
+    PDI = z_perception - z_instr
+  ) %>%
+  ungroup()
+
+pdi
+```
+
+### PDI summary table
+
+```{r pdi-table, include=FALSE}
+# (Manuscript style) Do not print full town×question table here.
+# A concise Table 1 is produced later after joining ACS covariates.
+```
+
+### PDI plot (by town)
+
+```{r pdi-bootstrap, include=FALSE}
+# ---- Bootstrap uncertainty for PDI (resample respondents within town) ----
+library(dplyr)
+library(tidyr)
+library(purrr)
+
+set.seed(1)
+
+B <- 500   # bootstrap replicates (increase to 1000 for final manuscript runs)
+buffer_choice <- if (exists("buffer_choice")) buffer_choice else "none"
+
+# Fixed instrumentation used for PDI
+instrumentation_fixed <- instrumentation %>%
+  filter(buffer == buffer_choice) %>%
+  select(town, question, instr_qcat_mean) %>%
+  distinct()
+
+# Helper: compute PDI from a perception table (town×question)
+compute_pdi_from_perception <- function(perception_tbl) {
+  perception_tbl %>%
+    left_join(instrumentation_fixed, by = c("town","question")) %>%
+    group_by(question) %>%
+    mutate(
+      z_perception = as.numeric(scale(perception_mean)),
+      z_instr = as.numeric(scale(instr_qcat_mean)),
+      PDI = z_perception - z_instr
+    ) %>%
+    ungroup() %>%
+    select(town, question, perception_mean, PDI)
+}
+
+# Precompute long survey responses for the mapped items
+survey_long <- survey %>%
+  select(town, all_of(survey_q_map$survey_col)) %>%
+  pivot_longer(cols = all_of(survey_q_map$survey_col),
+               names_to = "survey_item", values_to = "resp") %>%
+  left_join(survey_q_map, by = c("survey_item" = "survey_col")) %>%
+  mutate(
+    resp = as.numeric(resp),
+    resp = if_else(direction == "reverse" & !is.na(resp), 8 - resp, resp)  # Likert 1–7 reverse
+  ) %>%
+  select(town, question, resp)
+
+# Bootstrap: resample respondents within each town by resampling rows in the wide survey,
+# which is equivalent to resampling individuals.
+# We do this by sampling row indices within each town from the original survey dataframe.
+survey_with_id <- survey %>% mutate(.row_id = row_number())
+
+boot_pdi <- map_dfr(1:B, function(b) {
+  # sample individuals within town with replacement
+  # Use slice_sample() so we return n() rows per town (works with dplyr>=1.1)
+s_boot <- survey_with_id %>%
+  group_by(town) %>%
+  group_modify(~ .x[sample.int(nrow(.x), nrow(.x), replace = TRUE), , drop = FALSE]) %>%
+  ungroup() %>%
+  select(-.row_id)
+
+  perception_boot <- s_boot %>%
+    select(town, all_of(survey_q_map$survey_col)) %>%
+    pivot_longer(cols = all_of(survey_q_map$survey_col),
+                 names_to = "survey_item", values_to = "resp") %>%
+    left_join(survey_q_map, by = c("survey_item" = "survey_col")) %>%
+    mutate(
+      resp = as.numeric(resp),
+      resp = if_else(direction == "reverse" & !is.na(resp), 8 - resp, resp)
+    ) %>%
+    group_by(town, question) %>%
+    summarise(
+      perception_mean = mean(resp, na.rm = TRUE),
+      perception_n = sum(!is.na(resp)),
+      .groups = "drop"
+    )
+
+  compute_pdi_from_perception(perception_boot) %>%
+    mutate(boot = b)
+})
+
+pdi_ci <- boot_pdi %>%
+  group_by(town, question) %>%
+  summarise(
+    PDI_lo = quantile(PDI, 0.025, na.rm = TRUE),
+    PDI_hi = quantile(PDI, 0.975, na.rm = TRUE),
+    PDI_med = median(PDI, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+# Town ranking stability (mean PDI across questions)
+boot_rank <- boot_pdi %>%
+  group_by(boot, town) %>%
+  summarise(mean_PDI = mean(PDI, na.rm = TRUE), .groups = "drop")
+
+town_rank_ci <- boot_rank %>%
+  group_by(town) %>%
+  summarise(
+    mean_PDI_med = median(mean_PDI, na.rm = TRUE),
+    mean_PDI_lo  = quantile(mean_PDI, 0.025, na.rm = TRUE),
+    mean_PDI_hi  = quantile(mean_PDI, 0.975, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+### PDI with uncertainty (bootstrapped 95% CI)
+
+```{r pdi-plot-ci, fig.height=4.6}
+library(ggplot2)
+
+pdi_plot <- pdi %>%
+  select(town, question, PDI) %>%
+  left_join(pdi_ci, by = c("town","question"))
+
+ggplot(pdi_plot, aes(x = town, y = PDI)) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  geom_errorbar(aes(ymin = PDI_lo, ymax = PDI_hi), width = 0.2) +
+  geom_point(size = 2) +
+  facet_wrap(~ question, ncol = 2) +
+  labs(
+    title = "PDI by town and question (bootstrapped 95% CI)",
+    x = "Town",
+    y = "PDI (z-perception − z-instrumentation)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Town ranking by overall mismatch (mean PDI across questions)
+
+```{r town-ranking-ci, fig.height=3.8}
+rank_plot <- town_rank_ci %>%
+  mutate(town = reorder(town, mean_PDI_med))
+
+ggplot(rank_plot, aes(x = town, y = mean_PDI_med)) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  geom_errorbar(aes(ymin = mean_PDI_lo, ymax = mean_PDI_hi), width = 0.2) +
+  geom_point(size = 2) +
+  coord_flip() +
+  labs(
+    title = "Town ranking: mean PDI across questions (bootstrapped 95% CI)",
+    x = NULL,
+    y = "Mean PDI"
+  ) +
+  theme_minimal()
+```
+
+
+```{r pdi-tenure-annual, include=FALSE}
+# Use the annual town×year×metric table created by extract_fire_metrics2-2.R
+# annualfire_long columns: town, buffer, wateryear, metric, value
+
+buffer_choice_person <- "none"  # or "10mibuffer"
+
+annual_long <- annualfire_long %>%
+  filter(buffer == buffer_choice_person) %>%
+  transmute(
+    town = as.character(town),
+    year = as.integer(wateryear),
+    metric = as.character(metric),
+    value = as.numeric(value)
+  )
+```
+
+
+
+```{r pdi-tenure-compute, message=FALSE, warning=FALSE}
+# >>> CHANGE THESE THREE to match your survey columns <<<
+TOWN_COL   <- "Nearest_Town"
+ID_COL     <- "ObjectID"
+TENURE_COL <- "ID2"
+
+# Compute individualized instrumentation Delta (per person×question)
+# and PDI = z(response) - z(delta), standardized within question
+pdi_person <- compute_pdi_tenure(
+  survey = survey,
+  annual_long = annual_long,
+  survey_q_map = survey_q_map,
+  q_metric_map = q_metric_map,
+  town_col = TOWN_COL,
+  id_col = ID_COL,
+  tenure_col = TENURE_COL,
+  end_year = 2025,
+  delta_method = "slope",  # "slope" (per decade) or "diff"
+  k_years = 5,
+  min_years = 8
+)
+
+```
+
+
+
+```{r pdi-tenure-plot-alltowns, fig.height=7, fig.width=7}
+ggplot(pdi_person, aes(x = resp, y = instr_delta)) +
+  geom_point(alpha = 0.35) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ question, scales = "free_y") +
+  labs(
+    x = "Survey response (Likert 1–7)",
+    y = "Instrumentation Delta (tenure-based; slope per decade)",
+    title = "Perception vs Individualized Instrumentation Delta (All towns)"
+  )
+```
+
+
+```{r pdi-tenure-plot-bytown, fig.height=10, fig.width=8}
+ggplot(pdi_person, aes(x = resp, y = instr_delta)) +
+  geom_point(alpha = 0.35) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_grid(question ~ .town, scales = "free_y") +
+  labs(
+    x = "Survey response (Likert 1–7)",
+    y = "Instrumentation Delta (tenure-based; slope per decade)",
+    title = "Perception vs Individualized Instrumentation Delta (By town)"
+  )
+```
+  
+## Town demographics (ACS block-group population-weighted buffers)
+
+This section derives town-level demographic covariates by intersecting a town-centered buffer with Census **block groups** and computing **population-weighted** averages of ACS measures within the buffer.  
+**You must provide town coordinates (lon/lat)** below. If two towns fall within the same tract/block group, this approach can still differ across towns because it aggregates across the *buffer footprint* rather than assigning a single geography.
+
+### 8.1 Setup + town coordinates (edit these)
+
+```{r acs-setup, include=FALSE}
+library(sf)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(tidycensus)
+library(tigris)
+library(stringr)
+options(tigris_use_cache = TRUE)
+
+# ---- Census API key ----
+# Recommended: set once in your environment (e.g., .Renviron) rather than in the Rmd:
+# census_api_key("YOUR_KEY_HERE", install = TRUE)
+
+# ---- Town coordinates (loaded from CSV) ----
+# Expected file columns (case-insensitive):
+#   - town (or city)
+#   - lon (or longitude)
+#   - lat (or latitude)
+#
+# Preferred project location: data/coordinates/city_coordinates.csv
+# (During ChatGPT runs, a copy may exist at /mnt/data/city_coordinates.csv)
+coord_path <- dplyr::case_when(
+  file.exists('data/coordinates/city_coordinates.csv') ~ 'data/coordinates/city_coordinates.csv',
+  file.exists('/mnt/data/city_coordinates.csv') ~ '/mnt/data/city_coordinates.csv',
+  TRUE ~ NA_character_
+)
+
+if (is.na(coord_path)) {
+  stop('Could not find city_coordinates.csv at data/coordinates/city_coordinates.csv (preferred) or /mnt/data/city_coordinates.csv.')
+}
+
+town_coords_raw <- readr::read_csv(coord_path, show_col_types = FALSE)
+
+town_coords_raw <- town_coords_raw %>%
+  dplyr::mutate(town = stringr::str_replace_all(as.character(town), "\\s+", ""))
+
+# ---- Robust town matching (ignore spaces/case/punctuation) ----
+make_town_key <- function(x) {
+  x %>%
+    as.character() %>%
+    stringr::str_to_lower() %>%
+    stringr::str_replace_all("[^a-z0-9]", "")  # removes spaces, commas, etc.
+}
+
+# towns needed: from pdi if available
+towns_needed <- if (exists("pdi")) sort(unique(as.character(pdi$town))) else c("Bovill","Deary","Elk River","Juliaetta","Kendrick")
+towns_needed_key <- make_town_key(towns_needed)
+
+town_coords <- town_coords_raw %>%
+  dplyr::mutate(
+    town = stringr::str_trim(as.character(town)),
+    town_key = make_town_key(town),
+    lon = suppressWarnings(as.numeric(lon)),
+    lat = suppressWarnings(as.numeric(lat))
+  ) %>%
+  dplyr::filter(town_key %in% towns_needed_key) %>%
+  dplyr::select(town, town_key, lon, lat) %>%
+  dplyr::distinct()
+
+# Map back to the exact town spellings used in pdi
+town_key_map <- tibble::tibble(town = towns_needed, town_key = towns_needed_key)
+
+town_coords <- town_coords %>%
+  dplyr::select(-town) %>%
+  dplyr::left_join(town_key_map, by = "town_key") %>%
+  dplyr::select(town, lon, lat)
+
+# Check that we found all towns and have valid coords
+missing_towns <- setdiff(towns_needed, town_coords$town)
+if (length(missing_towns) > 0) {
+  stop(paste0("Missing coordinates for: ", paste(missing_towns, collapse = ", "),
+              ". Check city_coordinates.csv town/city/label values."))
+}
+if (any(is.na(town_coords$lon)) || any(is.na(town_coords$lat))) {
+  stop("Found NA lon/lat in city_coordinates.csv after filtering. Fix the file and re-knit.")
+}
+
+# Normalize column names
+nm <- tolower(names(town_coords_raw))
+names(town_coords_raw) <- nm
+
+# Identify the town-name column (accept: town, city, label, name)
+name_col <- dplyr::case_when(
+  "town"  %in% nm ~ "town",
+  "city"  %in% nm ~ "city",
+  "label" %in% nm ~ "label",
+  "name"  %in% nm ~ "name",
+  TRUE ~ NA_character_
+)
+if (is.na(name_col)) {
+  stop("city_coordinates.csv must contain a town name column: town/city/label/name")
+}
+if (name_col != "town") {
+  town_coords_raw <- town_coords_raw %>% dplyr::rename(town = !!name_col)
+}
+
+# Allow lon/lat aliases
+if (!("lon" %in% names(town_coords_raw)) && ("longitude" %in% names(town_coords_raw))) {
+  town_coords_raw <- town_coords_raw %>% dplyr::rename(lon = longitude)
+}
+if (!("lat" %in% names(town_coords_raw)) && ("latitude" %in% names(town_coords_raw))) {
+  town_coords_raw <- town_coords_raw %>% dplyr::rename(lat = latitude)
+}
+
+# Clean town names in the coords file (trim, drop trailing commas)
+town_coords_raw <- town_coords_raw %>%
+  dplyr::mutate(
+    town = stringr::str_trim(as.character(town)),
+    town = stringr::str_replace_all(town, ",$", "")
+  )
+
+# Towns needed: use towns present in the analysis (pdi), if available; otherwise fall back to a manual list
+towns_needed <- if (exists("pdi")) sort(unique(as.character(pdi$town))) else c("Bovill","Deary","Elk River","Juliaetta","Kendrick")
+
+town_coords <- town_coords_raw %>%
+  dplyr::mutate(
+    town = as.character(town),
+    lon = suppressWarnings(as.numeric(lon)),
+    lat = suppressWarnings(as.numeric(lat))
+  ) %>%
+  dplyr::filter(town %in% towns_needed) %>%
+  dplyr::select(town, lon, lat) %>%
+  dplyr::distinct()
+
+# Check that we found all towns and have valid coords
+missing_towns <- setdiff(towns_needed, town_coords$town)
+if (length(missing_towns) > 0) {
+  stop(paste0('Missing coordinates for: ', paste(missing_towns, collapse = ', '),
+              '. Check city_coordinates.csv town/city names match exactly.'))
+}
+if (any(is.na(town_coords$lon)) || any(is.na(town_coords$lat))) {
+  stop('Found NA lon/lat in city_coordinates.csv after filtering. Fix the file and re-knit.')
+}
+
+stopifnot(all(!is.na(town_coords$town)))
+# If you forget to fill coords, error early so you notice:
+if (any(is.na(town_coords$lon)) || any(is.na(town_coords$lat))) {
+  stop("Fill in lon/lat for all towns in town_coords before knitting.")
+}
+
+# Keep town names consistent with the rest of the report
+town_coords <- town_coords %>% mutate(town = as.character(town))
+
+town_sf <- st_as_sf(town_coords, coords = c("lon","lat"), crs = 4326)
+
+# Use a projected CRS for accurate buffering/areas in meters.
+# EPSG:3857 is okay for small-area buffers; for Idaho, EPSG:26911/26912 can also work.
+town_sf_m <- st_transform(town_sf, 3857)
+```
+
+### 8.2 Choose variables + pull block groups
+
+```{r acs-vars, include=FALSE}
+# ---- Choose ACS year (5-year) ----
+acs_year <- 2022
+
+# ---- Choose state for Census geographies (Idaho = "ID") ----
+acs_state <- "ID"
+
+# ---- Buffer for demographics (miles) ----
+# For manuscript stability in rural areas, use a larger buffer (adjust as needed).
+demo_buffer_miles <- 10
+demo_buffer_m <- demo_buffer_miles * 1609.34
+
+# ---- ACS variables (keep compact for manuscript) ----
+# Total population
+acs_vars <- c(
+  pop_total  = "B01003_001",
+  med_income = "B19013_001",
+  # poverty: below poverty / poverty universe
+  pov_total  = "B17001_001",
+  pov_below  = "B17001_002",
+  # education: bachelor's+ counts (sum of these)
+  bach_plus  = "B15003_022",
+  mast_plus  = "B15003_023",
+  prof_plus  = "B15003_024",
+  doc_plus   = "B15003_025"
+)
+
+# Age 65+ requires summing multiple B01001 cells (male 65+ and female 65+)
+age65_vars <- c(
+  paste0("B01001_", sprintf("%03d", 20:25)),  # male 65+ bins
+  paste0("B01001_", sprintf("%03d", 44:49))   # female 65+ bins
+)
+```
+
+### 8.3 Compute population-weighted buffer covariates (block groups)
+
+```{r acs-buffer-aggregate, message=FALSE, warning=FALSE}
+# ---- Buffers ----
+town_buf <- st_buffer(town_sf_m, dist = demo_buffer_m) %>%
+  dplyr::select(town)
+
+# ---- Block groups geometry ----
+bg <- tigris::block_groups(state = acs_state, year = acs_year, cb = TRUE, class = "sf") %>%
+  st_transform(st_crs(town_buf))
+
+# ---- ACS data at block-group level ----
+acs_bg_long <- get_acs(
+  geography = "block group",
+  variables = c(acs_vars, setNames(age65_vars, age65_vars)),
+  state = acs_state,
+  year = acs_year,
+  survey = "acs5",
+  geometry = FALSE,
+  cache_table = TRUE
+)
+
+acs_bg <- acs_bg_long %>%
+  dplyr::select(GEOID, variable, estimate) %>%
+  tidyr::pivot_wider(names_from = variable, values_from = estimate)
+
+# ---- Derived measures ----
+acs_bg <- acs_bg %>%
+  mutate(
+    # education counts and rates
+    bachplus_n = bach_plus + mast_plus + prof_plus + doc_plus,
+    bachplus_rate = if_else(pop_total > 0, bachplus_n / pop_total, NA_real_),
+    # poverty rate
+    pov_rate = if_else(!is.na(pov_total) & pov_total > 0 & !is.na(pov_below), pov_below / pov_total, NA_real_),
+    # 65+ rate
+    age65_n = rowSums(across(all_of(age65_vars)), na.rm = TRUE),
+    age65_rate = if_else(pop_total > 0, age65_n / pop_total, NA_real_)
+  ) %>%
+  select(GEOID, pop_total, med_income, pov_rate, bachplus_rate, age65_rate)
+
+bg_acs <- bg %>% left_join(acs_bg, by = "GEOID")
+
+# ---- Intersect buffers with BGs ----
+# We weight BG contributions by estimated population inside the buffer:
+#   pop_wt = pop_total * (intersection_area / bg_area)
+int <- st_intersection(
+  town_buf,
+  bg_acs %>% select(GEOID, pop_total, med_income, pov_rate, bachplus_rate, age65_rate)
+)
+
+# ---- Compute weights ----
+bg_area_tbl <- bg_acs %>%
+  mutate(bg_area = as.numeric(st_area(geometry))) %>%
+  st_drop_geometry() %>%
+  select(GEOID, bg_area)
+
+int <- int %>%
+  mutate(int_area = as.numeric(st_area(geometry))) %>%
+  left_join(bg_area_tbl, by = "GEOID") %>%
+  mutate(
+    area_wt = if_else(bg_area > 0, int_area / bg_area, NA_real_),
+    pop_wt  = pop_total * area_wt
+  )
+
+# ---- Town-level covariates (population-weighted) ----
+town_covars <- int %>%
+  st_drop_geometry() %>%
+  group_by(town) %>%
+  summarise(
+    pop_in_buffer = sum(pop_wt, na.rm = TRUE),
+    med_income_wt = weighted.mean(med_income, w = pop_wt, na.rm = TRUE),
+    pov_rate_wt   = weighted.mean(pov_rate,   w = pop_wt, na.rm = TRUE),
+    age65_rate_wt = weighted.mean(age65_rate, w = pop_wt, na.rm = TRUE),
+    bachplus_rate_wt = weighted.mean(bachplus_rate, w = pop_wt, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(town)
+
+invisible(town_covars)
+```
+
+### 8.4 Diagnostics: shared geographies and buffer overlap
+
+```{r acs-diagnostics, include=FALSE, message=FALSE, warning=FALSE}
+# Do towns fall within the same containing block group?
+town_bg <- st_join(town_sf_m %>% select(town), bg_acs %>% select(GEOID), join = st_within) %>%
+  st_drop_geometry()
+
+town_bg %>% count(GEOID) %>% arrange(desc(n))
+
+# How much do buffers overlap (percent of the smaller buffer's area)?
+buf_pairs <- tidyr::expand_grid(t1 = town_buf$town, t2 = town_buf$town) %>%
+  filter(t1 < t2)
+
+overlap_tbl <- purrr::pmap_dfr(buf_pairs, function(t1, t2) {
+  g1 <- town_buf %>% filter(town == t1)
+  g2 <- town_buf %>% filter(town == t2)
+  a1 <- as.numeric(st_area(g1))
+  a2 <- as.numeric(st_area(g2))
+  ai <- as.numeric(st_area(st_intersection(g1, g2)))
+  tibble(t1 = t1, t2 = t2, overlap_pct_of_smaller = 100 * ai / min(a1, a2))
+})
+
+overlap_tbl %>% arrange(desc(overlap_pct_of_smaller))
+```
+
+### 8.5 Join demographics to PDI + manuscript-ready plots
+
+```{r pdi-join-demographics, message=FALSE, warning=FALSE}
+# Join to your town-level PDI table (ARIMA-based PDI)
+# Assumes pdi has columns: town, question, PDI
+pdi <- pdi %>% dplyr::filter(town != "Troy")
+
+pdi_demo <- pdi %>%
+  left_join(town_covars, by = "town")
+
+invisible(pdi_demo)
+```
+
+```{r pdi-heatmap-with-demo, fig.height=5.5, fig.width=7.5}
+# Heatmap of PDI (town × question)
+ggplot(pdi_demo, aes(x = question, y = town, fill = PDI)) +
+  geom_tile(color = "white", linewidth = 0.2) +
+  geom_text(aes(label = ifelse(is.na(PDI), "", sprintf("%.2f", PDI))), size = 3) +
+  labs(
+    title = "Town × Question PDI (ARIMA-based)",
+    subtitle = paste0("Demographics buffer: ", demo_buffer_miles, " miles (ACS ", acs_year, " block groups)"),
+    x = "Question", y = "Town", fill = "PDI"
+  ) +
+  theme_minimal() +
+  theme(panel.grid = element_blank())
+```
+
+```{r pdi-vs-income, fig.height=5.5, fig.width=7.5}
+# Town mean PDI (across questions) vs demographics (example)
+# Requires ggrepel
+if (!requireNamespace("ggrepel", quietly = TRUE)) {
+  stop("Please install ggrepel (install.packages('ggrepel')) to run this plot.")
+}
+
+town_mean_pdi <- pdi_demo %>%
+  group_by(town) %>%
+  summarise(mean_PDI = mean(PDI, na.rm = TRUE), .groups = "drop") %>%
+  left_join(town_covars, by = "town")
+
+ggplot(town_mean_pdi, aes(x = med_income_wt, y = mean_PDI, label = town)) +
+  geom_point(size = 3) +
+  ggrepel::geom_text_repel() +
+  labs(
+    title = "Town mean PDI vs median household income (ACS-weighted buffer)",
+    x = "Median household income (population-weighted within buffer)",
+    y = "Mean PDI (across Q1–Q5)"
+  ) +
+  theme_minimal()
+```
+
+### Table 1. Town summary (PDI + ACS covariates)
+
+```{r table1-town-summary, message=FALSE, warning=FALSE}
+# Concise manuscript-style town summary
+table1 <- pdi_demo %>%
+  group_by(town) %>%
+  summarise(
+    mean_PDI = mean(PDI, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  left_join(town_rank_ci, by = "town") %>%
+  left_join(town_covars, by = "town") %>%
+  mutate(
+    # Convert potential NaN values to NA for clean tables
+    pov_rate_wt = if_else(is.nan(pov_rate_wt), NA_real_, pov_rate_wt),
+    age65_rate_wt = if_else(is.nan(age65_rate_wt), NA_real_, age65_rate_wt),
+    bachplus_rate_wt = if_else(is.nan(bachplus_rate_wt), NA_real_, bachplus_rate_wt),
+    poverty_pct = 100 * pov_rate_wt,
+    age65_pct   = 100 * age65_rate_wt,
+    bachplus_pct = 100 * bachplus_rate_wt,
+    pop_in_buffer = round(pop_in_buffer),
+    med_income_wt = round(med_income_wt)
+  ) %>%
+  select(
+    town,
+    mean_PDI,
+    mean_PDI_lo, mean_PDI_hi,
+    pop_in_buffer,
+    med_income_wt,
+    poverty_pct,
+    bachplus_pct,
+    age65_pct
+  ) %>%
+  arrange(desc(mean_PDI))
+
+knitr::kable(
+  table1,
+  digits = 3,
+  col.names = c(
+    "Town",
+    "Mean PDI",
+    "CI 2.5%",
+    "CI 97.5%",
+    "Pop in buffer",
+    "Median income",
+    "Poverty (%)",
+    "Bachelor's+ (%)",
+    "Age 65+ (%)"
+  )
+)
+```
+
+### Exploratory: town mean PDI vs ACS covariates
+
+```{r pdi-vs-acs-panel, fig.height=5.4, fig.width=7.5}
+if (!requireNamespace("ggrepel", quietly = TRUE)) {
+  stop("Please install ggrepel (install.packages('ggrepel')) to run this plot.")
+}
+
+town_mean_pdi2 <- pdi_demo %>%
+  group_by(town) %>%
+  summarise(mean_PDI = mean(PDI, na.rm = TRUE), .groups = "drop") %>%
+  left_join(town_covars, by = "town") %>%
+  mutate(
+    poverty_pct = 100 * pov_rate_wt,
+    age65_pct   = 100 * age65_rate_wt,
+    bachplus_pct = 100 * bachplus_rate_wt
+  ) %>%
+  select(town, mean_PDI, med_income_wt, poverty_pct, bachplus_pct, age65_pct) %>%
+  pivot_longer(cols = c(med_income_wt, poverty_pct, bachplus_pct, age65_pct),
+               names_to = "covariate", values_to = "value") %>%
+  mutate(
+    covariate = recode(
+      covariate,
+      med_income_wt = "Median income",
+      poverty_pct   = "Poverty (%)",
+      bachplus_pct  = "Bachelor's+ (%)",
+      age65_pct     = "Age 65+ (%)"
+    )
+  )
+
+ggplot(town_mean_pdi2, aes(x = value, y = mean_PDI, label = town)) +
+  geom_point(size = 2) +
+  ggrepel::geom_text_repel(size = 3) +
+  facet_wrap(~ covariate, scales = "free_x", ncol = 2) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  labs(
+    title = "Town mean PDI vs demographic context (ACS block-group weighted buffer)",
+    x = NULL,
+    y = "Mean PDI (across questions)"
+  ) +
+  theme_minimal()
+```
+
+
+```{r sensitivity-panel, message=FALSE, warning=FALSE, fig.height=8, fig.width=8}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# --- Guardrails: required objects ---
+stopifnot(exists("perception"), exists("instrumentation"))
+
+# Buffers to compare (use what's available)
+buffers_avail <- sort(unique(as.character(instrumentation$buffer)))
+buffers_to_use <- intersect(c("none", "10mibuffer"), buffers_avail)
+if (length(buffers_to_use) == 0) {
+  stop("No expected buffers found in instrumentation$buffer. Available: ",
+       paste(buffers_avail, collapse = ", "))
+}
+
+# Instrumentation metrics to compare
+metrics_to_use <- c("instr_qcat_mean", "instr_sen_slope_mean")
+
+# Helper: compute PDI for a scenario using one instrumentation column
+compute_pdi_scenario <- function(buffer_choice, instr_col) {
+  instr_use <- instrumentation %>%
+    filter(buffer == buffer_choice) %>%
+    select(town, question, instr_value = all_of(instr_col)) %>%
+    distinct()
+
+  perception %>%
+    left_join(instr_use, by = c("town", "question")) %>%
+    group_by(question) %>%
+    mutate(
+      z_perception = as.numeric(scale(perception_mean)),
+      z_instr      = as.numeric(scale(instr_value)),
+      PDI          = z_perception - z_instr
+    ) %>%
+    ungroup() %>%
+    mutate(
+      buffer = buffer_choice,
+      instr_metric = instr_col
+    ) %>%
+    select(town, question, buffer, instr_metric, PDI)
+}
+
+# Build scenarios
+pdi_sens <- tidyr::expand_grid(
+  buffer_choice = buffers_to_use,
+  instr_col = metrics_to_use
+) %>%
+  mutate(data = purrr::map2(buffer_choice, instr_col, compute_pdi_scenario)) %>%
+  select(data) %>%
+  tidyr::unnest(data) %>%
+  mutate(
+    scenario = paste0(
+      "buffer=", buffer,
+      " | metric=", dplyr::recode(instr_metric,
+                                  instr_qcat_mean = "Qcat",
+                                  instr_sen_slope_mean = "SenSlope")
+    )
+  )
+
+# --- Panel A: Heatmap (town × question) by scenario ---
+ggplot(pdi_sens, aes(x = question, y = town, fill = PDI)) +
+  geom_tile(color = "white", linewidth = 0.2) +
+  geom_text(aes(label = ifelse(is.na(PDI), "", sprintf("%.2f", PDI))), size = 3) +
+  facet_wrap(~ scenario, ncol = 2) +
+  labs(
+    title = "Sensitivity panel: PDI robustness to buffer and instrumentation metric",
+    x = "Question",
+    y = "Town",
+    fill = "PDI"
+  ) +
+  theme_minimal() +
+  theme(panel.grid = element_blank())
+
+# --- Panel B: Town ranking stability across scenarios (mean PDI across questions) ---
+town_rank_sens <- pdi_sens %>%
+  group_by(scenario, town) %>%
+  summarise(mean_PDI = mean(PDI, na.rm = TRUE), .groups = "drop")
+
+ggplot(town_rank_sens, aes(x = reorder(town, mean_PDI), y = mean_PDI)) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  geom_point(size = 2) +
+  facet_wrap(~ scenario, ncol = 2) +
+  coord_flip() +
+  labs(
+    title = "Sensitivity panel: town mean PDI (across questions) by scenario",
+    x = NULL,
+    y = "Mean PDI"
+  ) +
+  theme_minimal()
+```
+
+## Notes
+
+- This is a **tenure-free PDI**: instrumentation reflects the *place’s recent trajectory* (ARIMA/Qcat), not each respondent’s personal exposure window.
+- If you want an **individual-level** PDI without tenure, we can still do it: each respondent inherits their town’s instrumentation score, then PDI is computed per respondent and summarized by town/demographics.

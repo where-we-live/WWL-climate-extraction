@@ -1,0 +1,343 @@
+---
+title: "Idaho Climate Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+geometry: margin=1in
+fontsize: 11pt
+header-includes:
+  - \usepackage{float}
+  - \usepackage{placeins}
+  - \usepackage{needspace}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.width = 8, fig.height = 5)
+```
+
+```{r source-pipeline, include=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+library(knitr)
+
+project_root <- getwd()
+
+script_candidates <- file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics_v2-3.R")
+
+script_path <- script_candidates[file.exists(script_candidates)][1]
+stopifnot(!is.na(script_path), file.exists(script_path))
+
+plot_dir <- file.path(project_root, "plots")
+out_dir  <- file.path(project_root, "outputs")
+
+source(script_path)
+```
+
+```{r load-outputs, include=FALSE}
+question_outputs <- readr::read_csv(file.path(out_dir, "idaho_question_outputs.csv"), show_col_types = FALSE)
+pdi_summary <- readr::read_csv(file.path(out_dir, "idaho_pdi_summary.csv"), show_col_types = FALSE)
+pdi_person <- readr::read_csv(file.path(out_dir, "idaho_pdi_person.csv"), show_col_types = FALSE)
+annual_long <- readr::read_csv(file.path(out_dir, "idaho_annual_metrics_long.csv"), show_col_types = FALSE)
+acs_buffer_covariates <- readr::read_csv(file.path(out_dir, "idaho_acs_buffer_covariates.csv"), show_col_types = FALSE)
+pdi_question_acs <- readr::read_csv(file.path(out_dir, "idaho_pdi_question_acs.csv"), show_col_types = FALSE)
+pdi_stressor_acs <- readr::read_csv(file.path(out_dir, "idaho_pdi_stressor_acs.csv"), show_col_types = FALSE)
+pdi_overall_acs <- readr::read_csv(file.path(out_dir, "idaho_pdi_overall_acs.csv"), show_col_types = FALSE)
+
+question_order <- c(paste0("H", 1:6), paste0("D", 1:5), paste0("F", 1:5))
+question_outputs <- question_outputs %>% mutate(question = factor(question, levels = question_order))
+pdi_summary <- pdi_summary %>% mutate(question = factor(question, levels = question_order))
+
+question_meta <- tibble::tribble(
+  ~section, ~question, ~title, ~survey_question, ~interpretation,
+  "Heat", "H1", "Overall heat magnitude", "Overall, has it gotten hotter or cooler?", "Higher values indicate stronger overall warming relative to baseline conditions.",
+  "Heat", "H2", "Summer heat magnitude", "During the summer months, has it gotten hotter or cooler?", "Higher values indicate hotter summer conditions, especially in JJA.",
+  "Heat", "H3", "Heat frequency", "If summer has changed, how frequently is it hotter?", "Higher values indicate more frequent hot days or warm-threshold exceedances.",
+  "Heat", "H4", "Spring heat onset timing", "When does it start getting hotter in the spring?", "Smaller timing values generally indicate earlier onset of spring warmth.",
+  "Heat", "H5", "Fall cooling timing", "When does it start getting cooler in the fall?", "Larger timing values generally indicate later seasonal cooling.",
+  "Heat", "H6", "Heat duration / persistence", "Do heat conditions last shorter or longer than you remember?", "Higher values indicate longer hot periods or longer warm seasons.",
+  "Drought", "D1", "Overall wetter/drier magnitude", "Overall, has it gotten wetter or drier?", "Lower precipitation or larger moisture deficits indicate stronger drought stress.",
+  "Drought", "D2", "Winter wetter/drier magnitude", "During the winter months, has it become wetter or drier?", "Lower cool-season precipitation or stronger deficits indicate drier winters.",
+  "Drought", "D3", "Winter dryness frequency", "If winter has changed, how frequently is it drier?", "Higher values indicate more frequent dry winter days or low-precipitation conditions.",
+  "Drought", "D4", "Precipitation timing", "Has there been a change in when rainfall/snowfall starts during the year?", "Timing metrics describe when precipitation arrives within the water year.",
+  "Drought", "D5", "Dry-duration persistence", "Do drier conditions last shorter or longer than you remember?", "Higher values indicate longer uninterrupted dry periods.",
+  "Fire", "F1", "Overall frequency of high fire-weather days", "Overall, has fire become less common or more common?", "Higher values indicate more days with unusually elevated fire-weather conditions.",
+  "Fire", "F2", "Summer frequency of high fire-weather days", "During summer, has fire occurred more often or less often?", "Higher values indicate more frequent high fire-weather during JJA.",
+  "Fire", "F3", "Fire-weather magnitude / intensity proxy", "Have the areas affected by wildfires gotten smaller or larger?", "Higher values indicate more intense fire-weather conditions, not direct burned area.",
+  "Fire", "F4", "Fire-season start timing", "Has there been a change in when the fire season starts during the year?", "Smaller timing values generally indicate earlier onset of the fire-weather season.",
+  "Fire", "F5", "Fire-season duration / persistence", "Do fire conditions last shorter or longer than you remember?", "Higher values indicate longer runs or longer seasonal duration of elevated fire-weather."
+)
+
+render_plot_set <- function(q) {
+  mets <- question_outputs %>%
+    filter(question == q) %>%
+    distinct(metric) %>%
+    arrange(metric) %>%
+    pull(metric)
+
+ for (m in mets) {
+  p <- file.path(plot_dir, paste0(as.character(q), "_timeseries_", m, ".png"))
+  if (file.exists(p)) {
+    m_tex <- gsub("_", "\\\\_", m)
+    cat(
+      paste0(
+        "\n\n",
+        "\\Needspace{0.45\\textheight}\n",
+        "\\begin{figure}[H]\n",
+        "\\centering\n",
+        "\\textbf{", m_tex, "}\\\\[0.5em]\n",
+        "\\includegraphics[width=0.98\\textwidth]{\\detokenize{", p, "}}\n",
+        "\\end{figure}\n",
+        "\\FloatBarrier\n\n"
+      )
+    )
+  } else {
+    cat("\n\n_Missing plot:_ ", p, "\n\n", sep = "")
+  }
+ }
+}
+```
+
+# Overview
+
+This report produces a question-framed summary of heat, drought, and fire metrics for the five Idaho towns: Deary, Bovill, Kendrick, Juliaetta, and Elk River. The workflow follows the same general style as the earlier fire-only report, but extends the analysis to the climate-comparable heat and drought survey questions as well.
+
+# Data sources and conventions
+
+## Data source
+
+- GridMET daily climate time series for each town and its 10-mile buffer.
+- Input files follow the existing project naming convention used in the working script.
+
+## Calendar and water-year conventions
+
+- Water year: Oct 1 to Sep 30, labeled by the ending year.
+- `wyday`: water-year day where Oct 1 = 1.
+- `season4`: DJF / MAM / JJA / SON.
+- Baseline climatology period: 1996 to 2025.
+
+# Metric construction and question mapping
+
+## Heat questions
+
+- H1: Overall heat magnitude
+- H2: Summer heat magnitude
+- H3: Heat frequency
+- H4: Spring heat onset timing
+- H5: Fall cooling timing
+- H6: Heat duration / persistence
+
+## Drought questions
+
+- D1: Overall wetter/drier magnitude
+- D2: Winter wetter/drier magnitude
+- D3: Winter dryness frequency
+- D4: Precipitation timing
+- D5: Dry-duration persistence
+
+## Fire questions
+
+- F1: Overall frequency of high fire-weather days
+- F2: Summer frequency of high fire-weather days
+- F3: Fire-weather magnitude / intensity proxy
+- F4: Fire-season start timing
+- F5: Fire-season duration / persistence
+
+# Results: Question-framed plots
+
+# Heat
+
+```{r heat-sections, results='asis'}
+for (q in question_meta$question[question_meta$section == "Heat"]) {
+  meta <- question_meta %>% filter(question == q)
+  cat("## ", q, ": ", meta$title[[1]], "\n\n", sep = "")
+  cat("Survey question: \"", meta$survey_question[[1]], "\"\n\n", sep = "")
+  cat("Interpretation: ", meta$interpretation[[1]], "\n\n", sep = "")
+  cat("Metrics used (variable names):\n\n")
+  mets <- question_outputs %>% filter(question == q) %>% distinct(metric) %>% arrange(metric) %>% pull(metric)
+  for (m in mets) cat("- `", m, "`\n", sep = "")
+  cat("\n")
+  render_plot_set(q)
+}
+```
+
+# Drought
+
+```{r drought-sections, results='asis'}
+for (q in question_meta$question[question_meta$section == "Drought"]) {
+  meta <- question_meta %>% filter(question == q)
+  cat("## ", q, ": ", meta$title[[1]], "\n\n", sep = "")
+  cat("Survey question: \"", meta$survey_question[[1]], "\"\n\n", sep = "")
+  cat("Interpretation: ", meta$interpretation[[1]], "\n\n", sep = "")
+  cat("Metrics used (variable names):\n\n")
+  mets <- question_outputs %>% filter(question == q) %>% distinct(metric) %>% arrange(metric) %>% pull(metric)
+  for (m in mets) cat("- `", m, "`\n", sep = "")
+  cat("\n")
+  render_plot_set(q)
+}
+```
+
+# Fire
+
+```{r fire-sections, results='asis'}
+for (q in question_meta$question[question_meta$section == "Fire"]) {
+  meta <- question_meta %>% filter(question == q)
+  cat("## ", q, ": ", meta$title[[1]], "\n\n", sep = "")
+  cat("Survey question: \"", meta$survey_question[[1]], "\"\n\n", sep = "")
+  cat("Interpretation: ", meta$interpretation[[1]], "\n\n", sep = "")
+  cat("Metrics used (variable names):\n\n")
+  mets <- question_outputs %>% filter(question == q) %>% distinct(metric) %>% arrange(metric) %>% pull(metric)
+  for (m in mets) cat("- `", m, "`\n", sep = "")
+  cat("\n")
+  render_plot_set(q)
+}
+```
+
+# Delta / ARIMA outputs
+
+## What the Delta / ARIMA block is doing
+
+For each town, buffer, and annual metric, the workflow estimates a trend summary and compares the observed Sen slope to a simulated ARIMA reference distribution. The `qcat` values indicate where the observed slope falls relative to that simulated distribution.
+
+```{r arima-visual-1, fig.height=6, fig.width=9}
+question_outputs %>%
+  mutate(label = paste(town, buffer, sep = " | ")) %>%
+  ggplot(aes(x = question, y = as.numeric(str_remove(qcat, "Q")), fill = buffer)) +
+  geom_col(position = position_dodge(width = 0.8)) +
+  facet_wrap(~ town, ncol = 2) +
+  scale_y_continuous(breaks = 1:7) +
+  labs(title = "ARIMA Delta diagnostics: Qcat by question and town/buffer",
+       x = "Question", y = "Qcat (1-7)")
+```
+
+```{r arima-visual-2, fig.height=5, fig.width=8}
+question_outputs %>%
+  count(question, qcat) %>%
+  ggplot(aes(x = question, y = n, fill = qcat)) +
+  geom_col() +
+  labs(title = "Counts of ARIMA Qcat categories by question",
+       x = "Question", y = "Count")
+```
+
+# PDI (Perception Delta Instrumentation)
+
+This section summarizes the mismatch between survey perceptions and tenure-linked climate instrumentation.
+
+```{r pdi-summary-table}
+knitr::kable(
+  pdi_summary %>% arrange(question, .town),
+  caption = "Town-level PDI summary by question"
+)
+```
+
+```{r pdi-mean-plot, fig.height=7, fig.width=9}
+pdi_summary %>%
+  ggplot(aes(x = .town, y = mean_pdi)) +
+  geom_col() +
+  facet_wrap(~ question, scales = "free_y") +
+  labs(title = "Mean PDI by town and question", x = "Town", y = "Mean PDI")
+```
+
+# Notes / interpretation guidance
+
+- Frequency metrics generally increase when hot, dry, or high fire-weather days become more common.
+- Timing metrics require directional interpretation: earlier onset often corresponds to smaller day values.
+- Magnitude metrics summarize intensity or severity, not direct impacts such as burned area.
+- `qcat` values summarize how unusual an observed trend is relative to simulated ARIMA variability.
+- PDI values indicate the degree of mismatch between reported perceptions and climate-derived instrumentation.
+
+
+# Demographic context and sensitivity
+
+This section adds the ACS weighted-buffer demographic context from the script outputs without changing the working climate-report workflow above.
+
+## ACS weighted-buffer covariates
+
+```{r acs-buffer-table}
+acs_show <- acs_buffer_covariates
+if ("town" %in% names(acs_show)) acs_show <- dplyr::arrange(acs_show, town, dplyr::across(dplyr::any_of("buffer")))
+knitr::kable(acs_show, caption = "ACS weighted-buffer covariates by town and buffer")
+```
+
+## Stressor-level PDI and ACS associations
+
+```{r stressor-acs-table}
+stressor_show <- pdi_stressor_acs
+if ("stressor" %in% names(stressor_show)) stressor_show <- dplyr::arrange(stressor_show, stressor, dplyr::across(dplyr::any_of(c("town", ".town", "buffer"))))
+knitr::kable(stressor_show, caption = "Stressor-level PDI joined to ACS covariates")
+```
+
+```{r stressor-income-plot-include, results='asis'}
+p_income <- file.path(plot_dir, "pdi_vs_income_by_stressor.png")
+if (file.exists(p_income)) {
+  cat("\\begin{figure}[H]\n")
+  cat("\\centering\n")
+  cat(
+    "\\includegraphics[width=0.95\\textwidth]{\\detokenize{",
+    p_income,
+    "}}\n",
+    sep = ""
+  )
+  cat("\\end{figure}\n")
+} else {
+  cat("_Missing plot:_ `", p_income, "`\n\n", sep = "")
+}
+```
+
+```{r stressor-demographics-plot-include, results='asis'}
+p_demo <- file.path(plot_dir, "pdi_vs_demographics_by_stressor.png")
+if (file.exists(p_demo)) {
+  cat("\\begin{figure}[H]\n")
+  cat("\\centering\n")
+  cat(
+    "\\includegraphics[width=0.98\\textwidth]{\\detokenize{",
+    p_demo,
+    "}}\n",
+    sep = ""
+  )
+  cat("\\end{figure}\n")
+} else {
+  cat("_Missing plot:_ `", p_demo, "`\n\n", sep = "")
+}
+```
+
+```{r stressor-heatmap-include, results='asis'}
+p_heatmap <- file.path(plot_dir, "pdi_heatmap_by_stressor.png")
+if (file.exists(p_heatmap)) {
+  cat("\\begin{figure}[H]\n")
+  cat("\\centering\n")
+  cat(
+    "\\includegraphics[width=0.95\\textwidth]{\\detokenize{",
+    p_heatmap,
+    "}}\n",
+    sep = ""
+  )
+  cat("\\end{figure}\n")
+} else {
+  cat("_Missing plot:_ `", p_heatmap, "`\n\n", sep = "")
+}
+```
+
+## Question-level ACS join
+
+```{r question-acs-table}
+question_acs_show <- pdi_question_acs
+if ("question" %in% names(question_acs_show)) question_acs_show <- dplyr::arrange(question_acs_show, question, dplyr::across(dplyr::any_of(c("town", ".town", "buffer"))))
+knitr::kable(question_acs_show, caption = "Question-level PDI joined to ACS covariates")
+```
+
+## Overall PDI and ACS associations
+
+```{r overall-acs-table}
+overall_show <- pdi_overall_acs
+if ("town" %in% names(overall_show) || ".town" %in% names(overall_show)) overall_show <- dplyr::arrange(overall_show, dplyr::across(dplyr::any_of(c("town", ".town", "buffer"))))
+knitr::kable(overall_show, caption = "Overall PDI joined to ACS covariates")
+```

@@ -1,0 +1,383 @@
+---
+title: "Fire Metrics Report (By Question)"
+author: ""
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+params:
+  # Path to the script that loads data AND builds the annual fire metrics.
+  # The sourced script should create at least: annualfire and annualfire_long.
+  metrics_script: "fire_metrics_script.R"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    number_sections: true
+    toc: true
+geometry: margin=0.8in
+header-includes:
+  - "\\usepackage{pdflscape}"
+  - "\\usepackage{booktabs}"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center"
+)
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+
+# ---- User edit: where the fire plot PNGs live ----
+# If your PNGs are in the same folder as the Rmd, keep as ".".
+fire_plot_dir <- "."
+
+plot_path <- function(fname) {
+  p <- file.path(fire_plot_dir, fname)
+  if (!file.exists(p)) {
+    # fallback: try common relative folder used in the script
+    p2 <- file.path("plots", "fire", fname)
+    if (file.exists(p2)) return(p2)
+  }
+  p
+}
+
+landscape_begin <- function() cat("\\n\\\
+\\begin{landscape}\\n")
+landscape_end   <- function() cat("\\n\\\
+\\end{landscape}\\n")
+```
+
+```{r paths}
+# Project root: this Rmd lives at repo root; script is in /src
+project_root  <- getwd()
+script_path   <- file.path(project_root, "src", "extract_fire_metrics2.R")
+
+# Where the script writes outputs
+fire_plot_dir <- file.path(project_root, "plots", "fire")
+out_dir       <- file.path(project_root, "outputs", "fire_questions")
+
+stopifnot(file.exists(script_path))
+```
+
+```{r run-script}
+# This runs the up-to-date workflow:
+# - reads daily town files
+# - builds daily climatology thresholds (1996-2025)
+# - computes annual fire metrics (water-year)
+# - saves question-framed plots to plots/fire/
+# - writes CSV outputs to outputs/fire_questions/
+source(script_path)
+```
+
+
+```{r check-required-objects, include=FALSE}
+if (!exists("annualfire")) {
+  stop("Object `annualfire` not found. Either source your metrics script in the hidden chunk, or paste your annualfire-building code there.")
+}
+
+annualfire_long <- annualfire %>%
+  pivot_longer(cols = -c(town, buffer, wateryear), names_to = "metric", values_to = "value")
+```
+
+# Fire metrics framed by survey-style questions
+
+## Q1: Has the overall frequency of high fire-weather days changed?
+
+**Metric:** annual count of days exceeding the daily (1996-2025) 90th percentile threshold (ERC and BI).
+
+```{r q1-landscape-begin, results='asis', echo=FALSE}
+landscape_begin()
+```
+
+```{r q1-plot, echo=FALSE, fig.cap='Q1: Overall frequency (annual high days)'}
+knitr::include_graphics(plot_path("Q1_timeseries_firehighdays_erc90.png"))
+```
+
+```{r q1-dist, echo=FALSE, fig.cap='Q1: Distribution of annual ERC q90 high days'}
+knitr::include_graphics(plot_path("Q1_distribution_firehighdays_erc90.png"))
+```
+
+```{r q1-landscape-end, results='asis', echo=FALSE}
+landscape_end()
+```
+
+## Q2: Has the frequency of high fire-weather days changed in summer?
+
+**Metric:** annual count of high days occurring in JJA.
+
+```{r q2-landscape-begin, results='asis', echo=FALSE}
+landscape_begin()
+```
+
+```{r q2-plot, echo=FALSE, fig.cap='Q2: Summer frequency (JJA high days)'}
+knitr::include_graphics(plot_path("Q2_timeseries_firesummerhighdays_erc90.png"))
+```
+
+```{r q2-landscape-end, results='asis', echo=FALSE}
+landscape_end()
+```
+
+## Q3: Has fire-weather potential become more severe?
+
+**Metric (proxy):** annual peak ERC and 95th percentile ERC (tail intensity).
+
+```{r q3-landscape-begin, results='asis', echo=FALSE}
+landscape_begin()
+```
+
+```{r q3-plot1, echo=FALSE, fig.cap='Q3 proxy: Annual peak ERC'}
+knitr::include_graphics(plot_path("Q3proxy_timeseries_firepeak_erc.png"))
+```
+
+```{r q3-plot2, echo=FALSE, fig.cap='Q3 proxy: Annual ERC 95th percentile'}
+knitr::include_graphics(plot_path("Q3proxy_timeseries_firep95_erc.png"))
+```
+
+```{r q3-landscape-end, results='asis', echo=FALSE}
+landscape_end()
+```
+
+## Q4: Is the fire season starting earlier?
+
+**Metric:** first sustained run (k=3) of high fire-weather days, reported as water-year day (Oct 1 = 1).
+
+```{r q4-landscape-begin, results='asis', echo=FALSE}
+landscape_begin()
+```
+
+```{r q4-plot1, echo=FALSE, fig.cap='Q4: Fire season start timing (ERC q90, wyday)'}
+knitr::include_graphics(plot_path("Q4_timeseries_firestart_wyday_erc.png"))
+```
+
+```{r q4-plot2, echo=FALSE, fig.cap='Q4: ERC start day (wyday) early vs late'}
+knitr::include_graphics(plot_path("Q4_periodcompare_firestart_wyday_erc.png"))
+```
+
+```{r q4-landscape-end, results='asis', echo=FALSE}
+landscape_end()
+```
+
+## Q5: Are high fire-weather spells lasting longer?
+
+**Metric:** maximum consecutive run length of high days; optional season length (last - first high day).
+
+```{r q5-landscape-begin, results='asis', echo=FALSE}
+landscape_begin()
+```
+
+```{r q5-plot1, echo=FALSE, fig.cap='Q5: Max consecutive high-fire run length (ERC q90)'}
+knitr::include_graphics(plot_path("Q5_timeseries_firemaxrun_erc.png"))
+```
+
+```{r q5-plot2, echo=FALSE, fig.cap='Q5 optional: Season length (ERC q90: last - first high day)'}
+knitr::include_graphics(plot_path("Q5_timeseries_fireseasonlength_erc.png"))
+```
+
+```{r q5-landscape-end, results='asis', echo=FALSE}
+landscape_end()
+```
+
+# Trend summaries (Sen slope + Mann-Kendall)
+
+```{r trend-table, echo=FALSE}
+fire_trends <- function(startyears = c(1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020)) {
+  metrics_to_trend <- c(
+    "firehighdays_bi90","firehighdays_erc90",
+    "firesummerhighdays_bi90","firesummerhighdays_erc90",
+    "firestart_wyday_bi","firestart_wyday_erc",
+    "firemaxrun_bi","firemaxrun_erc"
+  )
+
+  dfL <- annualfire_long %>%
+    filter(metric %in% metrics_to_trend, !is.na(value))
+
+  out <- list()
+
+  for (sy in startyears) {
+    tmp <- dfL %>%
+      filter(wateryear >= sy) %>%
+      group_by(town, buffer, metric) %>%
+      summarise(
+        sen_slope = sens.slope(value)$estimates,
+        p_value   = mk.test(value)$p.value,
+        n_years   = n(),
+        .groups = "drop"
+      ) %>%
+      mutate(TimePeriod = paste0(sy, "-2025"))
+
+    out[[as.character(sy)]] <- tmp
+  }
+
+  bind_rows(out)
+}
+
+fire_slopes <- fire_trends()
+
+fire_slopes %>%
+  arrange(metric, p_value) %>%
+  knitr::kable(digits = 4)
+```
+
+# ARIMA Monte Carlo: Is the observed trend unusual under a no-trend time-series model?
+
+This section uses an ARIMA (no drift) fitted to each full-record metric time series to generate Monte Carlo slope distributions. It then places the observed Sen slope into a 7-bin quantile category (Q1 = most negative, Q7 = most positive).
+
+```{r arima-mc, include=FALSE}
+# --- CONFIG ---
+set.seed(2026)
+n_sim <- 2000
+
+metrics_for_arima <- c(
+  Q1 = "firehighdays_erc90",
+  Q2 = "firesummerhighdays_erc90",
+  Q3 = "firep95_erc",
+  Q4 = "firestart_wyday_erc",
+  Q5 = "firemaxrun_erc"
+)
+
+safe_sen_slope <- function(x) {
+  x <- as.numeric(x)
+  x <- x[is.finite(x)]
+  if (length(x) < 5) return(NA_real_)
+  tryCatch(as.numeric(sens.slope(x)$estimates), error = function(e) NA_real_)
+}
+
+fit_arima_nt <- function(x) {
+  x <- as.numeric(x)
+  x <- x[is.finite(x)]
+  auto.arima(x, allowdrift = FALSE, allowmean = TRUE)
+}
+
+simulate_slopes <- function(fit, n, len) {
+  out <- numeric(n)
+  for (i in seq_len(n)) {
+    sim <- as.numeric(simulate(fit, nsim = len))
+    out[i] <- safe_sen_slope(sim)
+  }
+  out
+}
+
+# Build per-location observed slopes + ARIMA slope distributions
+arima_results <- list()
+
+for (q in names(metrics_for_arima)) {
+  met <- metrics_for_arima[[q]]
+
+  obs_df <- annualfire %>%
+    select(town, buffer, wateryear, value = all_of(met)) %>%
+    filter(!is.na(value)) %>%
+    group_by(town, buffer) %>%
+    summarise(
+      n_years = n(),
+      obs_sen_slope = safe_sen_slope(value),
+      .groups = "drop"
+    ) %>%
+    mutate(question = q, metric = met)
+
+  # Monte Carlo per location
+  mc_df <- annualfire %>%
+    select(town, buffer, wateryear, value = all_of(met)) %>%
+    filter(!is.na(value)) %>%
+    group_by(town, buffer) %>%
+    group_modify(~{
+      x <- .x$value
+      if (length(x) < 10) return(tibble(sim_id = integer(), sim_slope = numeric()))
+      fit <- tryCatch(fit_arima_nt(x), error = function(e) NULL)
+      if (is.null(fit)) return(tibble(sim_id = integer(), sim_slope = numeric()))
+      sims <- simulate_slopes(fit, n_sim, length(x))
+      tibble(sim_id = seq_along(sims), sim_slope = sims)
+    }) %>%
+    ungroup() %>%
+    mutate(question = q, metric = met)
+
+  # 7-quantile bins (global across all locations for that question)
+  breaks <- quantile(mc_df$sim_slope, probs = seq(0, 1, length.out = 8), na.rm = TRUE)
+  # guard against duplicates
+  if (any(diff(breaks) <= 0)) {
+    breaks <- seq(min(mc_df$sim_slope, na.rm = TRUE), max(mc_df$sim_slope, na.rm = TRUE), length.out = 8)
+  }
+
+  obs_df <- obs_df %>%
+    mutate(
+      qcat = as.character(cut(obs_sen_slope, breaks = breaks, labels = paste0("Q", 1:7), include.lowest = TRUE, right = FALSE))
+    )
+
+  arima_results[[q]] <- list(obs = obs_df, mc = mc_df, breaks = breaks)
+}
+
+obs_all <- bind_rows(lapply(arima_results, `[[`, "obs"))
+mc_all  <- bind_rows(lapply(arima_results, `[[`, "mc"))
+```
+
+## ARIMA summary heatmap (Q1-Q7 categories)
+
+```{r arima-heatmap, echo=FALSE}
+# Show ARIMA quantile category by question and location
+obs_plot <- obs_all %>%
+  mutate(location = paste(town, buffer, sep = " - "))
+
+ggplot(obs_plot, aes(x = question, y = location, fill = qcat)) +
+  geom_tile(color = "white", linewidth = 0.25) +
+  labs(
+    title = "ARIMA delta diagnostics: Q1-Q7 category by question and location",
+    x = "Question",
+    y = "Location (town - buffer)",
+    fill = "Qcat (1-7)"
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.y = element_text(size = 7),
+    panel.grid = element_blank()
+  )
+```
+
+## ARIMA slope-distribution panels (example: ERC-based metrics)
+
+Each panel shows the Monte Carlo distribution of Sen slopes from ARIMA (no drift). The vertical line is the observed Sen slope.
+
+```{r arima-dists, echo=FALSE}
+# Keep it readable: pick a small set of locations to illustrate.
+# Change the filter if you want all locations faceted.
+example_locs <- obs_all %>%
+  arrange(question, town, buffer) %>%
+  group_by(question) %>%
+  slice_head(n = 4) %>%
+  ungroup() %>%
+  select(question, town, buffer)
+
+mc_ex <- mc_all %>%
+  inner_join(example_locs, by = c("question","town","buffer"))
+obs_ex <- obs_all %>%
+  inner_join(example_locs, by = c("question","town","buffer"))
+
+mc_ex <- mc_ex %>% mutate(location = paste(town, buffer, sep = " - "))
+obs_ex <- obs_ex %>% mutate(location = paste(town, buffer, sep = " - "))
+
+p <- ggplot(mc_ex, aes(x = sim_slope)) +
+  geom_histogram(bins = 40) +
+  facet_grid(location ~ question, scales = "free_x") +
+  geom_vline(data = obs_ex, aes(xintercept = obs_sen_slope), linewidth = 0.7) +
+  labs(
+    title = "ARIMA Monte Carlo slope distributions (examples)",
+    x = "Sen slope (metric units per year)",
+    y = "Simulation count"
+  ) +
+  theme_minimal(base_size = 10)
+
+p
+```
+
+```{r arima-table, echo=FALSE}
+obs_all %>%
+  arrange(question, town, buffer) %>%
+  select(question, town, buffer, metric, n_years, obs_sen_slope, qcat) %>%
+  knitr::kable(digits = 4)
+```

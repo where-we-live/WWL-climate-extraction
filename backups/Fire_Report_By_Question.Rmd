@@ -1,0 +1,663 @@
+---
+title: "Fire Metrics Review (GridMET) — Question-Framed Summary"
+author: "Erich"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    df_print: kable
+geometry: margin=1in
+fontsize: 11pt
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 14,
+  fig.height = 8,
+  dpi = 300
+)
+```
+
+# Overview
+
+This report reproduces the full fire-metrics workflow (daily climatology thresholds → annual metrics) and summarizes results **by survey question**.  
+The intent is to provide a clean, reviewable PDF where the **code runs**, but is **not printed**.
+
+```{r libraries}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+```
+
+```{r paths}
+# Project root + output paths
+project_root <- "/mnt/ceph/erichs/git/WWL-climate-extraction"
+town_dir     <- file.path(project_root, "data/ID_data/ID")
+fire_plot_dir <- file.path(project_root, "plots/fire")
+
+stopifnot(dir.exists(town_dir))
+dir.create(fire_plot_dir, recursive = TRUE, showWarnings = FALSE)
+
+# Water years to analyze
+wateryearselect <- 1980:2025
+```
+
+# Data ingestion and preprocessing
+
+```{r read-and-combine}
+files <- list.files(town_dir, pattern = "\\.csv$", full.names = TRUE)
+if (length(files) == 0) stop("No CSV files found in: ", town_dir)
+
+file_index <- tibble(
+  file = files,
+  filename = basename(files),
+  stem = str_remove(filename, "\\.csv$")
+) %>%
+  mutate(
+    buffer = if_else(str_detect(stem, "10mibuffer"), "10mibuffer", "none"),
+    stem_nobuf = str_remove(stem, "10mibuffer"),
+    source = str_extract(stem_nobuf, "(?<=_)(era5land|gridmet|nclim)$"),
+    town   = str_remove(stem_nobuf, "_(era5land|gridmet|nclim)$")
+  )
+
+bad <- file_index %>% filter(is.na(source) | is.na(town))
+if (nrow(bad) > 0) {
+  print(bad)
+  stop("Some filenames did not match expected pattern Town[_10mibuffer]_(era5land|gridmet|nclim).csv")
+}
+
+town_tbl <- file_index %>%
+  mutate(data = map(file, ~ read_csv(.x, show_col_types = FALSE))) %>%
+  select(town, buffer, source, data) %>%
+  unnest(data)
+```
+
+```{r time-fields}
+town_tbl <- town_tbl %>%
+  mutate(
+    date_str = str_extract(`system.index`, "^\\d{8}"),
+    date     = as.Date(date_str, format = "%Y%m%d"),
+    year     = year(date),
+    month    = month(date),
+    wateryear = if_else(month >= 10, year + 1L, year),
+    yday      = yday(date),
+    mday      = mday(date),
+    season4  = case_when(
+      month %in% 3:5  ~ "MAM",
+      month %in% 6:8  ~ "JJA",
+      month %in% 9:11 ~ "SON",
+      TRUE            ~ "DJF"
+    )
+  )
+
+stopifnot(!all(is.na(town_tbl$date)))
+
+# Christine-style water-year day (Oct 1 = 1)
+town_tbl <- town_tbl %>%
+  mutate(
+    wyday = ifelse(
+      year(date) == wateryear & leap_year(year(date)),
+      yday + 92,
+      ifelse(
+        year(date) == wateryear,
+        yday + 91,
+        ifelse(leap_year(wateryear - 1), yday - 274, yday - 273)
+      )
+    )
+  )
+```
+
+```{r completeness-check}
+town_tbl %>%
+  group_by(source) %>%
+  summarise(
+    n = n(),
+    bi_nonmissing     = sum(!is.na(bi)),
+    erc_nonmissing    = sum(!is.na(erc)),
+    fm100_nonmissing  = sum(!is.na(fm100)),
+    fm1000_nonmissing = sum(!is.na(fm1000)),
+    .groups = "drop"
+  ) %>%
+  knitr::kable()
+```
+
+# Fire metrics workflow (Christine-style)
+
+```{r daily-table}
+# Restrict to GridMET + WY range
+df <- town_tbl %>%
+  filter(source == "gridmet", wateryear %in% wateryearselect) %>%
+  select(
+    town, buffer, source, `system.index`,
+    date, year, month, wateryear, yday, wyday, mday, season4,
+    bi, erc, fm100, fm1000, pr, tmmn, tmmx, vpd, vs
+  )
+
+# Optional 5-day centered smoothing for BI/ERC
+df5day <- df
+df5day[, c("bi","erc")] <- rollmean(df[, c("bi","erc")], 5, align = "center", na.pad = TRUE)
+```
+
+```{r daily-climatology}
+# Christine helper
+quibble <- function(x, q = c(0.9, 0.95), dropNA = TRUE) {
+  tibble(x = quantile(x, q, na.rm = dropNA), q = q)
+}
+
+# Daily 1996–2025 climatology quantiles for BI & ERC
+daily9625_firequants <- df5day %>%
+  filter(wateryear %in% 1996:2025) %>%
+  group_by(month, mday) %>%
+  reframe(across(c(bi, erc), ~ quibble(.x, q = c(0.9, 0.95), dropNA = TRUE))) %>%
+  pivot_longer(cols = c(bi, erc), names_to = "var", values_to = "qb") %>%
+  mutate(
+    quantile = qb$q,
+    value = as.numeric(qb$x),
+    name = paste0("dailyclimo9625_", var, "_q", quantile)
+  ) %>%
+  select(month, mday, name, value)
+
+df_fireclimo <- df5day %>%
+  left_join(daily9625_firequants, by = c("month","mday")) %>%
+  pivot_wider(names_from = name, values_from = value)
+```
+
+```{r flags-and-helpers}
+# Define “high fire day” flags relative to daily climatology
+df_fireclimo <- df_fireclimo %>%
+  mutate(
+    high_bi90  = bi  > dailyclimo9625_bi_q0.9,
+    high_erc90 = erc > dailyclimo9625_erc_q0.9,
+    high_bi95  = bi  > dailyclimo9625_bi_q0.95,
+    high_erc95 = erc > dailyclimo9625_erc_q0.95,
+
+    # severity = exceedance above threshold (0 if below)
+    sev_bi90  = pmax(bi  - dailyclimo9625_bi_q0.9,  0, na.rm = TRUE),
+    sev_erc90 = pmax(erc - dailyclimo9625_erc_q0.9, 0, na.rm = TRUE)
+  )
+
+max_run <- function(x) {
+  x <- as.integer(x); x[is.na(x)] <- 0L
+  r <- rle(x)
+  if (!any(r$values == 1L)) 0L else max(r$lengths[r$values == 1L])
+}
+
+first_sustained_wyday <- function(high_vec, wyday_vec, k = 3) {
+  hv <- as.integer(high_vec); hv[is.na(hv)] <- 0L
+  if (length(hv) < k) return(NA_integer_)
+  roll <- zoo::rollapply(hv, width = k, FUN = sum, align = "left", fill = NA)
+  idx <- which(roll == k)
+  if (length(idx) == 0) NA_integer_ else wyday_vec[min(idx)]
+}
+```
+
+```{r annual-metrics}
+annualfire <- df_fireclimo %>%
+  group_by(town, buffer, wateryear) %>%
+  summarise(
+    # Q1: overall frequency
+    firehighdays_bi90  = sum(high_bi90,  na.rm = TRUE),
+    firehighdays_erc90 = sum(high_erc90, na.rm = TRUE),
+
+    # optional: more extreme frequency
+    firehighdays_bi95  = sum(high_bi95,  na.rm = TRUE),
+    firehighdays_erc95 = sum(high_erc95, na.rm = TRUE),
+
+    # optional: severity
+    fireseverity_bi90  = sum(sev_bi90,  na.rm = TRUE),
+    fireseverity_erc90 = sum(sev_erc90, na.rm = TRUE),
+
+    # Q2: summer frequency
+    firesummerhighdays_bi90  = sum(high_bi90  & season4 == "JJA", na.rm = TRUE),
+    firesummerhighdays_erc90 = sum(high_erc90 & season4 == "JJA", na.rm = TRUE),
+
+    # Q4: season start timing (sustained run)
+    firestart_wyday_bi  = first_sustained_wyday(high_bi90,  wyday, k = 3),
+    firestart_wyday_erc = first_sustained_wyday(high_erc90, wyday, k = 3),
+
+    # Q5: duration/persistence
+    firemaxrun_bi  = max_run(high_bi90),
+    firemaxrun_erc = max_run(high_erc90),
+
+    # optional: season length (first to last high day)
+    fireseasonlength_bi = {
+      idx <- which(high_bi90 %in% TRUE)
+      if (length(idx) < 2) NA_integer_ else (max(wyday[idx]) - min(wyday[idx]))
+    },
+    fireseasonlength_erc = {
+      idx <- which(high_erc90 %in% TRUE)
+      if (length(idx) < 2) NA_integer_ else (max(wyday[idx]) - min(wyday[idx]))
+    },
+
+    # Q3 proxies: large/impactful fire-weather potential
+    firepeak_bi  = max(bi,  na.rm = TRUE),
+    firepeak_erc = max(erc, na.rm = TRUE),
+    firep95_erc  = as.numeric(quantile(erc, 0.95, na.rm = TRUE)),
+
+    .groups = "drop"
+  )
+
+annualfire_long <- annualfire %>%
+  pivot_longer(cols = -c(town, buffer, wateryear),
+               names_to = "metric", values_to = "value")
+```
+
+```{r plotting-helpers}
+`%||%` <- function(a, b) if (!is.null(a)) a else b
+
+ts_plot <- function(metric_name, title = NULL) {
+  dfp <- annualfire_long %>% filter(metric == metric_name, !is.na(value))
+  ggplot(dfp, aes(x = wateryear, y = value, group = interaction(town, buffer))) +
+    geom_line(alpha = 0.7) +
+    facet_grid(buffer ~ town, scales = "free_y") +
+    labs(title = title %||% metric_name, x = "Water year", y = metric_name)
+}
+
+hist_plot <- function(metric_name, title = NULL) {
+  dfp <- annualfire_long %>% filter(metric == metric_name, !is.na(value))
+  ggplot(dfp, aes(x = value)) +
+    geom_histogram(bins = 30) +
+    facet_grid(buffer ~ town, scales = "free_x") +
+    labs(title = title %||% paste("Distribution:", metric_name),
+         x = metric_name, y = "Count")
+}
+
+period_compare_plot <- function(metric_name,
+                                early_years = 1996:2005,
+                                late_years  = 2016:2025,
+                                title = NULL) {
+  dfp <- annualfire %>%
+    mutate(period = case_when(
+      wateryear %in% early_years ~ "early (1996–2005)",
+      wateryear %in% late_years  ~ "late (2016–2025)",
+      TRUE ~ NA_character_
+    )) %>%
+    filter(!is.na(period)) %>%
+    select(town, buffer, period, value = all_of(metric_name))
+
+  ggplot(dfp, aes(x = period, y = value)) +
+    geom_boxplot() +
+    facet_grid(buffer ~ town, scales = "free_y") +
+    labs(title = title %||% paste(metric_name, "early vs late"),
+         x = "", y = metric_name)
+}
+```
+
+# Results by question
+
+
+## Q1 — Overall frequency
+
+**Metrics used**
+- `firehighdays_erc90`, `firehighdays_bi90` (annual count of daily high-fire days; q90 threshold relative to 1996–2025 daily climatology)
+- Distribution check: `firehighdays_erc90`
+
+### Interpretation
+
+Survey intent: “Overall, has fire become less common or more common?” (frequency)
+
+Metrics used
+
+firehighdays_erc90 (annual count of ERC q90 high days)
+
+firehighdays_bi90 (annual count of BI q90 high days)
+
+Optional context: distributions of annual high-day counts to show skew/extremes
+
+What the plots suggest
+
+Across towns, the annual count of high-fire days is strongly right-skewed: many years have relatively few high-fire days, but a smaller number of years exhibit very high counts. This is consistent with episodic “bad fire years” layered on top of a lower baseline.
+
+Time series panels show that several towns exhibit higher and/or more variable counts in the more recent decades (especially post-2000s), suggesting increasing frequency of high-fire conditions in the period most residents remember. Some towns have clearer upward shifts than others.
+
+Buffer vs none generally track each other (the shapes are similar), implying that the signal is not purely an artifact of the buffer choice—though the buffer can modestly change magnitudes by smoothing spatial heterogeneity.
+
+Figures
+
+Figure: Q1 timeseries firehighdays erc90
+
+Figure: Q1 timeseries firehighdays bi90
+
+Figure: Q1 distribution firehighdays erc90
+
+### Plots
+
+
+```{r q1-ts-erc}
+ts_plot("firehighdays_erc90", "Q1: Overall frequency (ERC q90 high days)")
+```
+
+```{r q1-ts-bi}
+ts_plot("firehighdays_bi90", "Q1: Overall frequency (BI q90 high days)")
+```
+
+```{r q1-dist-erc}
+hist_plot("firehighdays_erc90", "Q1: Distribution of annual ERC q90 high days")
+```
+
+
+
+
+## Q2 — Summer frequency
+
+**Metrics used**
+- `firesummerhighdays_erc90`, `firesummerhighdays_bi90` (annual count of *JJA* high-fire days; q90 threshold relative to 1996–2025 daily climatology)
+
+### Interpretation
+
+Survey intent: “During the summer months, has fire occurred more often or less often?” (summer frequency)
+
+Metrics used
+
+firesummerhighdays_erc90 (annual count of ERC q90 high days during JJA)
+
+firesummerhighdays_bi90 (annual count of BI q90 high days during JJA)
+
+What the plots suggest
+
+Summer-only high-day counts are generally lower than the all-season counts, but they preserve the same pattern: many low years with occasional spikes.
+
+Several towns show a visible increase in summer spikes and/or a rise in the baseline in recent decades, which is consistent with respondents perceiving “more frequent summer fire conditions.”
+
+Because these are JJA-only counts, they are particularly useful for distinguishing ‘overall frequency’ from ‘summer frequency’ perceptions in the survey responses.
+
+Figures
+
+Figure: Q2 timeseries firesummerhighdays erc90
+
+Figure: Q2 timeseries firesummerhighdays bi90
+
+### Plots
+
+
+```{r q2-ts-erc}
+ts_plot("firesummerhighdays_erc90", "Q2: Summer frequency (ERC q90 high days, JJA)")
+```
+
+```{r q2-ts-bi}
+ts_plot("firesummerhighdays_bi90", "Q2: Summer frequency (BI q90 high days, JJA)")
+```
+
+
+
+## Q3 — Magnitude proxy (fire-weather potential)
+
+**Metrics used**
+- `firepeak_erc`, `firepeak_bi` (annual maximum daily ERC/BI)
+- `firep95_erc` (annual 95th percentile of daily ERC; tail intensity proxy)
+- Optional: `fireseverity_erc90`, `fireseverity_bi90` (sum of exceedance above q90 threshold)
+
+### Interpretation
+
+Survey intent: “Have the fires been smaller or larger / less or more severe?” (magnitude/impact proxy)
+
+Metrics used
+
+firepeak_erc (annual maximum ERC)
+
+firepeak_bi (annual maximum BI)
+
+firep95_erc (annual 95th percentile ERC; ‘tail intensity’)
+
+What the plots suggest
+
+The peak metrics (firepeak_erc, firepeak_bi) show upward shifts over time in multiple towns, indicating that the ‘worst’ fire-weather day in a year has become more intense in many locations.
+
+The ERC 95th-percentile series adds an important nuance: it reflects not just a single extreme day, but the intensity of the broader upper tail of the season. Upward movement here suggests that many high-fire days are getting stronger, not only the annual maximum.
+
+Taken together, increasing peaks and increasing tail intensity support an interpretation consistent with perceived increases in ‘severity’ or ‘impact potential’ of fire weather—even if frequency metrics are noisy year-to-year.
+
+Figures
+
+Figure: Q3proxy timeseries firepeak erc
+
+Figure: Q3proxy timeseries firepeak bi
+
+Figure: Q3proxy timeseries firep95 erc
+
+### Plots
+
+
+```{r q3-peak-erc}
+ts_plot("firepeak_erc", "Q3 proxy: Annual peak ERC (large/impactful fire-weather potential)")
+```
+
+```{r q3-p95-erc}
+ts_plot("firep95_erc", "Q3 proxy: Annual ERC 95th percentile (tail intensity)")
+```
+
+```{r q3-peak-bi}
+ts_plot("firepeak_bi", "Q3 proxy: Annual peak BI")
+```
+
+
+
+## Q4 — Timing (start of season)
+
+**Metrics used**
+- `firestart_wyday_erc`, `firestart_wyday_bi` (water-year day of first sustained run of high-fire days; default k=3)
+- Period comparison (early 1996–2005 vs late 2016–2025) for `firestart_wyday_erc`
+
+### Interpretation
+
+Survey intent: “Has there been a change in when the fire season starts?” (timing)
+
+Metrics used
+
+firestart_wyday_erc (wyday of first sustained ERC q90 run)
+
+firestart_wyday_bi (wyday of first sustained BI q90 run)
+
+Optional: early vs late period comparison of start-day distributions (e.g., boxplots)
+
+What the plots suggest
+
+Start-day (wyday) values are highly variable—some years begin with sustained high-fire conditions much earlier or later than others. This is expected for a threshold-and-run based definition.
+
+Where the time series drifts downward over time, that implies earlier start timing (smaller wyday). Where it drifts upward, it implies later onset. Several towns show mixed behavior and strong interannual variability, so the clearest story often comes from comparing early vs late periods rather than eyeballing year-to-year lines.
+
+The early-vs-late boxplots are a useful ‘survey-facing’ summary: a lower median (or generally lower distribution) in the late period indicates a shift toward earlier starts that respondents may notice.
+
+Figures
+
+Figure: Q4 timeseries firestart wyday erc
+
+Figure: Q4 timeseries firestart wyday bi
+
+Figure: Q4 periodcompare firestart wyday erc
+
+### Plots
+
+
+```{r q4-start-erc}
+ts_plot("firestart_wyday_erc", "Q4: Fire season start timing (ERC q90, sustained run, wyday)")
+```
+
+```{r q4-start-bi}
+ts_plot("firestart_wyday_bi", "Q4: Fire season start timing (BI q90, sustained run, wyday)")
+```
+
+```{r q4-period}
+period_compare_plot(
+  "firestart_wyday_erc",
+  early_years = 1996:2005,
+  late_years  = 2016:2025,
+  title = "Q4: ERC start day (wyday) early vs late"
+)
+```
+
+
+
+## Q5 — Duration / persistence
+
+**Metrics used**
+- `firemaxrun_erc`, `firemaxrun_bi` (longest run of consecutive high-fire days; q90 threshold)
+- Optional: `fireseasonlength_erc`, `fireseasonlength_bi` (last - first high-fire day within the water year)
+
+### Interpretation
+
+Survey intent: “Do the fire conditions last shorter or longer than you remember?” (duration)
+
+Metrics used
+
+fireseasonlength_erc (season length based on ERC q90: last - first high day)
+
+firemaxrun_erc (maximum consecutive ERC q90 run length)
+
+firemaxrun_bi (maximum consecutive BI q90 run length)
+
+What the plots suggest
+
+Season length (last - first high day) generally increases when either starts move earlier, ends move later, or both. Several towns show higher season-length values in more recent decades, consistent with a lengthening window of high-fire conditions.
+
+Maximum consecutive run length captures persistence. Increasing maxima suggest longer uninterrupted stretches of high-fire weather—often the kind of change that is salient to residents and fire managers.
+
+ERC- and BI-based run metrics are complementary: ERC often tracks fuel moisture and energy release potential, while BI combines several factors into a fire behavior index. Agreement between them strengthens confidence that the signal is not index-specific.
+
+Figures
+
+Figure: Q5 timeseries fireseasonlength erc
+
+Figure: Q5 timeseries firemaxrun erc
+
+Figure: Q5 timeseries firemaxrun bi
+
+### Plots
+
+
+```{r q5-maxrun-erc}
+ts_plot("firemaxrun_erc", "Q5: Max consecutive high-fire run length (ERC q90)")
+```
+
+```{r q5-maxrun-bi}
+ts_plot("firemaxrun_bi", "Q5: Max consecutive high-fire run length (BI q90)")
+```
+
+```{r q5-seasonlength-erc}
+ts_plot("fireseasonlength_erc", "Q5 (optional): Season length (ERC q90: last - first high day)")
+```
+
+
+
+# Trend diagnostics (optional)
+
+This reproduces the Sen's slope + Mann–Kendall p-value table used in your exploratory checks.
+
+
+```{r trend-table, message=FALSE, warning=FALSE}
+library(dplyr)
+library(trend)
+
+fire_trends <- function(startyears = c(1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020),
+                        min_n = 10) {
+  metrics_to_trend <- c(
+    "firehighdays_bi90","firehighdays_erc90",
+    "firesummerhighdays_bi90","firesummerhighdays_erc90",
+    "firestart_wyday_bi","firestart_wyday_erc",
+    "firemaxrun_bi","firemaxrun_erc"
+  )
+
+  dfL <- annualfire_long %>%
+    filter(metric %in% metrics_to_trend) %>%
+    mutate(value = as.numeric(value))
+
+  out <- vector("list", length(startyears))
+  names(out) <- as.character(startyears)
+
+  for (sy in startyears) {
+    tmp <- dfL %>%
+      filter(wateryear >= sy) %>%
+      group_by(town, buffer, metric) %>%
+      summarise(
+        n_years = sum(!is.na(value)),
+        sen_slope = {
+          v <- value[!is.na(value)]
+          if (length(v) < min_n) NA_real_ else as.numeric(trend::sens.slope(v)$estimates)
+        },
+        p_value = {
+          v <- value[!is.na(value)]
+          if (length(v) < min_n) NA_real_ else as.numeric(trend::mk.test(v)$p.value)
+        },
+        .groups = "drop"
+      ) %>%
+      mutate(TimePeriod = paste0(sy, "-2025"))
+
+    out[[as.character(sy)]] <- tmp
+  }
+
+  bind_rows(out)
+}
+
+fire_slopes <- fire_trends(min_n = 10)
+
+fire_slopes %>%
+  arrange(metric, p_value) %>%
+  knitr::kable(digits = 4)
+```
+
+# Save plots to disk (optional)
+
+If you want the same PNGs written to `plots/fire/` (for slides, etc.), set `save_plots <- TRUE` below.
+
+```{r save-plots, eval=TRUE}
+save_plots <- TRUE
+
+save_plot <- function(p, filename, width = 14, height = 8, dpi = 300) {
+  ggsave(
+    filename = file.path(fire_plot_dir, filename),
+    plot = p,
+    width = width, height = height, dpi = dpi
+  )
+}
+
+if (isTRUE(save_plots)) {
+  save_plot(ts_plot("firehighdays_bi90",  "Q1: Overall frequency (BI q90 high days)"),
+            "Q1_timeseries_firehighdays_bi90.png")
+  save_plot(ts_plot("firehighdays_erc90", "Q1: Overall frequency (ERC q90 high days)"),
+            "Q1_timeseries_firehighdays_erc90.png")
+  save_plot(hist_plot("firehighdays_erc90","Q1: Distribution of annual ERC q90 high days"),
+            "Q1_distribution_firehighdays_erc90.png", width=14, height=9)
+
+  save_plot(ts_plot("firesummerhighdays_bi90",  "Q2: Summer frequency (BI q90 high days, JJA)"),
+            "Q2_timeseries_firesummerhighdays_bi90.png")
+  save_plot(ts_plot("firesummerhighdays_erc90", "Q2: Summer frequency (ERC q90 high days, JJA)"),
+            "Q2_timeseries_firesummerhighdays_erc90.png")
+
+  save_plot(ts_plot("firepeak_erc", "Q3 proxy: Annual peak ERC (large/impactful fire-weather potential)"),
+            "Q3proxy_timeseries_firepeak_erc.png")
+  save_plot(ts_plot("firep95_erc",  "Q3 proxy: Annual ERC 95th percentile (tail intensity)"),
+            "Q3proxy_timeseries_firep95_erc.png")
+  save_plot(ts_plot("firepeak_bi",  "Q3 proxy: Annual peak BI"),
+            "Q3proxy_timeseries_firepeak_bi.png")
+
+  save_plot(ts_plot("firestart_wyday_bi",  "Q4: Fire season start timing (BI q90, sustained run, wyday)"),
+            "Q4_timeseries_firestart_wyday_bi.png")
+  save_plot(ts_plot("firestart_wyday_erc", "Q4: Fire season start timing (ERC q90, sustained run, wyday)"),
+            "Q4_timeseries_firestart_wyday_erc.png")
+  save_plot(period_compare_plot("firestart_wyday_erc",
+                                early_years = 1996:2005,
+                                late_years  = 2016:2025,
+                                title = "Q4: ERC start day (wyday) early vs late"),
+            "Q4_periodcompare_firestart_wyday_erc.png", width=14, height=9)
+
+  save_plot(ts_plot("firemaxrun_bi",  "Q5: Max consecutive high-fire run length (BI q90)"),
+            "Q5_timeseries_firemaxrun_bi.png")
+  save_plot(ts_plot("firemaxrun_erc", "Q5: Max consecutive high-fire run length (ERC q90)"),
+            "Q5_timeseries_firemaxrun_erc.png")
+  save_plot(ts_plot("fireseasonlength_erc", "Q5 (optional): Season length (ERC q90: last - first high day)"),
+            "Q5_timeseries_fireseasonlength_erc.png")
+
+  message("Saved fire plots to: ", fire_plot_dir)
+}
+```

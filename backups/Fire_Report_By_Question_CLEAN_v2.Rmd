@@ -1,0 +1,361 @@
+---
+title: "Fire Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+geometry:
+  - margin=1in
+header-includes:
+  - \usepackage{pdflscape}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 6.5,
+  fig.height = 4.2,
+  dpi = 300,
+  fig.align = 'center',
+  out.width = '100%'
+)
+```
+
+# Overview
+
+This report produces a **question-framed** summary of *fire-weather* metrics derived from **GridMET** daily time series (per town and buffer). The workflow mirrors Christine’s approach used for heat/drought metrics:
+
+1. **Parse daily dates** from `system.index` and create water-year variables.
+2. Build a **daily climatology** (1996-2025) and use it to define *relative* “high fire-weather days” (e.g., above the daily 90th percentile).
+3. Aggregate daily flags into **annual (water-year) metrics**.
+4. Organize the metrics into **survey-question buckets** (Q1-Q5) with plots and summary tables.
+5. At the end, run the **Christine-style Delta/ARIMA diagnostic** to produce Q1-Q7 quantile categories for trend strength.
+
+This RMarkdown is designed so that **knitting the PDF runs the full pipeline once** by sourcing the up-to-date script (`src/extract_fire_metrics2.R`), and then **renders plots/tables in the report** from the generated objects and saved outputs.
+
+# Data sources and fire-weather variables
+
+## Data source
+
+- **GridMET**: gridded daily meteorology (used here for fire-weather indices and supporting variables).
+- Input files are expected under `data/ID_data/ID/` and follow the naming convention:
+  - `Town_gridmet.csv`
+  - `Town_10mibuffer_gridmet.csv`
+  - (Other sources can exist, but fire metrics in this report are computed from **gridmet** only.)
+
+## Fire-weather indices used
+
+These are **fire danger / fire-weather** indicators, not direct measurements of burned area:
+
+- **BI (Burning Index)**: composite index related to potential fire behavior (higher BI - more intense potential fire behavior).
+- **ERC (Energy Release Component)**: proxy for available energy in the flaming front; responds strongly to fuel dryness (higher ERC - more potential energy release).
+- **FM100 / FM1000**: 100-hr and 1000-hr dead fuel moisture proxies (lower - drier fuels).
+
+In this project, BI and ERC are the primary drivers for defining “high fire-weather days” using **relative exceedance** above the daily climatology percentiles.
+
+## Calendar and water-year conventions
+
+- **Water year**: Oct 1 - Sep 30, labeled by the ending year (e.g., Oct 2019-Sep 2020 is **WY2020**).
+- **wyday**: “water-year day” where Oct 1 = 1, and Sep 30 = 365/366.
+- **season4**: DJF / MAM / JJA / SON.
+
+# Run the full fire-metrics pipeline (source the script)
+
+```{r libraries}
+library(readr)
+library(dplyr)
+library(stringr)
+library(purrr)
+library(tidyr)
+library(lubridate)
+library(zoo)
+library(ggplot2)
+library(trend)
+library(forecast)
+library(knitr)
+```
+
+```{r paths}
+# Project root: this Rmd lives at repo root; script is in /src
+project_root  <- getwd()
+script_path   <- file.path(project_root, "src", "extract_fire_metrics2.R")
+
+# Where the script writes outputs
+fire_plot_dir <- file.path(project_root, "plots", "fire")
+out_dir       <- file.path(project_root, "outputs", "fire_questions")
+
+stopifnot(file.exists(script_path))
+```
+
+```{r run-script}
+# This runs the up-to-date workflow:
+# - reads daily town files
+# - builds daily climatology thresholds (1996-2025)
+# - computes annual fire metrics (water-year)
+# - saves question-framed plots to plots/fire/
+# - writes CSV outputs to outputs/fire_questions/
+source(script_path)
+```
+
+# Metric construction and question mapping
+
+## How “high fire-weather days” are defined
+
+For each calendar day (month/day), a **daily climatology threshold** is computed from **1996-2025** using the chosen quantile (typically **q90**, optionally **q95**). A day is a “high day” if:
+
+- `BI > dailyclimo9625_bi_q0.9`  (BI high day)
+- `ERC > dailyclimo9625_erc_q0.9` (ERC high day)
+
+This makes the threshold **seasonally varying**, so “high” in spring is defined relative to typical spring conditions.
+
+## Annual metrics (water-year summaries)
+
+Daily flags are aggregated into water-year metrics. The main families are:
+
+- **Frequency**: number of high days per year
+- **Seasonal frequency**: number of high days in summer (JJA)
+- **Intensity / magnitude proxy**: annual maxima or high percentiles
+- **Timing**: first sustained run of high days (start of season)
+- **Duration**: maximum consecutive run length; optional season length
+
+## Question-to-metric mapping
+
+These are the **Christine-style “question buckets”** used to generate CSV outputs and summary tables.
+
+```{r show-fire-map, include=FALSE}
+# Mapping table suppressed in the PDF to keep the report clean.
+# If you want it back, set include=TRUE.
+stopifnot(exists("fire_map"))
+fire_map_df <- tibble(
+  Question = rep(names(fire_map), lengths(fire_map)),
+  Metric   = unlist(fire_map)
+)
+```
+
+*(Question-to-metric mapping table suppressed to keep the report concise.)*
+
+# Results: Question-framed plots
+
+The script saves a standard set of plots to `plots/fire/`. Below we embed those images in the same Q1-Q5 structure.
+
+```{r helper-include-plot}
+include_plot <- function(fname, cap = NULL) {
+  f <- file.path(fire_plot_dir, fname)
+  if (!file.exists(f)) {
+    cat("(Plot not found:", fname, ")\n")
+    return(invisible(NULL))
+  }
+  knitr::include_graphics(f)
+}
+```
+
+## Q1: Overall frequency of high fire-weather days
+
+Interpretation: higher values indicate more days in the year where fire-weather conditions are unusually elevated relative to the daily 1996-2025 climatology.
+
+```{r q1-plots}
+include_plot("Q1_timeseries_firehighdays_erc90.png")
+include_plot("Q1_timeseries_firehighdays_bi90.png")
+include_plot("Q1_distribution_firehighdays_erc90.png")
+```
+
+## Q2: Summer frequency (JJA)
+
+Interpretation: focuses on the part of the year when fire activity and impacts are often highest. This is a subset of Q1 restricted to JJA.
+
+```{r q2-plots}
+include_plot("Q2_timeseries_firesummerhighdays_erc90.png")
+include_plot("Q2_timeseries_firesummerhighdays_bi90.png")
+```
+
+## Q3: Magnitude / intensity proxies (not burned area)
+
+Interpretation: these metrics capture **how extreme** fire-weather conditions become within a year.
+
+- `firepeak_*`: annual maximum
+- `firep95_erc`: upper-tail intensity (95th percentile)
+- `fireseverity_*`: exceedance above the daily q90 threshold summed across the year
+
+```{r q3-plots}
+include_plot("Q3proxy_timeseries_firepeak_erc.png")
+include_plot("Q3proxy_timeseries_firep95_erc.png")
+include_plot("Q3proxy_timeseries_firepeak_bi.png")
+```
+
+## Q4: Timing of the fire-weather season start
+
+Interpretation: smaller `wyday` means the season starts earlier (because Oct 1 = 1). Start is defined using a **sustained run** of high days (e.g., 3 consecutive high days), which avoids treating isolated spikes as “season onset”.
+
+```{r q4-plots}
+include_plot("Q4_timeseries_firestart_wyday_erc.png")
+include_plot("Q4_timeseries_firestart_wyday_bi.png")
+include_plot("Q4_periodcompare_firestart_wyday_erc.png")
+```
+
+## Q5: Duration / persistence
+
+Interpretation: these metrics describe how long high fire-weather conditions persist.
+
+- `firemaxrun_*`: longest consecutive run of high days in a year
+- `fireseasonlength_*`: (optional) span from first to last high day
+
+```{r q5-plots}
+include_plot("Q5_timeseries_firemaxrun_erc.png")
+include_plot("Q5_timeseries_firemaxrun_bi.png")
+include_plot("Q5_timeseries_fireseasonlength_erc.png")
+```
+
+# Results: Christine-style Delta/ARIMA outputs (CSV tables)
+
+## What the Delta/ARIMA block is doing
+
+For each metric (town × buffer):
+
+1. Compute **baseline anomalies** relative to the mean over 1996-2025.
+2. Compute **Sen’s slope** (per decade) for the observed series.
+3. Fit an **ARIMA** model (via `auto.arima`) with **no drift**.
+4. **Simulate** many synthetic series from the fitted ARIMA model.
+5. For each simulated series, compute Sen’s slope (per decade).
+6. Use the distribution of simulated slopes to define **Q1-Q7** quantile bins.
+7. Place the observed slope into one of the bins (**qcat**).
+
+The resulting `qcat` is a standardized way to summarize whether the observed trend is unusually strong relative to what would be expected under the fitted stationary ARIMA process.
+
+## Load the generated CSV outputs
+
+```{r read-arima-csv}
+all_path <- file.path(out_dir, "FIRE_ALL_questions_ARIMA_outputs.csv")
+summary_path <- file.path(out_dir, "FIRE_metric_summary_by_Qcat.csv")
+
+stopifnot(file.exists(all_path))
+
+df_all <- readr::read_csv(all_path, show_col_types = FALSE)
+
+# ------------------------------
+# ARIMA / Delta diagnostics: more visual summaries
+# ------------------------------
+# This block tries to create a few high-signal figures from the ARIMA outputs.
+# It is written defensively: if a needed column is missing, the figure is skipped.
+
+# Ensure question is a clean ordered factor if it exists (Q1..Q5 expected here)
+if ("question" %in% names(df_all)) {
+  q_levels <- sort(unique(df_all$question))
+  if (all(grepl("^Q[0-9]+$", q_levels))) {
+    q_levels <- paste0("Q", sort(as.integer(sub("Q", "", q_levels))))
+  }
+  df_all$question <- factor(df_all$question, levels = q_levels)
+}
+
+# Convert qcat to an ordered factor if present
+if ("qcat" %in% names(df_all)) {
+  qcat_levels <- paste0("Q", 1:7)
+  df_all$qcat <- factor(df_all$qcat, levels = qcat_levels, ordered = TRUE)
+  df_all$qcat_num <- as.integer(df_all$qcat)
+}
+
+# A compact unit id for plotting (town + buffer)
+if (all(c("town","buffer") %in% names(df_all))) {
+  df_all$unit <- paste(df_all$town, df_all$buffer, sep = " | ")
+}
+
+df_sum <- readr::read_csv(summary_path, show_col_types = FALSE)
+
+cat("(Initial rows table suppressed.)\n")
+```
+
+## ARIMA results: visual summaries
+
+```{r arima-qcat-heatmap}
+# Heatmap of Qcat by unit (town|buffer) and question
+if (all(c("qcat","unit","question") %in% names(df_all))) {
+  p_heat <- ggplot(df_all, aes(x = question, y = unit, fill = qcat_num)) +
+    geom_tile(color = "white", linewidth = 0.2) +
+    scale_fill_continuous(breaks = 1:7, limits = c(1,7)) +
+    labs(
+      title = "ARIMA Delta diagnostics: Q1–Q7 category by question and location",
+      x = "Question",
+      y = "Town | Buffer",
+      fill = "Qcat (1–7)"
+    ) +
+    theme_minimal(base_size = 10) +
+    theme(
+      axis.text.y = element_text(size = 7),
+      panel.grid = element_blank()
+    )
+  p_heat
+} else {
+  cat("(Heatmap skipped: need columns question, town, buffer, and qcat in FIRE_ALL_questions_ARIMA_outputs.csv.)\n")
+}
+```
+
+```{r arima-qcat-counts}
+# Distribution of Qcat by question
+if (all(c("qcat","question") %in% names(df_all))) {
+  p_bar <- df_all %>%
+    count(question, qcat) %>%
+    ggplot(aes(x = question, y = n, fill = qcat)) +
+    geom_col(position = "stack") +
+    labs(
+      title = "Counts of ARIMA Qcat categories by question",
+      x = "Question",
+      y = "Count",
+      fill = "Qcat"
+    ) +
+    theme_minimal(base_size = 11) +
+    scale_fill_discrete(drop = FALSE)
+  p_bar
+} else {
+  cat("(Bar chart skipped: need columns question and qcat.)\n")
+}
+```
+
+```{r arima-delta-by-qcat}
+# If an observed delta/trend magnitude column exists, show it by Qcat
+# We'll look for a few common names and use the first one found.
+delta_col <- intersect(c("delta","observed_delta","sen_slope","sen_slope_C_per_decade","slope"), names(df_all))
+if (length(delta_col) > 0 && all(c("qcat","question") %in% names(df_all))) {
+  dc <- delta_col[1]
+  p_box <- ggplot(df_all, aes(x = qcat, y = .data[[dc]])) +
+    geom_boxplot(outlier.alpha = 0.4) +
+    facet_wrap(~ question, scales = "free_y") +
+    labs(
+      title = paste0("Observed trend magnitude vs ARIMA Qcat (using ", dc, ")"),
+      x = "Qcat",
+      y = dc
+    ) +
+    theme_minimal(base_size = 11)
+  p_box
+} else {
+  cat("(Boxplot skipped: need qcat + question and a numeric trend column such as observed_delta or sen_slope_C_per_decade.)\n")
+}
+```
+
+
+## Summary counts by question, metric, and qcat
+
+```{r arima-summary-table, include=FALSE}
+# Full summary table suppressed to avoid printing large tables in the PDF.
+# The CSV is saved to outputs/fire_questions/FIRE_metric_summary_by_Qcat.csv
+```
+
+*(ARIMA summary table suppressed; see saved CSV outputs.)*
+
+## Quick sanity checks
+
+```{r arima-sanity, include=FALSE}
+# Sanity-check tables suppressed to keep the report clean.
+```
+
+
+# Notes / interpretation guidance
+
+- **Frequency metrics** (Q1/Q2) increasing typically indicate more frequent high fire-weather conditions.
+- **Timing metrics** (Q4) decreasing (more negative Sen slope) indicates *earlier* onset over time because wyday gets smaller.
+- **Magnitude proxies** (Q3) are not burned area, but can align with years of high potential fire behavior.
+- **Qcat values** are **relative to simulated ARIMA variability**, not a direct p-value test of a trend model.
+

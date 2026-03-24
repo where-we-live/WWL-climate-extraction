@@ -1,0 +1,197 @@
+---
+title: "Idaho Heat, Drought, and Fire Metrics Report (By Question)"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+geometry:
+  - margin=1in
+header-includes:
+  - \usepackage{graphicx}
+  - \usepackage{float}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 4.8,
+  dpi = 300,
+  fig.align = 'center',
+  out.width = '100%'
+)
+```
+
+# Overview
+
+This report extends the original Idaho **fire metrics** workflow so it now covers the climate-comparable survey questions for **heat, drought, and fire** for the five Idaho towns:
+
+- Deary
+- Bovill
+- Kendrick
+- Juliaetta
+- Elk River
+
+The workflow still follows the same overall structure as your original fire report:
+
+1. Read the Idaho town-level daily climate files.
+2. Parse dates and water-year variables from `system.index`.
+3. Build 1996–2025 daily climatologies and annual metrics.
+4. Organize annual metrics by survey question.
+5. Compute late-minus-early deltas and ARIMA-based trend categories.
+6. Join to the survey responses and calculate tenure-based PDI summaries.
+
+```{r source-pipeline, include=FALSE}
+library(readr)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(ggplot2)
+library(knitr)
+
+project_root <- getwd()
+script_path <- file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics.R")
+if (!file.exists(script_path)) {
+  script_path <- file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics_v2.R")
+}
+if (!file.exists(script_path)) {
+  script_path <- "/mnt/data/extract_idaho_heat_drought_fire_metrics_v2.R"
+}
+stopifnot(file.exists(script_path))
+source(script_path)
+```
+
+# Data and metric construction
+
+## Source data
+
+This report uses the Idaho town/buffer daily climate files and the survey file `FW2L_DC.csv`.
+Climate metrics are computed from **GridMET** only, restricted to:
+
+- Deary
+- Bovill
+- Kendrick
+- Juliaetta
+- Elk River
+
+Troy is excluded.
+
+## Water-year conventions
+
+- **Water year** runs from October 1 to September 30.
+- `wyday` is the water-year day where October 1 = 1.
+- Timing metrics for drought and fire therefore use **water-year timing**, not standard January-based Julian day.
+
+## Climate-comparable survey questions included
+
+```{r question-table}
+question_labels %>%
+  select(question, stressor, survey_col, question_text) %>%
+  arrange(stressor, question) %>%
+  kable(caption = "Question blocks included in the report")
+```
+
+# Annual metrics table preview
+
+```{r annual-preview}
+annual_all %>%
+  arrange(town, buffer, wateryear) %>%
+  head(15) %>%
+  kable(caption = "Preview of annual metric table")
+```
+
+# Trend/PDI summary preview
+
+```{r output-preview}
+question_outputs %>%
+  select(stressor, question, metric, town, buffer, sen_slope_per_decade, qcat, delta_late_minus_early) %>%
+  arrange(stressor, question, metric, town, buffer) %>%
+  head(20) %>%
+  kable(caption = "Preview of question-level climate output summary")
+```
+
+```{r pdi-preview}
+pdi_results$summary %>%
+  arrange(question, .town) %>%
+  kable(caption = "Preview of tenure-based PDI summary")
+```
+
+# Question-framed results
+
+```{r helpers, include=FALSE}
+plot_dir_local <- plot_dir
+include_plot_if_exists <- function(path) {
+  if (file.exists(path)) {
+    knitr::include_graphics(path)
+  } else {
+    cat("(Plot not found)")
+  }
+}
+
+question_order <- question_labels$question
+```
+
+```{r question-loop, results='asis'}
+for (q in question_order) {
+  q_info <- question_labels %>% filter(question == q)
+  q_metrics <- q_metric_map %>% filter(question == q)
+  q_out <- question_outputs %>% filter(question == q)
+  q_pdi <- pdi_results$summary %>% filter(question == q)
+
+  cat("\n\n## ", q, ": ", q_info$question_text[[1]], "\n\n", sep = "")
+  cat("**Stressor:** ", q_info$stressor[[1]], "  \n", sep = "")
+  cat("**Survey column:** `", q_info$survey_col[[1]], "`\n\n", sep = "")
+
+  cat("### Metrics used\n\n")
+  print(knitr::kable(q_metrics %>% select(metric), col.names = "Metric"))
+  cat("\n\n")
+
+  cat("### Climate summary by town/buffer\n\n")
+  print(knitr::kable(
+    q_out %>%
+      select(town, buffer, metric, sen_slope_per_decade, qcat, delta_late_minus_early) %>%
+      arrange(metric, town, buffer),
+    digits = 3
+  ))
+  cat("\n\n")
+
+  if (nrow(q_pdi) > 0) {
+    cat("### Tenure-based PDI summary\n\n")
+    print(knitr::kable(
+      q_pdi %>%
+        rename(town = .town) %>%
+        select(town, n, mean_resp, mean_climate_delta_z, mean_pdi, sd_pdi),
+      digits = 3
+    ))
+    cat("\n\n")
+  }
+
+  cat("### Example plots\n\n")
+  for (m in q_metrics$metric) {
+    ts_path <- file.path(plot_dir_local, paste0(q, "_timeseries_", m, ".png"))
+    dist_path <- file.path(plot_dir_local, paste0(q, "_distribution_", m, ".png"))
+
+    cat("**", m, "**\n\n", sep = "")
+    include_plot_if_exists(ts_path)
+    cat("\n\n")
+    include_plot_if_exists(dist_path)
+    cat("\n\n")
+  }
+}
+```
+
+# Output files written by the script
+
+The sourced script writes the following files under `outputs/climate_questions/`:
+
+- `idaho_annual_metrics_wide.csv`
+- `idaho_annual_metrics_long.csv`
+- `idaho_question_outputs.csv`
+- `idaho_pdi_summary.csv`
+- `idaho_pdi_person.csv`
+- `idaho_pdi_deltas.csv`
+
+It also writes per-metric plot PNGs under `plots/climate_questions/`.
