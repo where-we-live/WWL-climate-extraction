@@ -31,7 +31,7 @@ library(knitr)
 
 project_root <- getwd()
 
-script_candidates <- file.path(project_root, "src", "extract_idaho_heat_drought_fire_metrics_v2-6_modified-4.R")
+script_candidates <- file.path(project_root, "src", "climate_metrics.R")
 
 script_path <- script_candidates[file.exists(script_candidates)][1]
 stopifnot(!is.na(script_path), file.exists(script_path))
